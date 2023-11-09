@@ -6,7 +6,8 @@ use Dotenv\Dotenv as Dotenv;
 use Dotenv\Exception\InvalidPathException as InvalidPathException;
 
 try{
-    $dotenv = Dotenv::createImmutable(__DIR__.'/../');
+    $env = getenv('APP_ENV') ? getenv('APP_ENV') : 'local';
+    $dotenv = Dotenv::createImmutable(__DIR__.'/../', '.env.' . $env);
     $dotenv->load();
     $dotenv->required([
         'DB_CONNECTION',
@@ -18,11 +19,9 @@ try{
     ])->notEmpty();
 }
 catch(InvalidPathException $e){
-    // var_dump($e);
     throw new InvalidPathException($e->getMessage());
 }
 
-var_dump($_ENV['APP_NAME']);
 // (new Laravel\Lumen\Bootstrap\LoadEnvironmentVariables(
 //     dirname(__DIR__)
 // ))->bootstrap();
