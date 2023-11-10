@@ -1,0 +1,8 @@
+{
+    "home": {
+        "message": "Welcome to Bootstraping Laravel API"
+    },
+    "login":{
+        "incorrectUserEmailOrPassword": "Incorrect user email or password"
+    }
+}

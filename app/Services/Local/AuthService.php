@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Local;
 
 use Illuminate\Http\Response;
 use App\Models\User;
@@ -27,7 +27,7 @@ class AuthService
                 ->first();
 
             if($user) $token = auth()->login($user);
-            else throw new Exception('Incorrect user email or password');
+            else throw new Exception(t('login.incorrectUserEmailOrPassword'));
 
             return $token;
         } catch (\Exception $e) {

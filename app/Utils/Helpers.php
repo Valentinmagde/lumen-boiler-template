@@ -1,12 +1,29 @@
 <?php
 
-namespace App\Utils;
+if (!function_exists('t')) {
+    /**
+     * Translate the given message.
+     *
+     * @author Gregory Albert <gregoryalbert1209@gmail.com>
+     * @since 2023-11-10
+     *  
+     * @param string $translationWords
+     * @return string of translated given string
+     */
+    function t($translationWords)
+    {
+        $seperatedWords = explode(".", $translationWords);
+        $fetchedTranslation=trans($seperatedWords[0]);
 
-use stdClass;
-use Illuminate\Http\JsonResponse;
+        for($i= 1;$i<count($seperatedWords);$i++){
+            $fetchedTranslation=$fetchedTranslation[$seperatedWords[$i]];
+        }
 
-trait ApiResponser
-{
+        return ($fetchedTranslation);
+    }
+}
+
+if (! function_exists('successResponse')) {
     /**
      * Success Response
      * 
@@ -18,11 +35,13 @@ trait ApiResponser
      * 
      * @return \Illuminate\Http\Response|\Laravel\Lumen\Http\ResponseFactory
      */
-    public function successResponse($data, $code = \Illuminate\Http\Response::HTTP_OK)
+    function successResponse($data, $code = \Illuminate\Http\Response::HTTP_OK)
     {
         return response()->json(['status' => "OK", 'data' => $data], $code);
     }
+}
 
+if (! function_exists('errorResponse')) {
     /**
      * Error Response
      * 
@@ -35,7 +54,7 @@ trait ApiResponser
      * 
      * @return \Illuminate\Http\Response|\Laravel\Lumen\Http\ResponseFactory
      */
-    public function errorResponse($code, $errNo, $errMsg)
+    function errorResponse($code, $errNo, $errMsg)
     {
         $error = new stdClass();
 
@@ -44,7 +63,9 @@ trait ApiResponser
 
         return response()->json(['status' => "FAILED", 'data' => $error], $code);
     }
+}
 
+if (! function_exists('errorMessage')) {
     /**
      * Error Message
      * 
@@ -56,11 +77,13 @@ trait ApiResponser
      * 
      * @return \Illuminate\Http\Response|\Laravel\Lumen\Http\ResponseFactory
      */
-    public function errorMessage($message, $code)
+    function errorMessage($message, $code)
     {
         return response($message, $code)->header('Content-Type', 'application/json');
     }
+}
 
+if (! function_exists('respondWithToken')) {
     /**
      * Get the token array structure.
      *
@@ -68,7 +91,7 @@ trait ApiResponser
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public static function respondWithToken($token)
+    function respondWithToken($token)
     {
         return response()->json([
             'access_token' => $token,

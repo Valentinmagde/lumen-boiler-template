@@ -24,7 +24,8 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
-            "app/Remote/FileLoader.php"
+            "app/Utils/Helpers.php",
+            "app/Utils/CustomErrorCode.php"
         ]
     },
     "autoload-dev": {

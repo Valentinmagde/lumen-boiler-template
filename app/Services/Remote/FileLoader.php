@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Remote;
+namespace App\Services\Remote;
 
 use Exception;
 use ReflectionClass;
@@ -18,6 +18,7 @@ trait FileLoader
     private $remoteServicePath;
     private $remoteExtensionPath;
     private $remoteModelPath;
+    private $remoteResourcePath;
 
     /**
      * Create a new FileLoader instance.
@@ -32,6 +33,7 @@ trait FileLoader
         $this->remoteServicePath = env('REMOTE_SERVICE_PATH');
         $this->remoteExtensionPath = env('REMOTE_EXTENSION_PATH');
         $this->remoteModelPath = env('REMOTE_EXTENSION_PATH');
+        $this->remoteResourcePath = env('REMOTE_RESOURCE_PATH');
 
         spl_autoload_register(array($this, 'autoload'));
     }
@@ -66,11 +68,10 @@ trait FileLoader
             }
 
             $resourcePath = $this->remoteServicePath . $servicePath . '.php';
-            
+
             if (realpath($resourcePath)) {
                 require_once $resourcePath;
-            }
-            else {
+            } else {
                 throw new Exception("cannot load remote services " . $service, E_ERROR);
             }
 
@@ -83,7 +84,7 @@ trait FileLoader
         }
     }
 
-     /**
+    /**
      * Instantiantes an object of a given Service Class from a remote folder
      * on the same server
      *
@@ -101,9 +102,8 @@ trait FileLoader
         $model,
         $params = array(),
         $engineNameSpace = 'EngineModel'
-    )
-    {
-        try{
+    ) {
+        try {
             $resourcePath = $this->remoteModelPath . $model . '.model.php';
 
             if (realpath($resourcePath)) {
@@ -119,8 +119,7 @@ trait FileLoader
                 array(new ReflectionClass($engineNameSpace . '\\' . $model), 'newInstance'),
                 $params
             );
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
     }
@@ -140,16 +139,18 @@ trait FileLoader
      */
     protected function loadRemoteExtension($extension, $params = array())
     {
-        try{
+        try {
             $resourcePath = $this->remoteExtensionPath . $extension . '.php';
 
             if (realpath($resourcePath)) {
                 require_once $resourcePath;
             } else {
-                throw new Exception("cannot load extension " . $extension, E_ERROR);
+                throw new Exception(
+                    "cannot load extension " . $extension,
+                    E_ERROR
+                );
             }
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
     }
@@ -165,14 +166,13 @@ trait FileLoader
      */
     public function autoload($className)
     {
-        try{
+        try {
             //try to include a class file directly from Remote directory
-            $resourcePath = base_path() . DIRECTORY_SEPARATOR . "app"
-                . DIRECTORY_SEPARATOR . "Remote" . DIRECTORY_SEPARATOR
+            $resourcePath = base_path() . $this->remoteResourcePath
                 . $className . ".php";
 
             if (realpath($resourcePath)) {
-                require_once $resourcePath;
+                require_once $resourcePath; 
             } elseif (
                 $className === 'DatabaseConnection' ||
                 $className === 'DBConnectionRateManager' ||
@@ -182,8 +182,7 @@ trait FileLoader
 
                 if (realpath($resourcePath)) {
                     require_once $resourcePath;
-                }
-                else {
+                } else {
                     throw new Exception(
                         "cannot load class " . $className . " from " . $resourcePath,
                         E_ERROR
@@ -234,9 +233,8 @@ trait FileLoader
                 $path = substr($className, 0, strripos($className, '_'));
                 $realPath = str_replace('_', DIRECTORY_SEPARATOR, $path);
 
-                $resourcePath = base_path() . DIRECTORY_SEPARATOR . "app"
-                    . DIRECTORY_SEPARATOR . "Remote"  . DIRECTORY_SEPARATOR . $realPath
-                    . DIRECTORY_SEPARATOR . $className . ".php";
+                $resourcePath = base_path() . $this->remoteResourcePath
+                    . $realPath . DIRECTORY_SEPARATOR . $className . ".php";
 
                 if (realpath($resourcePath)) {
                     require_once $resourcePath;
@@ -249,8 +247,7 @@ trait FileLoader
                     );
                 }
             }
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             throw new Exception($e->getMessage(), E_ERROR);
         }
     }
