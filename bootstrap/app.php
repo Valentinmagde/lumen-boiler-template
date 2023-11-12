@@ -95,7 +95,8 @@ $app->middleware([
 
 $app->routeMiddleware([
     'cors' => App\Http\Middleware\CorsMiddleware::class,
-    'auth' => App\Http\Middleware\Authenticate::class
+    // 'auth' => App\Http\Middleware\Authenticate::class
+    'jwt' => App\Http\Middleware\JwtMiddleware::class
 ]);
 
 

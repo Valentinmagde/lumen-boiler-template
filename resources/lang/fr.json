@@ -2,7 +2,24 @@
     "home": {
         "message": "Bienvenue à Bootstraping Laravel API"
     },
-    "login":{
+    "auth":{
+        "failed" : "Ces informations d'identification ne correspondent pas à nos dossiers.",
+        "password" : "Le mot de passe fourni est incorrect.",
+        "throttle" : "Trop de tentatives de connexion. Veuillez réessayer dans :seconds seconds.",
+        "invalidToken" : "Le jeton est invalide",
+        "expiredToken" : "Le jeton est expiré",
+        "blacklistedToken" : "Le jeton est sur liste noire",
+        "tokenNotFound" : "Jeton d'autorisation non trouvé",
+        "theMethod" : "La méthode",
+        "isNotSupportedForThisRoute" : "n'est pas prise en charge pour cet itinéraire. Méthodes prises en charge :",
+        "ressourceNotFound" : "Ressource non trouvée",
+        "cantConnectToLocalMySQL" : "Impossible de se connecter au serveur MySQL local",
+        "cantConnectToMySQLServer" : "Impossible de se connecter au serveur MySQL",
+        "unknownMySQLHost" : "Hôte inconnu du serveur MySQL",
+        "mySQLServerGoneAway" : "Le serveur MySQL a disparu",
+        "mySQLRanOutMemory" : "Le client MySQL a manqué de mémoire",
+        "lostConnectionToMySQLQuery" : "Perte de connexion au serveur MySQL pendant une",
+        "unknownMySQLError" : "Erreur MySQL inconnue",
         "incorrectUserEmailOrPassword": "Adresse electronique ou mot de passe incorrect"
     }
 }

@@ -46,9 +46,6 @@ class HotelController extends Controller
      *                ),
      *           ),
      *       ),
-     *       security={
-     *         {"bearer": {}}
-     *       },
      *       @OA\Response(
      *           response=400, 
      *           description="Bad request",

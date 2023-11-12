@@ -2,7 +2,24 @@
     "home": {
         "message": "Welcome to Bootstraping Laravel API"
     },
-    "login":{
+    "auth": {
+        "failed" : "These credentials do not match our records.",
+        "password" : "The provided password is incorrect.",
+        "throttle" : "Too many login attempts. Please try again in :seconds seconds.",
+        "invalidToken" : "Token is Invalid",
+        "expiredToken" : "Token is Expired",
+        "blacklistedToken" : "Token is Blacklisted",
+        "tokenNotFound" : "Authorization Token not found",
+        "theMethod" : "The method",
+        "isNotSupportedForThisRoute" : "is not supported for this route. Supported methods:",
+        "ressourceNotFound" : "Ressource not found",
+        "cantConnectToLocalMySQL" : "Can't connect to local MySQL server",
+        "cantConnectToMySQLServer" : "Can't connect to MySQL server",
+        "unknownMySQLHost" : "Unknown MySQL server host",
+        "mySQLServerGoneAway" : "MySQL server has gone away",
+        "mySQLRanOutMemory" : "MySQL client ran out of memory",
+        "lostConnectionToMySQLQuery" : "Lost connection to MySQL server during query",
+        "unknownMySQLError" : "Unknown MySQL error",
         "incorrectUserEmailOrPassword": "Incorrect user email or password"
     }
 }

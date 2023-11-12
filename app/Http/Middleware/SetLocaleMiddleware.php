@@ -19,7 +19,7 @@ class SetLocaleMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        foreach (scandir("../resources/lang") as $jsonLangFile) {
+        foreach (scandir(base_path("resources/lang")) as $jsonLangFile) {
             if (strlen($jsonLangFile) > 2)
                 $availableLocales[substr($jsonLangFile, 0, 2)] 
                 = substr($jsonLangFile, 0, 2);

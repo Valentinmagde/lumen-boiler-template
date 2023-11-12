@@ -2,13 +2,12 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use JWTAuth;
 use Exception;
-use Tymon\JWTAuth\Http\Middleware\BaseMiddleware;
-use App\Http\Resources\ApiSendingErrorException;
 use Illuminate\Http\Response;
-use App\Http\Resources\ApiErrorNumbers;
-
+use Tymon\JWTAuth\Exceptions\TokenBlacklistedException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
+use Tymon\JWTAuth\Facades\JWTAuth as FacadesJWTAuth;
 
 class JwtMiddleware
 {
@@ -23,37 +22,37 @@ class JwtMiddleware
 	{
 		try 
         {
-		//    $user = JWTAuth::parseToken()->authenticate();
+		    FacadesJWTAuth::parseToken()->authenticate();
+
+            return $next($request);
  		} 
         catch (Exception $e) 
         {
-        	// if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
-            //     return ApiSendingErrorException::sendingError([
-            //         'errNo'=> ApiErrorNumbers::$invalid_token, 
-            //         'errMsg'=> __('auth.invalidToken'), 
-            //         'statusCode'=>Response::HTTP_UNAUTHORIZED
-            //     ]);
-            // }else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException){
-            //     return ApiSendingErrorException::sendingError([
-            //         'errNo'=>ApiErrorNumbers::$expired_token, 
-            //         'errMsg'=> __('auth.expiredToken'), 
-            //         'statusCode'=>Response::HTTP_UNAUTHORIZED
-            //     ]);
-            // }else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenBlacklistedException){
-            //     return ApiSendingErrorException::sendingError([
-            //         'errNo'=>ApiErrorNumbers::$blacklisted_token, 
-            //         'errMsg'=> __('auth.blacklistedToken'), 
-            //         'statusCode'=>Response::HTTP_UNAUTHORIZED
-            //     ]);
-            // }else{
-            //     return ApiSendingErrorException::sendingError([
-            //         'errNo'=>ApiErrorNumbers::$token_not_found,
-            //         'errMsg'=> __('auth.tokenNotFound'), 
-            //         'statusCode'=>Response::HTTP_UNAUTHORIZED
-            //     ]);
-            // }
-		}
-        
-        return $next($request);
+        	if ($e instanceof TokenInvalidException){
+                return errorResponse(
+                    Response::HTTP_UNAUTHORIZED,
+                    ERROR_CODE['INVALID_TOKEN'], 
+                    t('auth.invalidToken')
+                );
+            }else if ($e instanceof TokenExpiredException){
+                return errorResponse(
+                    Response::HTTP_UNAUTHORIZED,
+                    ERROR_CODE['EXPIRED_TOKEN'], 
+                    t('auth.expiredToken')
+                );
+            }else if ($e instanceof TokenBlacklistedException){
+                return errorResponse(
+                    Response::HTTP_UNAUTHORIZED,
+                    ERROR_CODE['BLACKLISTED_TOKEN'], 
+                    t('auth.blacklistedToken')
+                );
+            }else{
+                return errorResponse(
+                    Response::HTTP_UNAUTHORIZED,
+                    ERROR_CODE['TOKEN_NOT_FOUND'], 
+                    t('auth.tokenNotFound')
+                );
+            }
+		} 
 	}
 }

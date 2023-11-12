@@ -20,7 +20,7 @@ class AuthController extends Controller
      */
     public function __construct(AuthService $authService)
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('jwt:api', ['except' => ['login', 'register']]);
         $this->authService = $authService;
     }
 
@@ -140,7 +140,7 @@ class AuthController extends Controller
      * description="User Register here",
      *   @OA\Parameter(
      *          name="lang",
-     *          in="path",
+     *          in="query",
      *          required=true,
      *          example="en",
      *          @OA\Schema(
@@ -238,7 +238,7 @@ class AuthController extends Controller
      *      description="Returns current user",
      *   @OA\Parameter(
      *          name="lang",
-     *          in="path",
+     *          in="query",
      *          required=true,
      *          example="en",
      *          @OA\Schema(
@@ -312,7 +312,7 @@ class AuthController extends Controller
      * description="User update here",
      *   @OA\Parameter(
      *          name="lang",
-     *          in="path",
+     *          in="query",
      *          required=true,
      *          example="en",
      *          @OA\Schema(
@@ -411,7 +411,7 @@ class AuthController extends Controller
      * description="Logout User Here",
      *   @OA\Parameter(
      *          name="lang",
-     *          in="path",
+     *          in="query",
      *          required=true,
      *          example="en",
      *          @OA\Schema(
@@ -472,7 +472,7 @@ class AuthController extends Controller
      * description="Refresh Token Here",
      *   @OA\Parameter(
      *          name="lang",
-     *          in="path",
+     *          in="query",
      *          required=true,
      *          example="en",
      *          @OA\Schema(
