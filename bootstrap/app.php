@@ -6,8 +6,7 @@ use Dotenv\Dotenv as Dotenv;
 use Dotenv\Exception\InvalidPathException as InvalidPathException;
 
 try{
-    $env = getenv('APP_ENV') ? getenv('APP_ENV') : 'local';
-    $dotenv = Dotenv::createImmutable(__DIR__.'/../', '.env.' . $env);
+    $dotenv = Dotenv::createMutable(__DIR__.'/../');
     $dotenv->load();
     $dotenv->required([
         'DB_CONNECTION',
@@ -21,10 +20,6 @@ try{
 catch(InvalidPathException $e){
     throw new InvalidPathException($e->getMessage());
 }
-
-// (new Laravel\Lumen\Bootstrap\LoadEnvironmentVariables(
-//     dirname(__DIR__)
-// ))->bootstrap();
 
 date_default_timezone_set(env('APP_TIMEZONE', 'UTC'));
 
@@ -94,13 +89,13 @@ $app->configure('swagger-lume');
 |
 */
 
-// $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
-// ]);
+$app->middleware([
+    App\Http\Middleware\SetLocaleMiddleware::class,
+]);
 
 $app->routeMiddleware([
     'cors' => App\Http\Middleware\CorsMiddleware::class,
-    'auth' => App\Http\Middleware\Authenticate::class,
+    'auth' => App\Http\Middleware\Authenticate::class
 ]);
 
 

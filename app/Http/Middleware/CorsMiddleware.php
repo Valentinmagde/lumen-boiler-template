@@ -8,6 +8,9 @@ class CorsMiddleware
     /**
      * Handle an incoming request.
      *
+     * @author Valentin Magde <valentinmagde@gmail.com>
+     * @since 2023-11-10
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
      * @return mixed

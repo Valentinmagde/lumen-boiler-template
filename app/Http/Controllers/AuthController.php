@@ -4,19 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Helpers\ApiSendingErrorException;
-use App\Services\AuthService;
+use App\Services\Local\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Helpers\ApiErrorNumbers;
-use App\Utils\ApiErrorNumber;
-use App\Utils\ApiResponser;
 use Exception;
 
 class AuthController extends Controller
 {
-    use ApiResponser, ApiErrorNumber;
-
     private $authService;
     /**
      * Create a new AuthController instance.
@@ -38,7 +33,7 @@ class AuthController extends Controller
      * description="Login User Here",
      *   @OA\Parameter(
      *          name="lang",
-     *          in="path",
+     *          in="query",
      *          required=true,
      *          example="en",
      *          @OA\Schema(
@@ -116,21 +111,21 @@ class AuthController extends Controller
             if ($validator->fails()) {
                 $error = implode(",", $validator->errors()->all());
                 
-                return $this->errorResponse(
+                return errorResponse(
                     Response::HTTP_BAD_REQUEST,
-                    $this->validator, 
+                    ERROR_CODE['VALIDATOR'], 
                     $error
                 );
             }
             
-            return $this->respondWithToken(
+            return respondWithToken(
                 $this->authService->login($request->all())
             );
         }
         catch(Exception $e){
-            return $this->errorResponse(
+            return errorResponse(
                 Response::HTTP_INTERNAL_SERVER_ERROR,
-                $this->generic_error,
+                ERROR_CODE['GENERIC_ERROR'],
                 $e->getMessage()
             );
         }

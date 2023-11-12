@@ -1,12 +1,12 @@
 <?php
 /**
- * DataBase Abstraction Layer
+ * Class DataBaseManager
  * 
  * This Class provides a common interface to interact with the DataBase
  * 
  * @author San Teelock Ramguttee
  * @author Valentin magde <valentinmagde@gmail.com>
- * @since
+ * @since 2023-11-10
  */
 class DatabaseManager 
 {
@@ -25,7 +25,7 @@ class DatabaseManager
     }
     
     /** 
-     * getSQL 
+     * getSQL
      * @author San Ramguttee <san.ramguttee@phpml.com>
      * @since 2016-12-09
      */

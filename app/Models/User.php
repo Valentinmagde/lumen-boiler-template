@@ -92,9 +92,9 @@ AuthorizableContract, JWTSubject
 	];
 
     /**
-     * /--------------------------------------------------------------------------------
+     * /------------------------------------------------------------------------
      * / JWT Functions
-     * /--------------------------------------------------------------------------------
+     * /------------------------------------------------------------------------
     */
 
 	/**
@@ -108,16 +108,13 @@ AuthorizableContract, JWTSubject
     }
 
     /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
+     * Return a key value array, containing any custom claims to be added to
+     * the JWT.
      *
      * @return array
      */
     public function getJWTCustomClaims()
     {
         return [];
-    }
-
-    public function getAuthPassword(){
-        return $this->user_password;
     }
 }
