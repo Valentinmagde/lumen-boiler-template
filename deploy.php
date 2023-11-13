@@ -14,6 +14,9 @@ set('rsync_src', function () {
     return __DIR__;
 });
 
+add('shared_files', []);
+add('shared_dirs', []);
+add('writable_dirs', []);
 
 add('rsync', [
     'exclude' => [
@@ -32,14 +35,13 @@ task('deploy:secrets', function () {
     upload('.env', get('deploy_path') . '/shared');
 });
 
-host('kitecole.net')
-  ->set('alias', 'kitecole.net')
+host('production')
   ->set('hostname', '137.184.133.101')
   ->set('remote_user', 'root')
   ->set('labels', ['stage' => 'production'])
   ->set('deploy_path', '/var/www/lumen-boiler-template');
 
-host('kitecole.net')
+host('staging')
   ->set('hostname', '137.184.133.101')
   ->set('remote_user', 'root')
   ->set('labels', ['stage' => 'staging'])
