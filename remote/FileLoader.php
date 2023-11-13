@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Remote;
+namespace Remote;
 
 use Exception;
 use ReflectionClass;
