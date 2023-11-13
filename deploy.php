@@ -42,6 +42,7 @@ host('production')
 host('staging')
   ->set('hostname', '137.184.133.101')
   ->set('remote_user', 'root')
+  ->set('port', '22')
   ->set('labels', ['stage' => 'staging'])
   ->set('deploy_path', '/var/www/lumen-boiler-template');
 
