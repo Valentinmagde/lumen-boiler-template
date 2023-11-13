@@ -33,7 +33,7 @@ task('deploy:secrets', function () {
 });
 
 host('kitecole.net')
-  ->set('alias', 'production')
+  ->set('alias', 'kitecole.net')
   ->set('hostname', '137.184.133.101')
   ->set('remote_user', 'root')
   ->set('labels', ['stage' => 'production'])
