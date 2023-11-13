@@ -3,27 +3,28 @@
 namespace Deployer;
 
 require 'recipe/laravel.php';
-require 'recipe/rsync.php';
+// require 'recipe/rsync.php';
 
+set('repository', 'https://github.com/Valentinmagde/lumen-boiler-template.git');
 set('application', 'API V2');
 set('ssh_multiplexing', true);
 
-set('rsync_src', function () {
-    return __DIR__;
-});
+// set('rsync_src', function () {
+//     return __DIR__;
+// });
 
 
-add('rsync', [
-    'exclude' => [
-        '.git',
-        '/.env',
-        '/storage/',
-        '/vendor/',
-        '/node_modules/',
-        '.github',
-        'deploy.php',
-    ],
-]);
+// add('rsync', [
+//     'exclude' => [
+//         '.git',
+//         '/.env',
+//         '/storage/',
+//         '/vendor/',
+//         '/node_modules/',
+//         '.github',
+//         'deploy.php',
+//     ],
+// ]);
 
 task('deploy:secrets', function () {
     file_put_contents(__DIR__ . '/.env', getenv('DOT_ENV'));
