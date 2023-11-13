@@ -66,4 +66,4 @@ task('deploy', [
     'deploy:symlink',
     'deploy:unlock',
     'cleanup',
-]);
+])->select('stage=production');
