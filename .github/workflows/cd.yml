@@ -49,8 +49,8 @@ jobs:
       - name: Setup Deployer
         uses: atymic/deployer-php-action@master
         with:
-          private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          # ssh-known-hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-known-hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
           # To disable host key checking (insecure!):
           ssh-disable-host-key-checking: true
       - name: Deploy to PRODUCTION Server
