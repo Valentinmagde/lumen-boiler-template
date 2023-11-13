@@ -3,7 +3,6 @@
 namespace Deployer;
 
 require 'recipe/laravel.php';
-require 'recipe/deploy/cleanup.php';
 require 'contrib/rsync.php';
 
 set('repository', 'https://github.com/Valentinmagde/lumen-boiler-template.git');
