@@ -54,7 +54,7 @@ jobs:
       #     # To disable host key checking (insecure!):
       #     ssh-disable-host-key-checking: true
       - name: Deploy to PRODUCTION Server
-        uses: appleboy/ssh-action@main
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
