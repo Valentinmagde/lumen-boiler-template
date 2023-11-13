@@ -54,7 +54,7 @@ jobs:
       - name: Deploy to PRODUCTION Server
         env:
           DOT_ENV: ${{ secrets.DOT_ENV_PRODUCTION }}
-        run: dep deploy stage=production --tag=${{ env.GITHUB_REF }} -vvv
+        run: vendor/bin/dep deploy stage=production --tag=${{ env.GITHUB_REF }} -vvv
   deploy-staging:
     name: Deploy Project to STAGING Server
     runs-on: ubuntu-latest
@@ -76,4 +76,4 @@ jobs:
       - name: Deploy to Prod
         env:
           DOT_ENV: ${{ secrets.DOT_ENV_STAGING }}
-        run: dep deploy stage=staging --tag=${{ env.GITHUB_REF }} -vvv
+        run: vendor/bin/dep deploy stage=staging --tag=${{ env.GITHUB_REF }} -vvv
