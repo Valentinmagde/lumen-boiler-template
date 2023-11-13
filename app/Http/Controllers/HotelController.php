@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\Local\HotelService;
+use App\Services\HotelService;
 use Exception;
 use Illuminate\Http\Response;
 

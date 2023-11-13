@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services\Local;
+namespace App\Services;
 
-use App\Services\Remote\FileLoader as RemoteFileLoader;
+use Remote\FileLoader as RemoteFileLoader;
 use Exception;
 
 class HotelService
