@@ -61,7 +61,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            cd /var/lumen-boiler-template
+            cd /var/www/lumen-boiler-template
             git pull --ff-only
             composer i
             php artisan migrate --force
