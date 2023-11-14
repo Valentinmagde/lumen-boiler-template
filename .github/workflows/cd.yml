@@ -62,7 +62,7 @@ jobs:
           port: 22
           script: |
             cd /var/www/lumen-boiler-template
-            # git pull --ff-only
+            git pull --ff-only
             # composer i
             # php artisan migrate --force
   deploy-staging:
