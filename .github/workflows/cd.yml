@@ -55,7 +55,7 @@ jobs:
       - name: Deploy to Prod
         env:
           DOT_ENV: ${{ secrets.DOT_ENV_PRODUCTION }}
-        run: vendor/bin/dep deploy stage=production --tag=${{ env.GITHUB_REF }} -vvv
+        run: vendor/bin/dep deploy stage=production --tag=${{ env.GITHUB_REF }} -vv
       # - name: Deploy to PRODUCTION Server
       #   uses: appleboy/ssh-action@master
       #   with:
