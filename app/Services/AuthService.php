@@ -45,13 +45,9 @@ class AuthService
         try{
             auth()->logout();
 
-            return ApiSendingResponse::sendingResponse([
-                'successMsg'=> __('auth.logout.successfullyLoggedOut'),
-                'data'=> null, 
-                'statusCode'=>Response::HTTP_OK
-            ]);
+            return null;
         }catch(\Exception $e){
-            return ApiSendingErrorException::formatError($e);
+            throw new Exception($e->getMessage());
         } 
     }
 
@@ -63,9 +59,9 @@ class AuthService
     public static function refresh()
     {
         try{
-            return HelperFunctions::respondWithToken(auth()->refresh());
+            return auth()->refresh();
         }catch(\Exception $e){
-            return ApiSendingErrorException::formatError($e);
+            throw new Exception($e->getMessage());
         }
     }
     
