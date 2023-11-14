@@ -8,7 +8,7 @@ on:
 
 jobs:
   validate:
-
+    name: Validate composer.json and composer.lock
     runs-on: ubuntu-latest
 
     steps:
@@ -30,7 +30,7 @@ jobs:
       run: composer install --prefer-dist --no-progress
 
   tests:
-
+    name: Execute tests suite
     runs-on: ubuntu-latest
     needs: [validate]
     steps:

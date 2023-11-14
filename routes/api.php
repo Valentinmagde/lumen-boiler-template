@@ -31,11 +31,22 @@ $router->group(
         */
         $router->group(['prefix' => 'auth'], function () use ($router) {
             $router->post('/login', 'AuthController@login');
-            $router->post('/register', 'AuthController@register');
             $router->post('/logout', 'AuthController@logout');
-            $router->get('/me', 'AuthController@me');
-            $router->put('/update', 'AuthController@update');
             $router->post('/refresh', 'AuthController@refresh');
+        });
+
+        /*
+        |--------------------------------------------------------------------------
+        | API Routes of User
+        |--------------------------------------------------------------------------
+        |
+        */
+        $router->group(['prefix' => 'users'], function () use ($router) {
+            $router->post('/register', 'UserController@register');
+        });
+
+        $router->group(['prefix' => 'user'], function () use ($router) {
+            $router->get('/me', 'UserController@me');
         });
 
         /*

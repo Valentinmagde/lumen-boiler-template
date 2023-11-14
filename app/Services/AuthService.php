@@ -45,13 +45,9 @@ class AuthService
         try{
             auth()->logout();
 
-            return ApiSendingResponse::sendingResponse([
-                'successMsg'=> __('auth.logout.successfullyLoggedOut'),
-                'data'=> null, 
-                'statusCode'=>Response::HTTP_OK
-            ]);
+            return null;
         }catch(\Exception $e){
-            return ApiSendingErrorException::formatError($e);
+            throw new Exception($e->getMessage());
         } 
     }
 
@@ -63,9 +59,9 @@ class AuthService
     public static function refresh()
     {
         try{
-            return HelperFunctions::respondWithToken(auth()->refresh());
+            return auth()->refresh();
         }catch(\Exception $e){
-            return ApiSendingErrorException::formatError($e);
+            throw new Exception($e->getMessage());
         }
     }
     
@@ -80,70 +76,6 @@ class AuthService
             return auth()->user();
         } catch (\Exception $e) {
             throw new Exception($e->getMessage());
-        } 
-    }
-
-    /**
-     * Register a user
-     * 
-     * @param $data
-     * 
-     * @return $user
-     */
-    public static function register($data)
-    {
-        try{
-            $data['user_password'] = bcrypt($data['user_password']);
-            $user = User::create($data);
-
-            return ApiSendingResponse::sendingResponse([
-                'successMsg'=> __('auth.register.userWasSuccessfullyCreated'),
-                'data'=>$user,
-                'statusCode'=>Response::HTTP_CREATED
-            ]);
-        }catch(\Exception $e){
-            return ApiSendingErrorException::formatError($e);
-        } 
-    }
-
-     /**
-     * Update authenticate user
-     * 
-     * @param $userId
-     * @param $data
-     * 
-     * @return $user
-     */
-    public static function update($data)
-    {
-        try{
-            $user = auth()->user();
-
-            if(!$user){
-                return ApiSendingErrorException::sendingError([
-                    'errNo'=>ApiErrorNumbers::$resource_not_found, 
-                    'errMsg'=> __('auth.update.userNotExist'), 
-                    'statusCode'=>Response::HTTP_NOT_FOUND
-                ]);
-            }
-
-            // Prevent these fields from being updated
-            $user->makeHidden('user_email');
-            $user->makeHidden('user_type_id');
-            $user->makeHidden('user_group_id');
-            
-            //Fill user with new data
-            // Persist user record to database
-            $user->fill($data);
-            $user->save();
-            
-            return ApiSendingResponse::sendingResponse([
-                'successMsg'=> __('auth.update.userUpdatedSuccessfully'),
-                'data'=>$user,
-                'statusCode'=>Response::HTTP_OK
-            ]);
-        }catch(\Exception $e){
-            return ApiSendingErrorException::formatError($e);
         } 
     }
 }
