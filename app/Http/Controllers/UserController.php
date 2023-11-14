@@ -103,22 +103,22 @@ class UserController extends Controller
     public function register(Request $request)
     {
         try{
-            // $validator = Validator::make($request->all(), [
-            //     'user_email'                  => 'required|email|unique:users',
-            //     'user_password'               => 'required|confirmed|min:6',
-            //     'user_password_confirmation'  => 'required',
-            //     'user_surname'                => 'required',
-            // ]);
+            $validator = Validator::make($request->all(), [
+                'user_email'                  => 'required|email|unique:user',
+                'user_password'               => 'required|confirmed|min:6',
+                'user_password_confirmation'  => 'required',
+                'user_surname'                => 'required',
+            ]);
         
-            // if ($validator->fails()) {
-            //     $error = implode(",", $validator->errors()->all());
+            if ($validator->fails()) {
+                $error = implode(",", $validator->errors()->all());
     
-            //     return errorResponse(
-            //         Response::HTTP_PRECONDITION_FAILED,
-            //         ERROR_CODE['VALIDATOR'],
-            //         $error
-            //     );
-            // }
+                return errorResponse(
+                    Response::HTTP_PRECONDITION_FAILED,
+                    ERROR_CODE['VALIDATOR'],
+                    $error
+                );
+            }
     
             return successResponse($this->userService->register($request->all()));
         }
