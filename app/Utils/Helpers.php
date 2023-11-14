@@ -13,10 +13,17 @@ if (!function_exists('t')) {
     function t($translationWords)
     {
         $seperatedWords = explode(".", $translationWords);
-        $fetchedTranslation=trans($seperatedWords[0]);
+        $fetchedTranslation = trans($seperatedWords[0]);
 
-        for($i= 1;$i<count($seperatedWords);$i++){
-            $fetchedTranslation=$fetchedTranslation[$seperatedWords[$i]];
+
+        for ($i = 1; $i < count($seperatedWords); $i++) {
+
+            if (is_array($fetchedTranslation)
+            && array_key_exists($seperatedWords[$i] , $fetchedTranslation)) {
+
+                $fetchedTranslation = $fetchedTranslation[$seperatedWords[$i]];
+            } 
+            else return $translationWords;
         }
 
         return ($fetchedTranslation);
