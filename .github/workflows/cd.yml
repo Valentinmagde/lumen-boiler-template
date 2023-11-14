@@ -63,8 +63,8 @@ jobs:
           script: |
             cd /var/www/lumen-boiler-template
             git pull --ff-only
-            composer i
-            php artisan migrate --force
+            # composer i
+            # php artisan migrate --force
   deploy-staging:
     name: Deploy Project to STAGING Server
     runs-on: ubuntu-latest
