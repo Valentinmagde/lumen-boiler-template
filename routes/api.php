@@ -56,5 +56,15 @@ $router->group(
         |
         */
         $router->get('/hotels', 'HotelController@index');
+
+        /*
+        |--------------------------------------------------------------------------
+        | API Routes of Country
+        |--------------------------------------------------------------------------
+        |
+        */
+        $router->group(['prefix' => 'countries'], function () use ($router) {
+            $router->get('/', 'CountryController@index');
+        });
     }
 );

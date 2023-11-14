@@ -41,6 +41,10 @@ use Laravel\Lumen\Routing\Controller as BaseController;
  *     description="API Endpoints of User"
  * )
  * @OA\Tag(
+ *     name="Countries",
+ *     description="API Endpoints of Countries"
+ * )
+ * @OA\Tag(
  *     name="Hotels",
  *     description="API Endpoints of Hotels"
  * )
