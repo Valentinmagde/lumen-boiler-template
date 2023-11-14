@@ -49,10 +49,13 @@ jobs:
       - name: Setup Deployer
         uses: atymic/deployer-php-action@master
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-known-hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+          ssh-disable-host-key-checking: true
+      - name: Deploy to Prod
+        env:
+          DOT_ENV: ${{ secrets.DOT_ENV_PRODUCTION }}
+        run: vendor/bin/dep deploy stage=production --tag=${{ env.GITHUB_REF }} -vvv
       # - name: Deploy to PRODUCTION Server
       #   uses: appleboy/ssh-action@master
       #   with:
