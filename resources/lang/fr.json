@@ -187,12 +187,13 @@
         "roomDeletedSuccessfully" : "Chambre deleted successfully"
     },
     "tariff":{
-        "tariffNotExist" : "This tariff does not exist",
-        "successfulOperation" : "Successful operation",
-        "successfullyCreatedTariff" : "Successfully created tariff",
-        "imageUploadedSuccessfully" : "Image uploaded successfully",
-        "tariffUpdatedSuccessfully" : "Tariff updated successfully",
+        "tariffNotExist" : "Ce tarif n'existe pas",
+        "successfulOperation" : "Opération réussie",
+        "successfullyCreatedTariff" : "Tarif créé avec succès",
+        "imageUploadedSuccessfully" : "Image téléchargée avec succès",
+        "tariffUpdatedSuccessfully" : "Tariff mis à jour avec succès",
         "tariffDeletedSuccessfully" : "Tariff deleted successfully"
     }
+    
    
 }

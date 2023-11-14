@@ -73,8 +73,6 @@ AuthorizableContract, JWTSubject
         'user_phone' => '+230 601 9000',
         'user_name' => 0,
         'active' => 0,
-        'avatar' => null,
-        'deleted_at' => null
     ];
 
 	protected $fillable = [
