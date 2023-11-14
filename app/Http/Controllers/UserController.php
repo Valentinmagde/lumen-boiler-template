@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Helpers\ApiSendingErrorException;
-use App\Services\AuthService;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
@@ -18,7 +17,7 @@ class UserController extends Controller
      *
      * @return void
      */
-    public function __construct(AuthService $userService)
+    public function __construct(UserService $userService)
     {
         $this->middleware('jwt:api', ['except' => ['register']]);
         $this->userService = $userService;
@@ -103,24 +102,33 @@ class UserController extends Controller
      */
     public function register(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'user_email'                  => 'required|email|unique:users',
-            'user_password'               => 'required|confirmed|min:6',
-            'user_password_confirmation'  => 'required',
-            'user_surname'                => 'required',
-        ]);
+        try{
+            $validator = Validator::make($request->all(), [
+                'user_email'                  => 'required|email|unique:users',
+                'user_password'               => 'required|confirmed|min:6',
+                'user_password_confirmation'  => 'required',
+                'user_surname'                => 'required',
+            ]);
+        
+            if ($validator->fails()) {
+                $error = implode(",", $validator->errors()->all());
     
-        if ($validator->fails()) {
-            $error = implode(",", $validator->errors()->all());
-
+                return errorResponse(
+                    Response::HTTP_PRECONDITION_FAILED,
+                    ERROR_CODE['VALIDATOR'],
+                    $error
+                );
+            }
+    
+            return successResponse($this->userService->register($request->all()));
+        }
+        catch(Exception $e){
             return errorResponse(
-                Response::HTTP_PRECONDITION_FAILED,
-                ERROR_CODE['VALIDATOR'],
-                $error
+                Response::HTTP_INTERNAL_SERVER_ERROR,
+                ERROR_CODE['GENERIC_ERROR'],
+                $e->getMessage()
             );
         }
-
-        return $this->userService->register($request->all());
     }
 
     /**
