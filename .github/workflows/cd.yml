@@ -46,23 +46,23 @@ jobs:
           php-version: 8.2
       - name: Composer install
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
-      # - name: Setup Deployer
-      #   uses: atymic/deployer-php-action@master
-      #   with:
-      #     ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      #     ssh-known-hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
-      #     # To disable host key checking (insecure!):
-      #     ssh-disable-host-key-checking: true
-      - name: Deploy to PRODUCTION Server
-        uses: appleboy/ssh-action@master
+      - name: Setup Deployer
+        uses: atymic/deployer-php-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
-          script: |
-            cd /var/www/lumen-boiler-template
-            git pull --ff-only
+      # - name: Deploy to PRODUCTION Server
+      #   uses: appleboy/ssh-action@master
+      #   with:
+      #     host: ${{ secrets.HOST }}
+      #     username: ${{ secrets.USERNAME }}
+      #     key: ${{ secrets.SSH_PRIVATE_KEY }}
+      #     port: 22
+      #     script: |
+      #       cd /var/www/lumen-boiler-template
+      #       git pull --ff-only
             # composer i
             # php artisan migrate --force
   deploy-staging:
