@@ -33,28 +33,20 @@ use Laravel\Lumen\Routing\Controller as BaseController;
  * ),
  *
  * @OA\Tag(
- *     name="Authentification",
- *     description="API Endpoints of Authentification"
+ *     name="Token",
+ *     description="API Endpoints of Tokens"
  * )
  * @OA\Tag(
- *     name="Users",
- *     description="API Endpoints of User"
+ *     name="User",
+ *     description="API Endpoints of Users"
  * )
  * @OA\Tag(
- *     name="Countries",
+ *     name="Country",
  *     description="API Endpoints of Countries"
  * )
  * @OA\Tag(
- *     name="Hotels",
+ *     name="Hotel",
  *     description="API Endpoints of Hotels"
- * )
- * @OA\Tag(
- *     name="Rooms",
- *     description="API Endpoints of Rooms"
- * )
- * @OA\Tag(
- *     name="Tariffs",
- *     description="API Endpoints of Tariffs"
  * )
  */
 class Controller extends BaseController

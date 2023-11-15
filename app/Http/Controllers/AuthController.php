@@ -26,15 +26,15 @@ class AuthController extends Controller
 
     /**
      * @OA\Post(
-     * path="/api/v2/auth/login",
-     * operationId="authLogin",
-     * tags={"Authentification"},
-     * summary="User Login",
-     * description="Login User Here",
+     * path="/api/v2/token/access",
+     * operationId="accessToken",
+     * tags={"Token"},
+     * summary="Get access token",
+     * description="Get access token here",
      *   @OA\Parameter(
      *          name="lang",
      *          in="query",
-     *          required=true,
+     *          required=false,
      *          example="en",
      *          @OA\Schema(
      *              type="string"
@@ -133,11 +133,11 @@ class AuthController extends Controller
 
     /**
      * @OA\Post(
-     * path="/api/v2/auth/logout",
-     * operationId="authLogout",
-     * tags={"Authentification"},
-     * summary="User Logout",
-     * description="Logout User Here",
+     * path="/api/v2/token/revoke",
+     * operationId="revokeToken",
+     * tags={"Token"},
+     * summary="Revoke token",
+     * description="Revoke token here",
      *   @OA\Parameter(
      *          name="lang",
      *          in="query",
@@ -203,9 +203,9 @@ class AuthController extends Controller
 
     /**
      * @OA\Post(
-     * path="/api/v2/auth/refresh",
-     * operationId="authRefresh",
-     * tags={"Authentification"},
+     * path="/api/v2/token/refresh",
+     * operationId="refreshToken",
+     * tags={"Token"},
      * summary="Refresh token",
      * description="Refresh Token Here",
      *   @OA\Parameter(

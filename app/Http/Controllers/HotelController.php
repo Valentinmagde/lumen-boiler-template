@@ -24,7 +24,7 @@ class HotelController extends Controller
      * @OA\Get(
      *      path="/api/v2/hotels",
      *      operationId="hotelIndex",
-     *      tags={"Hotels"},
+     *      tags={"Hotel"},
      *      summary="Get all hotels",
      *      description="Returns all hotels",
      *      @OA\Parameter(

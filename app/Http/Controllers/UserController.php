@@ -27,7 +27,7 @@ class UserController extends Controller
      * @OA\Post(
      * path="/api/v2/users/register",
      * operationId="Register",
-     * tags={"Users"},
+     * tags={"User"},
      * summary="User Register",
      * description="User Register here",
      *   @OA\Parameter(
@@ -135,7 +135,7 @@ class UserController extends Controller
      * @OA\Get(
      *      path="/api/v2/user/me",
      *      operationId="getProfile",
-     *      tags={"Users"},
+     *      tags={"User"},
      *      summary="Get the logged in user",
      *      description="Returns current user",
      *   @OA\Parameter(
