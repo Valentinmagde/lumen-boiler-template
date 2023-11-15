@@ -155,14 +155,6 @@ return [
             ],
         ],
         */
-
-        'bearer' => [
-            'type' => 'http',
-            'description' => 'Authorization token obtained from logging in.',
-            'name' => 'Authorization',
-            'in' => 'header',
-            'scheme' => 'bearer',
-        ],
     ],
 
     /*
@@ -170,7 +162,7 @@ return [
     | Turn this off to remove swagger generation on production
     |--------------------------------------------------------------------------
      */
-    'generate_always' => env('SWAGGER_GENERATE_ALWAYS', true),
+    'generate_always' => env('SWAGGER_GENERATE_ALWAYS', false),
 
     /*
     |--------------------------------------------------------------------------
