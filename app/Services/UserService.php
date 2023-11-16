@@ -8,25 +8,13 @@ use Exception;
 
 class UserService
 {
-    
     /**
-     * Get authenticate user
+     * Create a new user
      * 
-     * @return $user
-     */
-    public static function show()
-    {
-        try {
-            return auth()->user();
-        } catch (\Exception $e) {
-            throw new Exception($e->getMessage());
-        } 
-    }
-
-    /**
-     * Register a user
+     * @author Valentin magde <valentinmagde@gmail.com>
+     * @since 2023-11-15
      * 
-     * @param $data
+     * @param mixed $data the user data
      * 
      * @return $user
      */
@@ -43,8 +31,11 @@ class UserService
      /**
      * Update authenticate user
      * 
-     * @param $userId
-     * @param $data
+     * @author Valentin magde <valentinmagde@gmail.com>
+     * @since 2023-11-15
+     * 
+     * @param int $userId the user id
+     * @param mixed $data the user data
      * 
      * @return $user
      */

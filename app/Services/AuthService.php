@@ -2,13 +2,10 @@
 
 namespace App\Services;
 
-use Illuminate\Http\Response;
-use App\Models\User;
-use App\Http\Helpers\HelperFunctions;
-use App\Http\Helpers\ApiSendingResponse;
-use App\Http\Helpers\ApiSendingErrorException;
-use App\Http\Helpers\ApiErrorNumbers;
+use App\Models\Consumer;
 use Exception;
+use Illuminate\Support\Facades\Hash;
+use stdClass;
 
 class AuthService
 {
@@ -22,17 +19,29 @@ class AuthService
     public static function login($data)
     {
         try {
-            $user = User::where('user_email', $data['user_email'])
-                ->where('user_password', md5($data['user_password']))
+            $consumer = Consumer::where('email', $data['email'])
+                ->get(['id', 'name', 'password'])
                 ->first();
 
-            if($user) $token = auth()->login($user);
-            else throw new Exception(t('auth.incorrectUserEmailOrPassword'));
+            if (
+                $consumer &&
+                $consumer->makeVisible(['password']) &&
+                Hash::check($data['password'], $consumer->password)
+            ) {
+                $token = auth()
+                    ->claims([
+                        'consumer' => $consumer->makeHidden(['password']),
+                        'roles' => array()
+                    ])
+                    ->login($consumer);
+            } else {
+                throw new Exception(t('auth.incorrectUserEmailOrPassword'));
+            }
 
             return $token;
         } catch (\Exception $e) {
             throw new Exception($e->getMessage());
-        } 
+        }
     }
 
     /**
@@ -42,13 +51,13 @@ class AuthService
      */
     public static function logout()
     {
-        try{
+        try {
             auth()->logout();
 
             return null;
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             throw new Exception($e->getMessage());
-        } 
+        }
     }
 
     /**
@@ -58,13 +67,13 @@ class AuthService
      */
     public static function refresh()
     {
-        try{
+        try {
             return auth()->refresh();
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             throw new Exception($e->getMessage());
         }
     }
-    
+
     /**
      * Get authenticate user
      * 
@@ -76,6 +85,6 @@ class AuthService
             return auth()->user();
         } catch (\Exception $e) {
             throw new Exception($e->getMessage());
-        } 
+        }
     }
 }

@@ -3,32 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Services\UserService;
+use App\Services\ConsumerService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 use Exception;
 
-class UserController extends Controller
+class ConsumerController extends Controller
 {
-    private $userService;
+    private $consumerService;
 
     /**
-     * Create a new UserController instance.
-     *
+     * Create a new ConsumerController instance.
+     * 
      * @author Valentin magde <valentinmagde@gmail.com>
      * @since 2023-11-15
      * 
      * @return void
      */
-    public function __construct(UserService $userService)
+    public function __construct(ConsumerService $consumerService)
     {
         $this->middleware('jwt:api', ['except' => ['register']]);
-        $this->userService = $userService;
+        $this->consumerService = $consumerService;
     }
 
     /**
-     * Create a new user
+     * Create a new consumer
      * 
      * @author Valentin magde <valentinmagde@gmail.com>
      * @since 2023-11-15
@@ -40,10 +40,10 @@ class UserController extends Controller
     {
         try{
             $validator = Validator::make($request->all(), [
-                'user_email'                  => 'required|email|unique:user',
-                'user_password'               => 'required|confirmed|min:6',
-                'user_password_confirmation'  => 'required',
-                'user_surname'                => 'required',
+                'name'                   => 'required',
+                'email'                  => 'required|email|unique:api_consumers',
+                'password'               => 'required|confirmed|min:6',
+                'password_confirmation'  => 'required',
             ]);
         
             if ($validator->fails()) {
@@ -56,7 +56,29 @@ class UserController extends Controller
                 );
             }
     
-            return successResponse($this->userService->register($request->all()));
+            return successResponse($this->consumerService->register($request->all()));
+        }
+        catch(Exception $e){
+            return errorResponse(
+                Response::HTTP_INTERNAL_SERVER_ERROR,
+                ERROR_CODE['GENERIC_ERROR'],
+                $e->getMessage()
+            );
+        }
+    }
+
+    /**
+     * Get the authenticated a concumer.
+     *
+     * @author Valentin magde <valentinmagde@gmail.com>
+     * @since 2023-11-15
+     * 
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function me()
+    {
+        try{
+            return successResponse($this->consumerService->show());
         }
         catch(Exception $e){
             return errorResponse(

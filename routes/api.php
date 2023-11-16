@@ -37,6 +37,20 @@ $router->group(
 
         /*
         |--------------------------------------------------------------------------
+        | API Routes of Consumer
+        |--------------------------------------------------------------------------
+        |
+        */
+        $router->group(['prefix' => 'consumers'], function () use ($router) {
+            $router->post('/register', 'ConsumerController@register');
+        });
+
+        $router->group(['prefix' => 'consumer'], function () use ($router) {
+            $router->get('/me', 'ConsumerController@me');
+        });
+
+        /*
+        |--------------------------------------------------------------------------
         | API Routes of User
         |--------------------------------------------------------------------------
         |
