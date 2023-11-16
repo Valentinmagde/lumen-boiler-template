@@ -103,7 +103,7 @@
  *      tags={"Consumer"},
  *      summary="Get the logged in consumer",
  *      description="Returns current consumer",
- *   @OA\Parameter(
+ *      @OA\Parameter(
  *          name="lang",
  *          in="query",
  *          required=true,
