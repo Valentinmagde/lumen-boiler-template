@@ -11,20 +11,22 @@ class AuthService
 {
     /**
      * Get a JWT via given credentials.
-     * 
-     * @param mixed $data
-     * 
+     *
+     * @author Valentin magde <valentinmagde@gmail.com>
+     * @since 2023-11-09
+     *
+     * @param array $data The authentication credentials.
+     *
      * @return token
      */
-    public static function login($data)
+    public static function login(array $data)
     {
         try {
             $consumer = Consumer::where('email', $data['email'])
                 ->get(['id', 'name', 'password'])
                 ->first();
 
-            if (
-                $consumer &&
+            if ($consumer &&
                 $consumer->makeVisible(['password']) &&
                 Hash::check($data['password'], $consumer->password)
             ) {
@@ -46,7 +48,10 @@ class AuthService
 
     /**
      * Log the user out (Invalidate the token).
-     * 
+     *
+     * @author Valentin magde <valentinmagde@gmail.com>
+     * @since 2023-11-09
+     *
      * @return mixed
      */
     public static function logout()
@@ -62,8 +67,11 @@ class AuthService
 
     /**
      * Refresh a token.
-     * 
-     * @return new token 
+     *
+     * @author Valentin magde <valentinmagde@gmail.com>
+     * @since 2023-11-09
+     *
+     * @return new token
      */
     public static function refresh()
     {
@@ -76,7 +84,10 @@ class AuthService
 
     /**
      * Get authenticate user
-     * 
+     *
+     * @author Valentin magde <valentinmagde@gmail.com>
+     * @since 2023-11-09
+     *
      * @return $user
      */
     public static function show()

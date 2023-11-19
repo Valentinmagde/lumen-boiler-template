@@ -1,4 +1,5 @@
 <?php
+// phpcs:disable Squiz.Commenting.FunctionComment.TypeHintMissing
 namespace App\Http\Middleware;
 
 use Closure;
@@ -10,9 +11,9 @@ class CorsMiddleware
      *
      * @author Valentin Magde <valentinmagde@gmail.com>
      * @since 2023-11-10
-     * 
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     *
+     * @param  \Illuminate\Http\Request  $request Request.
+     * @param  \Closure  $next Next.
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -25,14 +26,12 @@ class CorsMiddleware
             'Access-Control-Allow-Headers'     => 'Content-Type, Authorization, X-Requested-With'
         ];
 
-        if ($request->isMethod('OPTIONS'))
-        {
+        if ($request->isMethod('OPTIONS')) {
             return response()->json('{"method":"OPTIONS"}', 200, $headers);
         }
 
         $response = $next($request);
-        foreach($headers as $key => $value)
-        {
+        foreach ($headers as $key => $value) {
             $response->header($key, $value);
         }
 

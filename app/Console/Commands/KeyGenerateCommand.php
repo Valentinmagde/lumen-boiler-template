@@ -11,12 +11,18 @@ class KeyGenerateCommand extends Command
     /**
      * The console command name.
      *
+     * @author Valentin magde <valentinmagde@gmail.com>
+     * @since 2023-11-12
+     *
      * @var string
      */
     protected $name = 'key:generate';
 
     /**
      * The console command description.
+     *
+     * @author Valentin magde <valentinmagde@gmail.com>
+     * @since 2023-11-12
      *
      * @var string
      */
@@ -25,7 +31,10 @@ class KeyGenerateCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return void
+     * @author Valentin magde <valentinmagde@gmail.com>
+     * @since 2023-11-12
+     *
+     * @return mixed
      */
     public function handle()
     {
@@ -42,7 +51,8 @@ class KeyGenerateCommand extends Command
                 $path,
                 str_replace(
                     'APP_KEY=' . env('APP_KEY'),
-                    'APP_KEY=' . $key, file_get_contents($path)
+                    'APP_KEY=' . $key,
+                    file_get_contents($path)
                 )
             );
         }
@@ -53,6 +63,9 @@ class KeyGenerateCommand extends Command
     /**
      * Generate a random key for the application.
      *
+     * @author Valentin magde <valentinmagde@gmail.com>
+     * @since 2023-11-12
+     *
      * @return string
      */
     protected function getRandomKey()
@@ -62,6 +75,9 @@ class KeyGenerateCommand extends Command
 
     /**
      * Get the console command options.
+     *
+     * @author Valentin magde <valentinmagde@gmail.com>
+     * @since 2023-11-12
      *
      * @return array
      */

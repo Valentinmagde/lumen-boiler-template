@@ -15,10 +15,11 @@ class ConsumerController extends Controller
 
     /**
      * Create a new ConsumerController instance.
-     * 
+     *
      * @author Valentin magde <valentinmagde@gmail.com>
      * @since 2023-11-15
-     * 
+     *
+     * @param ConsumerService $consumerService The instance of ConsumerService class.
      * @return void
      */
     public function __construct(ConsumerService $consumerService)
@@ -29,19 +30,19 @@ class ConsumerController extends Controller
 
     /**
      * Create a new consumer
-     * 
+     *
      * @author Valentin magde <valentinmagde@gmail.com>
      * @since 2023-11-15
-     * 
-     * @param Request $request
+     *
+     * @param Request $request Request.
      * @return \Illuminate\Http\Response
      */
     public function register(Request $request)
     {
-        try{
+        try {
             $validator = Validator::make($request->all(), [
                 'name'                   => 'required',
-                'email'                  => 'required|email|unique:api_consumers',
+                'email'                  => 'required|email|unique:Api_Consumers',
                 'password'               => 'required|confirmed|min:6',
                 'password_confirmation'  => 'required',
             ]);
@@ -57,8 +58,7 @@ class ConsumerController extends Controller
             }
     
             return successResponse($this->consumerService->register($request->all()));
-        }
-        catch(Exception $e){
+        } catch (Exception $e) {
             return errorResponse(
                 Response::HTTP_INTERNAL_SERVER_ERROR,
                 ERROR_CODE['GENERIC_ERROR'],
@@ -72,15 +72,14 @@ class ConsumerController extends Controller
      *
      * @author Valentin magde <valentinmagde@gmail.com>
      * @since 2023-11-15
-     * 
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function me()
     {
-        try{
+        try {
             return successResponse($this->consumerService->show());
-        }
-        catch(Exception $e){
+        } catch (Exception $e) {
             return errorResponse(
                 Response::HTTP_INTERNAL_SERVER_ERROR,
                 ERROR_CODE['GENERIC_ERROR'],

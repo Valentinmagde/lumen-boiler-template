@@ -7,8 +7,6 @@
     "require": {
         "php": "^8.1",
         "darkaonline/swagger-lume": "10.*",
-        "deployer/deployer": "^7.3",
-        "deployer/recipes": "^6.2",
         "guzzlehttp/guzzle": "^7.8",
         "laravel/lumen-framework": "^10.0",
         "tymon/jwt-auth": "^2.0",
@@ -18,7 +16,10 @@
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
         "mockery/mockery": "^1.4.4",
-        "phpunit/phpunit": "^10.0"
+        "phpunit/phpunit": "^10.0",
+        "deployer/deployer": "^7.3",
+        "deployer/recipes": "^6.2",
+        "squizlabs/php_codesniffer": "^3.7"
     },
     "autoload": {
         "psr-4": {
@@ -27,7 +28,6 @@
             "Database\\Seeders\\": "database/seeders/",
             "Remote\\": "remote/",
             "ExternalApi\\": "external-api/"
-            
         },
         "files": [
             "app/Utils/Helpers.php",

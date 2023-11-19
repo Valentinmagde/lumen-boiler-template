@@ -18,7 +18,8 @@ class UserController extends Controller
      *
      * @author Valentin magde <valentinmagde@gmail.com>
      * @since 2023-11-15
-     * 
+     *
+     * @param UserService $userService The instance of UserService class.
      * @return void
      */
     public function __construct(UserService $userService)
@@ -29,18 +30,18 @@ class UserController extends Controller
 
     /**
      * Create a new user
-     * 
+     *
      * @author Valentin magde <valentinmagde@gmail.com>
      * @since 2023-11-15
-     * 
-     * @param Request $request
+     *
+     * @param Request $request Request.
      * @return \Illuminate\Http\Response
      */
     public function register(Request $request)
     {
-        try{
+        try {
             $validator = Validator::make($request->all(), [
-                'user_email'                  => 'required|email|unique:user',
+                'user_email'                  => 'required|email|unique:User',
                 'user_password'               => 'required|confirmed|min:6',
                 'user_password_confirmation'  => 'required',
                 'user_surname'                => 'required',
@@ -57,8 +58,7 @@ class UserController extends Controller
             }
     
             return successResponse($this->userService->register($request->all()));
-        }
-        catch(Exception $e){
+        } catch (Exception $e) {
             return errorResponse(
                 Response::HTTP_INTERNAL_SERVER_ERROR,
                 ERROR_CODE['GENERIC_ERROR'],

@@ -21,26 +21,33 @@ class CountryService
      */
     public $secret;
 
+    /**
+     * Create a new CountryService instance.
+     *
+     * @author Valentin magde <valentinmagde@gmail.com>
+     * @since 2023-11-14
+     *
+     * @return void
+     */
     public function __construct()
     {
-        $this->baseUri = "http://localhost/api.beachcomber-hotels.com/";
-        $this->secret = '';
+        $this->baseUri = env('API_BASE_URL');
+        $this->secret = env('API_SECRET');
     }
 
     /**
      * Get all hotels
-     * 
+     *
      * @author Valentin magde <valentinmagde@gmail.com>
      * @since 2023-11-14
-     * 
+     *
      * @return array list of countries
      */
     public function getAllCountries()
     {
-        try{
-            return $this->performRequest('GET', '?q=bct&a=getCountries');
-        }
-        catch(Exception $e) {
+        try {
+            return $this->performRequest('GET', '/?q=bct&a=getCountries');
+        } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
     }

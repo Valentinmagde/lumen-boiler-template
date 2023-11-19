@@ -2,10 +2,10 @@
 
 /**
  * Register Consumer
- * 
+ *
  * @author Valentin magde <valentinmagde@gmail.com>
  * @since 2023-11-15
- * 
+ *
  * @OA\Post(
  * path="/api/v2/consumers/register",
  * operationId="Register",
@@ -53,11 +53,10 @@
  *               @OA\Property(property="data", type="object",
  *                   ref="#/components/schemas/Consumer"
  *               ),
- *               
  *           )
  *       ),
  *       @OA\Response(
- *           response=400, 
+ *           response=400,
  *           description="Bad request",
  *           @OA\JsonContent(
  *               @OA\Property(property="errNo", type="integer", example="number"),
@@ -65,7 +64,7 @@
  *          )
  *       ),
  *       @OA\Response(
- *           response=401, 
+ *           response=401,
  *           description="Unauthorized",
  *           @OA\JsonContent(
  *               @OA\Property(property="errNo", type="integer", example="number"),
@@ -73,7 +72,7 @@
  *          )
  *       ),
  *       @OA\Response(
- *           response=404, 
+ *           response=404,
  *           description="Resource Not Found",
  *           @OA\JsonContent(
  *               @OA\Property(property="errNo", type="integer", example="number"),
@@ -81,7 +80,7 @@
  *          )
  *       ),
  *       @OA\Response(
- *           response=500, 
+ *           response=500,
  *           description="Internal Server Error",
  *           @OA\JsonContent(
  *               @OA\Property(property="errNo", type="integer", example="number"),
@@ -91,12 +90,12 @@
  *    )
  */
 
-/** 
+/**
  * Get Authenticated User
  *
  * @author Valentin magde <valentinmagde@gmail.com>
  * @since 2023-11-15
- * 
+ *
  * @OA\Get(
  *      path="/api/v2/consumer/me",
  *      operationId="getProfile",
@@ -126,7 +125,7 @@
  *         {"bearer": {}}
  *       },
  *       @OA\Response(
- *           response=400, 
+ *           response=400,
  *           description="Bad request",
  *           @OA\JsonContent(
  *               @OA\Property(property="errNo", type="integer", example="number"),
@@ -134,7 +133,7 @@
  *          )
  *       ),
  *       @OA\Response(
- *           response=401, 
+ *           response=401,
  *           description="Unauthorized",
  *           @OA\JsonContent(
  *               @OA\Property(property="errNo", type="integer", example="number"),
@@ -142,7 +141,7 @@
  *          )
  *       ),
  *       @OA\Response(
- *           response=404, 
+ *           response=404,
  *           description="Resource Not Found",
  *           @OA\JsonContent(
  *               @OA\Property(property="errNo", type="integer", example="number"),
@@ -150,14 +149,12 @@
  *          )
  *       ),
  *       @OA\Response(
- *           response=500, 
+ *           response=500,
  *           description="Internal Server Error",
  *           @OA\JsonContent(
  *               @OA\Property(property="errNo", type="integer", example="number"),
  *               @OA\Property(property="errMsg", type="string", example="string"),
  *          )
  *       ),
- *    ),
- *      
- * 
+ *    )
  */

@@ -1,0 +1,8 @@
+{
+    "phpcs.enable": true,
+    "phpcs.standard": "./phpcs.xml",
+    "phpcs.ignorePatterns": ["*/vendor/*"],
+    "php-cs-fixer.rules": "@PSR2",
+    "php-cs-fixer.onsave": true,
+    "files.eol": "\n"
+}

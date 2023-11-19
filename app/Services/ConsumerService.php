@@ -11,10 +11,10 @@ class ConsumerService
     
     /**
      * Get authenticate consumer
-     * 
+     *
      * @author Valentin magde <valentinmagde@gmail.com>
      * @since 2023-11-15
-     * 
+     *
      * @return mixed $consumer
      */
     public static function show()
@@ -23,26 +23,26 @@ class ConsumerService
             return auth()->user();
         } catch (\Exception $e) {
             throw new Exception($e->getMessage());
-        } 
+        }
     }
 
     /**
      * Create a new concumer
-     * 
+     *
      * @author Valentin magde <valentinmagde@gmail.com>
      * @since 2023-11-15
-     * 
-     * @param mixed $data the consumer data
-     * 
+     *
+     * @param array $data The consumer data to store.
+     *
      * @return mixed $consumer
      */
-    public static function register($data)
+    public static function register(array $data)
     {
-        try{
+        try {
             $data['password'] = Hash::make($data['password']);
             return Consumer::create($data);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             throw new Exception($e->getMessage());
-        } 
+        }
     }
 }

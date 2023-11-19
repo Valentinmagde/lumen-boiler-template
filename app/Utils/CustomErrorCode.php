@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 const ERROR_CODE = array(
     'VALIDATOR' => 6,

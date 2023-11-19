@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Http\Middleware;
 
 use Closure;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Tymon\JWTAuth\Exceptions\TokenBlacklistedException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
@@ -11,48 +13,45 @@ use Tymon\JWTAuth\Facades\JWTAuth as FacadesJWTAuth;
 
 class JwtMiddleware
 {
-	/**
-	 * Handle an incoming request.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  \Closure  $next
-	 * @return mixed
-	 */
-	public function handle($request, Closure $next)
-	{
-		try 
-        {
-		    FacadesJWTAuth::parseToken()->authenticate();
+    /**
+     * Handle an incoming request.
+     *
+     * @param  Request  $request Request.
+     * @param  \Closure  $next Next.
+     * @return mixed
+     */
+    public function handle(Request $request, Closure $next)
+    {
+        try {
+            FacadesJWTAuth::parseToken()->authenticate();
 
             return $next($request);
- 		} 
-        catch (Exception $e) 
-        {
-        	if ($e instanceof TokenInvalidException){
+        } catch (Exception $e) {
+            if ($e instanceof TokenInvalidException) {
                 return errorResponse(
                     Response::HTTP_UNAUTHORIZED,
-                    ERROR_CODE['INVALID_TOKEN'], 
+                    ERROR_CODE['INVALID_TOKEN'],
                     t('auth.invalidToken')
                 );
-            }else if ($e instanceof TokenExpiredException){
+            } elseif ($e instanceof TokenExpiredException) {
                 return errorResponse(
                     Response::HTTP_UNAUTHORIZED,
-                    ERROR_CODE['EXPIRED_TOKEN'], 
+                    ERROR_CODE['EXPIRED_TOKEN'],
                     t('auth.expiredToken')
                 );
-            }else if ($e instanceof TokenBlacklistedException){
+            } elseif ($e instanceof TokenBlacklistedException) {
                 return errorResponse(
                     Response::HTTP_UNAUTHORIZED,
-                    ERROR_CODE['BLACKLISTED_TOKEN'], 
+                    ERROR_CODE['BLACKLISTED_TOKEN'],
                     t('auth.blacklistedToken')
                 );
-            }else{
+            } else {
                 return errorResponse(
                     Response::HTTP_UNAUTHORIZED,
-                    ERROR_CODE['TOKEN_NOT_FOUND'], 
+                    ERROR_CODE['TOKEN_NOT_FOUND'],
                     t('auth.tokenNotFound')
                 );
             }
-		} 
-	}
+        }
+    }
 }

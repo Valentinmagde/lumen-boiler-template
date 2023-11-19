@@ -15,7 +15,8 @@ class HotelController extends Controller
      *
      * @author Valentin magde <valentinmagde@gmail.com>
      * @since 2023-11-15
-     * 
+     *
+     * @param HotelService $hotelService The instance of HotelService class.
      * @return void
      */
     public function __construct(HotelService $hotelService)
@@ -28,15 +29,14 @@ class HotelController extends Controller
      *
      * @author Valentin magde <valentinmagde@gmail.com>
      * @since 2023-11-15
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        try{
+        try {
             return successResponse($this->hotelService->getAllHotels());
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             return errorResponse(
                 Response::HTTP_INTERNAL_SERVER_ERROR,
                 ERROR_CODE['GENERIC_ERROR'],

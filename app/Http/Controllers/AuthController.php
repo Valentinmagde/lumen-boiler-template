@@ -11,6 +11,11 @@ use Exception;
 
 class AuthController extends Controller
 {
+    /**
+     * The instance of AuthService class.
+     *
+     * @var AuthService
+     */
     private $authService;
 
     /**
@@ -18,7 +23,8 @@ class AuthController extends Controller
      *
      * @author Valentin magde <valentinmagde@gmail.com>
      * @since 2023-11-15
-     * 
+     *
+     * @param AuthService $authService The instance of AuthService class.
      * @return void
      */
     public function __construct(AuthService $authService)
@@ -32,13 +38,13 @@ class AuthController extends Controller
      *
      * @author Valentin magde <valentinmagde@gmail.com>
      * @since 2023-11-15
-     * 
-     * @param  Request  $request
+     *
+     * @param Request $request Request.
      * @return Response
      */
     public function login(Request $request)
     {
-        try{
+        try {
             $validator = Validator::make($request->all(), [
                 'email'     => 'required|email',
                 'password'  => 'required|min:6'
@@ -49,7 +55,7 @@ class AuthController extends Controller
                 
                 return errorResponse(
                     Response::HTTP_BAD_REQUEST,
-                    ERROR_CODE['VALIDATOR'], 
+                    ERROR_CODE['VALIDATOR'],
                     $error
                 );
             }
@@ -57,8 +63,7 @@ class AuthController extends Controller
             return respondWithToken(
                 $this->authService->login($request->all())
             );
-        }
-        catch(Exception $e){
+        } catch (Exception $e) {
             return errorResponse(
                 Response::HTTP_INTERNAL_SERVER_ERROR,
                 ERROR_CODE['GENERIC_ERROR'],
@@ -72,15 +77,14 @@ class AuthController extends Controller
      *
      * @author Valentin magde <valentinmagde@gmail.com>
      * @since 2023-11-15
-     * 
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function logout()
     {
-        try{
+        try {
             return successResponse($this->authService->logout());
-        }
-        catch(Exception $e){
+        } catch (Exception $e) {
             return errorResponse(
                 Response::HTTP_INTERNAL_SERVER_ERROR,
                 ERROR_CODE['GENERIC_ERROR'],
@@ -94,15 +98,14 @@ class AuthController extends Controller
      *
      * @author Valentin magde <valentinmagde@gmail.com>
      * @since 2023-11-15
-     * 
+     *
      * @return \Illuminate\Http\JsonResponse
      */
     public function refresh()
     {
-        try{
+        try {
             return respondWithToken($this->authService->refresh());
-        }
-        catch(Exception $e){
+        } catch (Exception $e) {
             return errorResponse(
                 Response::HTTP_INTERNAL_SERVER_ERROR,
                 ERROR_CODE['GENERIC_ERROR'],

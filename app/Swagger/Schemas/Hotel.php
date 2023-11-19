@@ -3,7 +3,7 @@
 /**
  * @OA\Schema(
  *  schema="Hotel",
- *  required={"name", "type", "postal_street", "postal_city", "tel", "	fax", 
+ *  required={"name", "type", "postal_street", "postal_city", "tel", "	fax",
  *   "url", "check_in", "check_out", "order_id", "menu_order_id",
  *   "video_code", "pms_property_code", "site_url", "latitude",
  *   "longitude", "facebook_url", "googleplus_url"

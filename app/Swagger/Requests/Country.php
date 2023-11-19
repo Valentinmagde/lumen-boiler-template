@@ -33,7 +33,7 @@
  *           ),
  *       ),
  *       @OA\Response(
- *           response=400, 
+ *           response=400,
  *           description="Bad request",
  *           @OA\JsonContent(
  *               @OA\Property(property="errNo", type="integer", example="number"),
@@ -41,7 +41,7 @@
  *          )
  *       ),
  *       @OA\Response(
- *           response=401, 
+ *           response=401,
  *           description="Unauthorized",
  *           @OA\JsonContent(
  *               @OA\Property(property="errNo", type="integer", example="number"),
@@ -49,7 +49,7 @@
  *          )
  *       ),
  *       @OA\Response(
- *           response=404, 
+ *           response=404,
  *           description="Resource Not Found",
  *           @OA\JsonContent(
  *               @OA\Property(property="errNo", type="integer", example="number"),
@@ -57,7 +57,7 @@
  *          )
  *       ),
  *       @OA\Response(
- *           response=500, 
+ *           response=500,
  *           description="Internal Server Error",
  *           @OA\JsonContent(
  *               @OA\Property(property="errNo", type="integer", example="number"),

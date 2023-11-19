@@ -12,22 +12,23 @@ class SetLocaleMiddleware
      *
      * @author Gregory Albert <gregoryalbert1209@gmail.com>
      * @since 2023-11-10
-     * 
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     *
+     * @param  \Illuminate\Http\Request  $request Request.
+     * @param  \Closure  $next Next.
      * @return mixed
      */
     public function handle(Request $request, Closure $next)
     {
         foreach (scandir(base_path("resources/lang")) as $jsonLangFile) {
-            if (strlen($jsonLangFile) > 2)
-                $availableLocales[substr($jsonLangFile, 0, 2)] 
+            if (strlen($jsonLangFile) > 2) {
+                $availableLocales[substr($jsonLangFile, 0, 2)]
                 = substr($jsonLangFile, 0, 2);
+            }
         }
 
-        in_array($request->input('lang'), $availableLocales) 
-            ? $locale = $request->input('lang') 
-            : $locale = env('APP_LOCALE','en');
+        in_array($request->input('lang'), $availableLocales)
+            ? $locale = $request->input('lang')
+            : $locale = env('APP_LOCALE', 'en');
 
         // Set the application's locale
         app('translator')->setLocale($locale);

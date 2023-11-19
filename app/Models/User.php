@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * 
+ *
  * Class User
- * 
+ *
  * @property int $user_id
  * @property int $user_type_id
  * @property int $user_group_id
@@ -19,14 +19,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $user_name
  * @property string $user_password
  * @property int $active
- * 
+ *
  * @package App\Models
  */
 class User extends Model
 {
-	protected $table = 'User';
-	protected $primaryKey = 'user_id';
-	public $timestamps = false;
+    protected $table = 'User';
+    protected $primaryKey = 'user_id';
+    public $timestamps = false;
 
     /**
      * The attributes that should be hidden for arrays.
@@ -35,13 +35,13 @@ class User extends Model
         'user_password'
     ];
 
-	protected $casts = [
-		'user_id' => 'int'
-	];
+    protected $casts = [
+        'user_id' => 'int'
+    ];
 
     protected $attributes = [
         'user_id' => 0,
-		'user_type_id' => 0,
+        'user_type_id' => 0,
         'user_group_id' => 0,
         'user_surname' => 0,
         'user_othername' => 0,
@@ -52,9 +52,9 @@ class User extends Model
         'active' => 0,
     ];
 
-	protected $fillable = [
-		'user_id',
-		'user_type_id',
+    protected $fillable = [
+        'user_id',
+        'user_type_id',
         'user_group_id',
         'user_surname',
         'user_othername',
@@ -64,15 +64,15 @@ class User extends Model
         'user_name',
         'user_password',
         'active'
-	];
+    ];
 
     /**
      * /------------------------------------------------------------------------
      * / JWT Functions
      * /------------------------------------------------------------------------
-    */
+     */
 
-	/**
+    /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
      * @return mixed

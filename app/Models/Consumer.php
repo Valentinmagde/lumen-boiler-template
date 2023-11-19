@@ -10,25 +10,27 @@ use Laravel\Lumen\Auth\Authorizable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
- * 
+ *
  * Class Consumer
- * 
+ *
  * @property int id
  * @property string $name
  * @property string $email
  * @property string $phone
  * @property string $password
  * @property int $active
- * 
+ *
  * @package App\Models
  */
-class Consumer extends Model implements AuthenticatableContract,
-AuthorizableContract, JWTSubject
+class Consumer extends Model implements
+    AuthenticatableContract,
+    AuthorizableContract,
+    JWTSubject
 {
-	use Authenticatable, Authorizable;
+    use Authenticatable, Authorizable;
 
-	protected $table = 'Api_Consumers';
-	public $timestamps = false;
+    protected $table = 'Api_Consumers';
+    public $timestamps = false;
 
     /**
      * The attributes that should be hidden for arrays.
@@ -37,29 +39,29 @@ AuthorizableContract, JWTSubject
         'password'
     ];
 
-	protected $casts = [
-		// 
-	];
-
-    protected $attributes = [
-        // 
+    protected $casts = [
+        //
     ];
 
-	protected $fillable = [
-		'name',
+    protected $attributes = [
+        //
+    ];
+
+    protected $fillable = [
+        'name',
         'email',
         'phone',
         'password',
         'active'
-	];
+    ];
 
     /**
      * /------------------------------------------------------------------------
      * / JWT Functions
      * /------------------------------------------------------------------------
-    */
+     */
 
-	/**
+    /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
      * @return mixed

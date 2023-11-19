@@ -2,7 +2,7 @@
 
 /**
  * Access token (Login)
- * 
+ *
  *  @OA\Post(
  *      path="/api/v2/token/access",
  *      operationId="accessToken",
@@ -48,28 +48,28 @@
  *         ),
  *      ),
  *      @OA\Response(
- *          response=400, 
+ *          response=400,
  *          description="Bad request",
  *          @OA\JsonContent(
  *              ref="#/components/schemas/BadRequestResponse"
  *          )
  *      ),
  *      @OA\Response(
- *           response=401, 
+ *           response=401,
  *           description="Unauthorized",
  *           @OA\JsonContent(
  *                ref="#/components/schemas/UnauthorizedResponse"
  *          )
  *      ),
  *      @OA\Response(
- *           response=404, 
+ *           response=404,
  *           description="Resource Not Found",
  *           @OA\JsonContent(
  *               ref="#/components/schemas/NotFoundResponse"
  *          )
  *      ),
  *      @OA\Response(
- *          response=500, 
+ *          response=500,
  *          description="Internal Server Error",
  *          @OA\JsonContent(
  *              ref="#/components/schemas/InternalServerErrorResponse"
@@ -108,39 +108,39 @@
  *         {"bearer": {}}
  *      },
  *      @OA\Response(
- *          response=400, 
+ *          response=400,
  *          description="Bad request",
  *          @OA\JsonContent(
  *              ref="#/components/schemas/BadRequestResponse"
  *          )
  *      ),
  *      @OA\Response(
- *           response=401, 
+ *           response=401,
  *           description="Unauthorized",
  *           @OA\JsonContent(
  *                ref="#/components/schemas/UnauthorizedResponse"
  *          )
  *      ),
  *      @OA\Response(
- *           response=404, 
+ *           response=404,
  *           description="Resource Not Found",
  *           @OA\JsonContent(
  *               ref="#/components/schemas/NotFoundResponse"
  *          )
  *      ),
  *      @OA\Response(
- *          response=500, 
+ *          response=500,
  *          description="Internal Server Error",
  *          @OA\JsonContent(
  *              ref="#/components/schemas/InternalServerErrorResponse"
  *          )
  *      ),
  * )
- */ 
+ */
 
 /**
  * Refresh Token
- * 
+ *
  *  @OA\Post(
  *      path="/api/v2/token/refresh",
  *      operationId="refreshToken",
@@ -169,28 +169,28 @@
  *         ),
  *       ),
  *      @OA\Response(
- *          response=400, 
+ *          response=400,
  *          description="Bad request",
  *          @OA\JsonContent(
  *              ref="#/components/schemas/BadRequestResponse"
  *          )
  *      ),
  *      @OA\Response(
- *           response=401, 
+ *           response=401,
  *           description="Unauthorized",
  *           @OA\JsonContent(
  *                ref="#/components/schemas/UnauthorizedResponse"
  *          )
  *      ),
  *      @OA\Response(
- *           response=404, 
+ *           response=404,
  *           description="Resource Not Found",
  *           @OA\JsonContent(
  *               ref="#/components/schemas/NotFoundResponse"
  *          )
  *      ),
  *      @OA\Response(
- *          response=500, 
+ *          response=500,
  *          description="Internal Server Error",
  *          @OA\JsonContent(
  *              ref="#/components/schemas/InternalServerErrorResponse"

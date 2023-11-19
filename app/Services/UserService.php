@@ -10,44 +10,44 @@ class UserService
 {
     /**
      * Create a new user
-     * 
+     *
      * @author Valentin magde <valentinmagde@gmail.com>
      * @since 2023-11-15
-     * 
-     * @param mixed $data the user data
-     * 
+     *
+     * @param array $data The user data to store.
+     *
      * @return $user
      */
-    public static function register($data)
+    public static function register(array $data)
     {
-        try{
+        try {
             $data['user_password'] = md5($data['user_password']);
             return User::create($data);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             throw new Exception($e->getMessage());
-        } 
+        }
     }
 
      /**
      * Update authenticate user
-     * 
+     *
      * @author Valentin magde <valentinmagde@gmail.com>
      * @since 2023-11-15
-     * 
-     * @param int $userId the user id
-     * @param mixed $data the user data
-     * 
-     * @return $user
+     *
+     * @param integer $userId The user id.
+     * @param array $data The user data.
+     *
+     * @return void
      */
-    public static function update($data)
+    public static function update(int $userId, array $data)
     {
         // try{
         //     $user = auth()->user();
 
         //     if(!$user){
         //         return ApiSendingErrorException::sendingError([
-        //             'errNo'=>ApiErrorNumbers::$resource_not_found, 
-        //             'errMsg'=> __('auth.update.userNotExist'), 
+        //             'errNo'=>ApiErrorNumbers::$resource_not_found,
+        //             'errMsg'=> __('auth.update.userNotExist'),
         //             'statusCode'=>Response::HTTP_NOT_FOUND
         //         ]);
         //     }
@@ -69,6 +69,6 @@ class UserService
         //     ]);
         // }catch(\Exception $e){
         //     return ApiSendingErrorException::formatError($e);
-        // } 
+        // }
     }
 }
