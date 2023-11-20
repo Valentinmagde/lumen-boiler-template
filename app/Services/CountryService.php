@@ -5,6 +5,7 @@ namespace App\Services;
 use ExternalApi\ConsumeExternalService;
 use Exception;
 use App\Models\Country;
+use App\Models\CountryIpv4;
 
 class CountryService
 {
@@ -66,6 +67,33 @@ class CountryService
         return  json_decode(Country::where('country_id',$id)
         ->get());
     }
+
+    public function getIsoByNumericIP($ip)
+    {
+        $result = CountryIpv4::where([
+            ['start_ip_num', '<=', $ip],
+            ['end_ip_num', '>=', $ip],
+        ])->with('country')->first();
+    
+        if ($result) {
+            return Country::where('name', $result->country_name)
+                ->value('iso_code_2') ?? 'unknown';
+        }
+    
+        return 'unknown';
+    }
+
+    public function convertIPV4ToNumericFormat($ipAddress)
+    {
+        if (!filter_var($ipAddress, FILTER_VALIDATE_IP) === false && $ipAddress == '::1') {
+			$ipAddress 	= '197.155.64.0';
+		} 
+
+		$ipArray 		= explode('.',$ipAddress);
+		$integer_ip 	= (16777216 * $ipArray[0] ) + (65536 * $ipArray[1] )+ ( 256 * $ipArray[2] ) +$ipArray[3];	
+		return  $integer_ip;
+    }
+
     // /**
     //  * Get all hotels
     //  *

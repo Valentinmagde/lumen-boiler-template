@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\CountryService;
 use Exception;
 use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 
 class CountryController extends Controller
 {
@@ -163,10 +164,10 @@ class CountryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexByNumericIp()
+    public function isoByNumericIp($ip)
     {
         try {
-            return successResponse($this->countryService->getAllCountries());
+            return successResponse($this->countryService->getIsoByNumericIP($ip));
         } catch (Exception $e) {
             return errorResponse(
                 Response::HTTP_INTERNAL_SERVER_ERROR,
@@ -194,26 +195,6 @@ class CountryController extends Controller
         	'country_name' 			=> $this->country_name
         );
 	}
-    /**
-     * Display a listing of the countries.
-     *
-     * @author Valentin magde <valentinmagde@gmail.com>
-     * @since 2023-11-15
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function convertIPV4()
-    {
-        try {
-            return successResponse($this->countryService->getAllCountries());
-        } catch (Exception $e) {
-            return errorResponse(
-                Response::HTTP_INTERNAL_SERVER_ERROR,
-                ERROR_CODE['GENERIC_ERROR'],
-                $e->getMessage()
-            );
-        }
-    } 
 
     /**
      * Display a listing of the countries.
@@ -223,10 +204,11 @@ class CountryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getIP()
+    public function convertIPV4(Request $request)
     {
+        $ipAddress =$request->input('ipAddress');
         try {
-            return successResponse($this->countryService->getAllCountries());
+            return successResponse($this->countryService->convertIPV4ToNumericFormat($ipAddress));
         } catch (Exception $e) {
             return errorResponse(
                 Response::HTTP_INTERNAL_SERVER_ERROR,
