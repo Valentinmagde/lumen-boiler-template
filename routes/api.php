@@ -77,8 +77,11 @@ $router->group(
         |--------------------------------------------------------------------------
         |
         */
-        $router->group(['prefix' => 'countries'], function () use ($router) {
-            $router->get('/', 'CountryController@index');
+        $router->group(['prefix' => 'country'], function () use ($router) {
+            $router->get('/', 'CountryController@indexAll');
+            $router->get('/getCountryIdByisoCode/{iso_code_2}', 'CountryController@getIdByIso');
+            $router->get('/getCountryByisoCode/{iso_code_2}', 'CountryController@indexByIso');
+            $router->get('/getCountryByID/{id}', 'CountryController@indexByID');
         });
     }
 );
