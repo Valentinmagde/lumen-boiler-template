@@ -37,7 +37,7 @@ class UserService
      * @param integer $id ID of user to fetch.
      * @return User data
      */
-    public static function getByID(int $id)
+    public static function getById(int $id)
     {
         try {
             return User::find($id)->first();

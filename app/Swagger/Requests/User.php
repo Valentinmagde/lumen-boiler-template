@@ -91,7 +91,7 @@
  * Get User data
  *
  * @OA\Get(
- *      path="/api/v2/user/{id}",
+ *      path="/api/v2/user/{userId}",
  *      operationId="getProfile",
  *      tags={"User"},
  *      summary="Get User data",
@@ -106,7 +106,7 @@
  *          )
  *      ),
  *   @OA\Parameter(
- *         name="id",
+ *         name="userId",
  *         in="path",
  *         required=false,
  *         example="1",
@@ -124,9 +124,6 @@
  *               ),
  *           )
  *       ),
- *       security={
- *         {"bearer": {}}
- *       },
  *       @OA\Response(
  *           response=400,
  *           description="Bad request",

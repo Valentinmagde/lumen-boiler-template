@@ -58,7 +58,7 @@ $router->group(
         });
 
         $router->group(['prefix' => 'user'], function () use ($router) {
-            $router->get('/{id}', 'UserController@indexByID');
+            $router->get('/{userId}', 'UserController@indexByID');
         });
 
         /*
