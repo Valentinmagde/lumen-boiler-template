@@ -67,29 +67,30 @@ class CountryController extends Controller
     //     }
     // }
 
-    // /**
-    //  * Display a listing of the countries.
-    //  *
-    //  * @author Valentin magde <valentinmagde@gmail.com>
-    //  * @since 2023-11-15
-    //  *
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function indexByVisitor()
-    // {
-    //     try {
-    //         return successResponse($this->countryService->getAllCountries());
-    //     } catch (Exception $e) {
-    //         return errorResponse(
-    //             Response::HTTP_INTERNAL_SERVER_ERROR,
-    //             ERROR_CODE['GENERIC_ERROR'],
-    //             $e->getMessage()
-    //         );
-    //     }
-    // }
+    /**
+     * Get the visitor's country.
+     *
+     * @author Valentin magde <valentinmagde@gmail.com>
+     * @since 2023-11-21
+     *
+     * @param Request $request Request.
+     * @return \Illuminate\Http\Response
+     */
+    public function getVisitorCountry(Request $request)
+    {
+        try {
+            return successResponse($this->countryService->getVisitorCountry($request->ip()));
+        } catch (Exception $e) {
+            return errorResponse(
+                Response::HTTP_INTERNAL_SERVER_ERROR,
+                ERROR_CODE['GENERIC_ERROR'],
+                $e->getMessage()
+            );
+        }
+    }
 
     /**
-     *Iso code 2 is used to fetch ID of a country.
+     * Iso code 2 is used to fetch ID of a country.
      *
      * @author Gregory Albert <gregoryalbert1209@gmail.com>
      * @since 2023-11-21

@@ -2,6 +2,8 @@
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
+use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -41,12 +43,14 @@ $router->group(
         |--------------------------------------------------------------------------
         |
         */
-        $router->group(['prefix' => 'consumers'], function () use ($router) {
-            $router->post('/register', 'ConsumerController@register');
-        });
+        $router->group([], function () use ($router) {
+            $router->group(['prefix' => 'consumers'], function () use ($router) {
+                $router->post('/register', 'ConsumerController@register');
+            });
 
-        $router->group(['prefix' => 'consumer'], function () use ($router) {
-            $router->get('/me', 'ConsumerController@me');
+            $router->group(['prefix' => 'consumer'], function () use ($router) {
+                $router->get('/me', 'ConsumerController@me');
+            });
         });
 
         /*
@@ -55,12 +59,14 @@ $router->group(
         |--------------------------------------------------------------------------
         |
         */
-        $router->group(['prefix' => 'users'], function () use ($router) {
-            $router->post('/register', 'UserController@register');
-        });
+        $router->group([], function () use ($router) {
+            $router->group(['prefix' => 'users'], function () use ($router) {
+                $router->post('/register', 'UserController@register');
+            });
 
-        $router->group(['prefix' => 'user'], function () use ($router) {
-            $router->get('/me', 'UserController@me');
+            $router->group(['prefix' => 'user'], function () use ($router) {
+                $router->get('/me', 'UserController@me');
+            });
         });
 
         /*
@@ -69,7 +75,11 @@ $router->group(
         |--------------------------------------------------------------------------
         |
         */
-        $router->get('/hotels', 'HotelController@index');
+        $router->group([], function () use ($router) {
+            $router->group(['prefix' => 'hotels'], function () use ($router) {
+                $router->post('/', 'HotelController@index');
+            });
+        });
 
         /*
         |--------------------------------------------------------------------------
@@ -77,16 +87,26 @@ $router->group(
         |--------------------------------------------------------------------------
         |
         */
-        $router->group(['prefix' => 'countries'], function () use ($router) {
-            $router->get('/', 'CountryController@indexAll');
-        });
+        $router->group([], function () use ($router) {
+            $router->group(['prefix' => 'countries'], function () use ($router) {
+                $router->get('/', 'CountryController@indexAll');
+            });
 
-        $router->group(['prefix' => 'country'], function () use ($router) {
-            $router->get('/{iso_code_2}/countryID', 'CountryController@getIdByIso');
-            $router->get('/{iso_code_2}/countryByIso', 'CountryController@indexByIso');
-            $router->get('/{id}/id', 'CountryController@indexByID');
-            $router->get('/{ip}/isoFromNumericIp', 'CountryController@isoByNumericIp');
-            $router->get('/convertIP', 'CountryController@convertIPV4');
+            $router->group(['prefix' => 'country'], function () use ($router) {
+                $router->get('/visitor', 'CountryController@getVisitorCountry');
+                $router->get('/{iso_code_2}/countryID', 'CountryController@getIdByIso');
+                $router->get('/{iso_code_2}/countryByIso', 'CountryController@indexByIso');
+                $router->get('/{id}/id', 'CountryController@indexByID');
+                $router->get('/{ip}/isoFromNumericIp', 'CountryController@isoByNumericIp');
+                $router->get('/convertIP', 'CountryController@convertIPV4');
+            });
         });
     }
 );
+
+/** 
+ * Handle not found route exception
+ */ 
+// $router->options('/{any:.*}', function (Request $req) {
+//     return "Route not found";
+// });
