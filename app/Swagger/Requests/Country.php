@@ -2,7 +2,7 @@
 
 /**
  * @OA\Get(
- *      path="/api/v2/country",
+ *      path="/api/v2/countries",
  *      operationId="countryIndexAll",
  *      tags={"Country"},
  *      summary="Get all countries",
@@ -130,7 +130,7 @@
 
 /**
  * @OA\Get(
- *      path="/api/v2/country/{iso_code_2}/idByIso",
+ *      path="/api/v2/country/{iso_code_2}/countryID",
  *      operationId="countryIDIso",
  *      tags={"Country"},
  *      summary="Get the ID of a country from it's iso code",
@@ -406,7 +406,7 @@
 
 /**
  * @OA\Get(
- *      path="/api/v2/country/convertIp",
+ *      path="/api/v2/country/convertIP",
  *      operationId="countryConvertIP",
  *      tags={"Country"},
  *      summary="Convert IPV4 to numeric format",

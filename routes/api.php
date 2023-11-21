@@ -77,13 +77,16 @@ $router->group(
         |--------------------------------------------------------------------------
         |
         */
-        $router->group(['prefix' => 'country'], function () use ($router) {
+        $router->group(['prefix' => 'countries'], function () use ($router) {
             $router->get('/', 'CountryController@indexAll');
-            $router->get('/{iso_code_2}/idByIso', 'CountryController@getIdByIso');
+        });
+
+        $router->group(['prefix' => 'country'], function () use ($router) {
+            $router->get('/{iso_code_2}/countryID', 'CountryController@getIdByIso');
             $router->get('/{iso_code_2}/countryByIso', 'CountryController@indexByIso');
             $router->get('/{id}/id', 'CountryController@indexByID');
             $router->get('/{ip}/isoFromNumericIp', 'CountryController@isoByNumericIp');
-            $router->get('/convertIp', 'CountryController@convertIPV4');
+            $router->get('/convertIP', 'CountryController@convertIPV4');
         });
     }
 );
