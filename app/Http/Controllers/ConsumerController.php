@@ -68,7 +68,7 @@ class ConsumerController extends Controller
     }
 
     /**
-     * Get the authenticated a concumer.
+     * Get the authenticated a consumer.
      *
      * @author Valentin magde <valentinmagde@gmail.com>
      * @since 2023-11-15
@@ -79,6 +79,91 @@ class ConsumerController extends Controller
     {
         try {
             return successResponse($this->consumerService->show());
+        } catch (Exception $e) {
+            return errorResponse(
+                Response::HTTP_INTERNAL_SERVER_ERROR,
+                ERROR_CODE['GENERIC_ERROR'],
+                $e->getMessage()
+            );
+        }
+    }
+
+    /**
+     * Return soft deleted consumer.
+     *
+     * @author Gregory Albert <gregoryalbert1209@gmail.com>
+     * @since 2023-11-21
+     *
+     * @param integer $consumerId ID of consumer to be deleted.
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function delete(int $consumerId)
+    {
+        try {
+            return successResponse(
+                $this->consumerService->softDelete($consumerId),
+                Response::HTTP_NO_CONTENT
+            );
+        } catch (Exception $e) {
+            return errorResponse(
+                Response::HTTP_INTERNAL_SERVER_ERROR,
+                ERROR_CODE['GENERIC_ERROR'],
+                $e->getMessage()
+            );
+        }
+    }
+
+    /**
+     * Return a restored consumer.
+     *
+     * @author Gregory Albert <gregoryalbert1209@gmail.com>
+     * @since 2023-11-21
+     *
+     * @param integer $consumerId ID of consumer to be restored.
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function restore(int $consumerId)
+    {
+        try {
+            return successResponse($this->consumerService->restore($consumerId));
+        } catch (Exception $e) {
+            return errorResponse(
+                Response::HTTP_INTERNAL_SERVER_ERROR,
+                ERROR_CODE['GENERIC_ERROR'],
+                $e->getMessage()
+            );
+        }
+    }
+
+     /**
+     * Return the upated consumer.
+     *
+     * @author Gregory Albert <gregoryalbert1209@gmail.com>
+     * @since 2023-11-21
+     *
+     * @param integer $consumerId ID of consumer to be updated.
+     * @param Request $request Request.
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update(int $consumerId, Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'name'                   => 'required',
+                'email'                  => 'required|email',
+                'password'               => 'required|confirmed|min:6'
+            ]);
+        
+            if ($validator->fails()) {
+                $error = implode(",", $validator->errors()->all());
+    
+                return errorResponse(
+                    Response::HTTP_PRECONDITION_FAILED,
+                    ERROR_CODE['VALIDATOR'],
+                    $error
+                );
+            }
+            return successResponse($this->consumerService->update($consumerId, $request->all()));
         } catch (Exception $e) {
             return errorResponse(
                 Response::HTTP_INTERNAL_SERVER_ERROR,

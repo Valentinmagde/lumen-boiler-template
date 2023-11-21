@@ -8,6 +8,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  *
@@ -27,10 +28,10 @@ class Consumer extends Model implements
     AuthorizableContract,
     JWTSubject
 {
-    use Authenticatable, Authorizable;
+    use Authenticatable, Authorizable, SoftDeletes;
 
     protected $table = 'Api_Consumers';
-    public $timestamps = false;
+    public $timestamps = true;
 
     /**
      * The attributes that should be hidden for arrays.

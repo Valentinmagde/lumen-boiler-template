@@ -45,6 +45,10 @@ $router->group(
 
         $router->group(['prefix' => 'consumer'], function () use ($router) {
             $router->get('/me', 'ConsumerController@me');
+            $router->delete('/{consumerId}/delete', 'ConsumerController@delete');
+            $router->get('/{consumerId}/restore', 'ConsumerController@restore');
+            $router->patch('/{consumerId}/patch', 'ConsumerController@patch');
+            $router->put('/{consumerId}/update', 'ConsumerController@update');
         });
 
         /*
