@@ -35,6 +35,6 @@ class Country extends Model
      */
     public function ipv4()
     {
-        return $this->hasOne(CountryIpv4::class, 'name', 'country_name');
+        return $this->hasOne(CountryIpv4::class, 'iso_code_2', 'country_code_2');
     }
 }

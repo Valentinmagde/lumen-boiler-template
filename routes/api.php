@@ -83,7 +83,6 @@ $router->group(
             $router->get('/{iso_code_2}/countryByIso', 'CountryController@indexByIso');
             $router->get('/{id}/id', 'CountryController@indexByID');
             $router->get('/{ip}/isoFromNumericIp', 'CountryController@isoByNumericIp');
-            $router->get('/country', 'CountryController@getCountry');
             $router->get('/convertIp', 'CountryController@convertIPV4');
         });
     }

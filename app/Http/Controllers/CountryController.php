@@ -9,11 +9,6 @@ use Illuminate\Http\Request;
 
 class CountryController extends Controller
 {
-    private $country;
-    private $country_id;
-    private $country_iso_id;
-    private $country_iso_id_3;
-    private $country_name;
     private $countryService;
 
     /**
@@ -179,25 +174,6 @@ class CountryController extends Controller
                 $e->getMessage()
             );
         }
-    }
-
-    /**
-     * Get all country attributes from the object
-     *
-     * @author Gregory Albert <gregoryalbert1209@gmail.com>
-     * @since 2023-11-21
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function getCountry()
-    {
-        return array(
-            'country'   			=> $this->country,
-            'country_id'        	=> $this->country_id,
-            'country_iso_code_2'  	=> $this->country_iso_id,
-            'country_iso_code_3'  	=> $this->country_iso_id_3,
-            'country_name' 			=> $this->country_name
-        );
     }
 
     /**

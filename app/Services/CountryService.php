@@ -86,9 +86,7 @@ class CountryService
     public function getCountryByisoCode(string $iso_code_2)
     {
         try {
-            return Country::where('iso_code_2', $iso_code_2)
-            ->get()
-            ->first();
+            return Country::where('iso_code_2', $iso_code_2)->first();
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
@@ -106,8 +104,7 @@ class CountryService
     public function getCountryByID(int $id)
     {
         try {
-            return Country::where('country_id', $id)
-            ->get();
+            return Country::find($id)->first();
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
@@ -128,9 +125,9 @@ class CountryService
             $result = CountryIpv4::where([
                 ['start_ip_num', '<=', $ip],
                 ['end_ip_num', '>=', $ip],
-                ])->with('country')->first();
+            ])->first();
         
-            return $result->country->iso_code_2 ?? 'unknown';
+            return $result->country->iso_code_2;
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
@@ -148,13 +145,17 @@ class CountryService
     public function convertIPV4ToNumericFormat(string $ipAddress)
     {
         try {
-            if (!filter_var($ipAddress, FILTER_VALIDATE_IP) === false && $ipAddress == '::1') {
+            if ($ipAddress == '::1') {
                 $ipAddress 	= '197.155.64.0';
             }
-            $ipArray 		= explode('.', $ipAddress);
-            $integer_ip 	= (16777216 * $ipArray[0] )
-            + (65536 * $ipArray[1] )+ ( 256 * $ipArray[2] )
-            + $ipArray[3];
+            
+            $ipArray = explode('.', $ipAddress);
+            $integer_ip = (
+                (16777216 * $ipArray[0] ) +
+                (65536 * $ipArray[1] ) +
+                ( 256 * $ipArray[2] ) +
+                $ipArray[3]
+            );
 
             return  $integer_ip;
         } catch (Exception $e) {

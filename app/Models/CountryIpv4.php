@@ -27,6 +27,6 @@ class CountryIpv4 extends Model
      */
     public function country()
     {
-            return $this->belongsTo(Country::class, 'country_name', 'name');
+            return $this->belongsTo(Country::class, 'country_code_2', 'iso_code_2');
     }
 }
