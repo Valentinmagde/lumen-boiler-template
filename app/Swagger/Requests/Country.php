@@ -20,16 +20,10 @@
  *          response=200,
  *          description="Countries successfully collects",
  *          @OA\JsonContent(
- *              @OA\Property(property="successMsg", type="string", example="string"),
- *              @OA\Property(property="data", type="array",
- *                  @OA\Items(
- *                      @OA\Property(property="data", type="object",
- *                          @OA\Property(property="value", type="integer", example="number"),
- *                          @OA\Property(property="description", type="string", example="string"),
- *                          @OA\Property(property="code", type="string", example="string"),
- *                      )
- *                  )
- *              ),
+ *                @OA\Property(property="successMsg", type="string", example="string"),
+ *                @OA\Property(property="data", type="array",
+ *                    @OA\Items(ref="#/components/schemas/Country"),
+ *                ),
  *           ),
  *       ),
  *       @OA\Response(
@@ -164,15 +158,7 @@
  *          description="Countries successfully collects",
  *          @OA\JsonContent(
  *              @OA\Property(property="successMsg", type="string", example="string"),
- *              @OA\Property(property="data", type="array",
- *                  @OA\Items(
- *                      @OA\Property(property="data", type="object",
- *                          @OA\Property(property="value", type="integer", example="number"),
- *                          @OA\Property(property="description", type="string", example="string"),
- *                          @OA\Property(property="code", type="string", example="string"),
- *                      )
- *                  )
- *              ),
+ *              @OA\Property(property="data", type="integer", example="1"),
  *           ),
  *       ),
  *       @OA\Response(
@@ -239,16 +225,10 @@
  *          response=200,
  *          description="Countries successfully collects",
  *          @OA\JsonContent(
- *              @OA\Property(property="successMsg", type="string", example="string"),
- *              @OA\Property(property="data", type="array",
- *                  @OA\Items(
- *                      @OA\Property(property="data", type="object",
- *                          @OA\Property(property="value", type="integer", example="number"),
- *                          @OA\Property(property="description", type="string", example="string"),
- *                          @OA\Property(property="code", type="string", example="string"),
- *                      )
- *                  )
- *              ),
+ *               @OA\Property(property="successMsg", type="string", example="string"),
+ *                @OA\Property(property="data", type="object",
+ *                    ref="#/components/schemas/Country",
+ *                ),
  *           ),
  *       ),
  *       @OA\Response(
@@ -315,16 +295,10 @@
  *          response=200,
  *          description="Countries successfully collects",
  *          @OA\JsonContent(
- *              @OA\Property(property="successMsg", type="string", example="string"),
- *              @OA\Property(property="data", type="array",
- *                  @OA\Items(
- *                      @OA\Property(property="data", type="object",
- *                          @OA\Property(property="value", type="integer", example="number"),
- *                          @OA\Property(property="description", type="string", example="string"),
- *                          @OA\Property(property="code", type="string", example="string"),
- *                      )
- *                  )
- *              ),
+ *             @OA\Property(property="successMsg", type="string", example="string"),
+ *                @OA\Property(property="data", type="object",
+ *                    ref="#/components/schemas/Country",
+ *                ),
  *           ),
  *       ),
  *       @OA\Response(
@@ -391,16 +365,8 @@
  *          response=200,
  *          description="Countries successfully collects",
  *          @OA\JsonContent(
- *              @OA\Property(property="successMsg", type="string", example="string"),
- *              @OA\Property(property="data", type="array",
- *                  @OA\Items(
- *                      @OA\Property(property="data", type="object",
- *                          @OA\Property(property="value", type="integer", example="number"),
- *                          @OA\Property(property="description", type="string", example="string"),
- *                          @OA\Property(property="code", type="string", example="string"),
- *                      )
- *                  )
- *              ),
+ *             @OA\Property(property="successMsg", type="string", example="string"),
+ *              @OA\Property(property="data", type="string", example="string"),
  *           ),
  *       ),
  *       @OA\Response(
@@ -468,15 +434,7 @@
  *          description="Countries successfully collects",
  *          @OA\JsonContent(
  *              @OA\Property(property="successMsg", type="string", example="string"),
- *              @OA\Property(property="data", type="array",
- *                  @OA\Items(
- *                      @OA\Property(property="data", type="object",
- *                          @OA\Property(property="value", type="integer", example="number"),
- *                          @OA\Property(property="description", type="string", example="string"),
- *                          @OA\Property(property="code", type="string", example="string"),
- *                      )
- *                  )
- *              ),
+ *              @OA\Property(property="data", type="integer", example="1"),
  *           ),
  *       ),
  *       @OA\Response(
