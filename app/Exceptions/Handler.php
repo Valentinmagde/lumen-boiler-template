@@ -1,4 +1,5 @@
 <?php
+
 // phpcs:disable Squiz.Commenting.FunctionComment.TypeHintMissing
 namespace App\Exceptions;
 
@@ -33,7 +34,7 @@ class Handler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param \Throwable $exception The object that describes the error to report or log jklfas a; lsdjfl asldfj.
+     * @param \Throwable $exception The object that describes the error to report or log.
      * @return void
      *
      * @throws \Exception The type of exception to throw.
