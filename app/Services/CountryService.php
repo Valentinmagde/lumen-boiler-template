@@ -37,61 +37,129 @@ class CountryService
     //     $this->secret = env('API_SECRET');
     // }
 
-    /**
-     * Get all countries
+   /**
+     * Fetch all the countries.
      *
-     * @author Valentin magde <valentinmagde@gmail.com>
-     * @since 2023-11-14
+     * @author Gregory Albert <gregoryalbert1209@gmail.com>
+     * @since 2023-11-21
      *
      * @return array list of countries
      */
     public function getAllCountries()
     {
-        return  json_decode(Country::all());
-    }
-
-    public function getCountryIdByisoCode($iso_code_2)
-    {
-        return  json_decode(Country::where('iso_code_2',$iso_code_2)
-        ->get('country_id'));
-    }
-
-    public function getCountryByisoCode($iso_code_2)
-    {
-        return  json_decode(Country::where('iso_code_2',$iso_code_2)
-        ->get());
-    }
-
-    public function getCountryByID($id)
-    {
-        return  json_decode(Country::where('country_id',$id)
-        ->get());
-    }
-
-    public function getIsoByNumericIP($ip)
-    {
-        $result = CountryIpv4::where([
-            ['start_ip_num', '<=', $ip],
-            ['end_ip_num', '>=', $ip],
-        ])->with('country')->first();
-    
-        if ($result) {
-            return Country::where('name', $result->country_name)
-                ->value('iso_code_2') ?? 'unknown';
+        try {
+            return Country::all();
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
         }
-    
-        return 'unknown';
     }
 
-    public function convertIPV4ToNumericFormat($ipAddress)
+    /**
+     * Fetch ID of a country from its iso code.
+     *
+     * @author Gregory Albert <gregoryalbert1209@gmail.com>
+     * @since 2023-11-21
+     *
+     * @param string $iso_code_2 Iso code of a country.
+     * @return country id
+     */
+    public function getCountryIdByisoCode(string $iso_code_2)
     {
-        if (!filter_var($ipAddress, FILTER_VALIDATE_IP) === false && $ipAddress == '::1') {
-			$ipAddress 	= '197.155.64.0';
-		} 
+        try {
+            return Country::where('iso_code_2', $iso_code_2)
+            ->get('country_id')
+            ->first();
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
 
-		$ipArray 		= explode('.',$ipAddress);
-		$integer_ip 	= (16777216 * $ipArray[0] ) + (65536 * $ipArray[1] )+ ( 256 * $ipArray[2] ) +$ipArray[3];	
-		return  $integer_ip;
+    /**
+     * Fetch data of a country from its iso code.
+     *
+     * @author Gregory Albert <gregoryalbert1209@gmail.com>
+     * @since 2023-11-21
+     *
+     * @param string $iso_code_2 Iso code of a country.
+     * @return country object
+     */
+    public function getCountryByisoCode(string $iso_code_2)
+    {
+        try {
+            return Country::where('iso_code_2', $iso_code_2)
+            ->get()
+            ->first();
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    /**
+     * Fetch data of a country from its ID.
+     *
+     * @author Gregory Albert <gregoryalbert1209@gmail.com>
+     * @since 2023-11-21
+     *
+     * @param integer $id ID of a country.
+     * @return country object
+     */
+    public function getCountryByID(int $id)
+    {
+        try {
+            return Country::where('country_id', $id)
+            ->get();
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    /**
+     * Fetch the iso code of a country from its numeric IP.
+     *
+     * @author Gregory Albert <gregoryalbert1209@gmail.com>
+     * @since 2023-11-21
+     *
+     * @param integer $ip Numeric IP of a country.
+     * @return country iso code
+     */
+    public function getIsoByNumericIP(int $ip)
+    {
+        try {
+            $result = CountryIpv4::where([
+                ['start_ip_num', '<=', $ip],
+                ['end_ip_num', '>=', $ip],
+                ])->with('country')->first();
+        
+            return $result->country->iso_code_2 ?? 'unknown';
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    /**
+     * Convert an IP address into numeric format.
+     *
+     * @author Gregory Albert <gregoryalbert1209@gmail.com>
+     * @since 2023-11-21
+     *
+     * @param string $ipAddress IP address.
+     * @return integer numeric IP address
+     */
+    public function convertIPV4ToNumericFormat(string $ipAddress)
+    {
+        try {
+            if (!filter_var($ipAddress, FILTER_VALIDATE_IP) === false && $ipAddress == '::1') {
+                $ipAddress 	= '197.155.64.0';
+            }
+            $ipArray 		= explode('.', $ipAddress);
+            $integer_ip 	= (16777216 * $ipArray[0] )
+            + (65536 * $ipArray[1] )+ ( 256 * $ipArray[2] )
+            + $ipArray[3];
+
+            return  $integer_ip;
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
     }
 
     // /**

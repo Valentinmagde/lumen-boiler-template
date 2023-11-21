@@ -10,10 +10,10 @@ use Illuminate\Http\Request;
 class CountryController extends Controller
 {
     private $country;
-	private $country_id;
-	private $country_iso_id;
-	private $country_iso_id_3;
-	private $country_name;
+    private $country_id;
+    private $country_iso_id;
+    private $country_iso_id_3;
+    private $country_name;
     private $countryService;
 
     /**
@@ -31,10 +31,10 @@ class CountryController extends Controller
     }
 
      /**
-     * Display a listing of the countries.
+     * Display a listing of all the countries.
      *
-     * @author Valentin magde <valentinmagde@gmail.com>
-     * @since 2023-11-15
+     * @author Gregory Albert <gregoryalbert1209@gmail.com>
+     * @since 2023-11-21
      *
      * @return \Illuminate\Http\Response
      */
@@ -52,7 +52,7 @@ class CountryController extends Controller
     }
 
     // /**
-    //  * Display a listing of the countries.
+    //  * Get the country of the visitor".
     //  *
     //  * @author Valentin magde <valentinmagde@gmail.com>
     //  * @since 2023-11-15
@@ -72,36 +72,37 @@ class CountryController extends Controller
     //     }
     // }
 
-    /**
-     * Display a listing of the countries.
-     *
-     * @author Valentin magde <valentinmagde@gmail.com>
-     * @since 2023-11-15
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function indexByVisitor()
-    {
-        try {
-            return successResponse($this->countryService->getAllCountries());
-        } catch (Exception $e) {
-            return errorResponse(
-                Response::HTTP_INTERNAL_SERVER_ERROR,
-                ERROR_CODE['GENERIC_ERROR'],
-                $e->getMessage()
-            );
-        }
-    }
+    // /**
+    //  * Display a listing of the countries.
+    //  *
+    //  * @author Valentin magde <valentinmagde@gmail.com>
+    //  * @since 2023-11-15
+    //  *
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function indexByVisitor()
+    // {
+    //     try {
+    //         return successResponse($this->countryService->getAllCountries());
+    //     } catch (Exception $e) {
+    //         return errorResponse(
+    //             Response::HTTP_INTERNAL_SERVER_ERROR,
+    //             ERROR_CODE['GENERIC_ERROR'],
+    //             $e->getMessage()
+    //         );
+    //     }
+    // }
 
     /**
-     * Display a listing of the countries.
+     *Iso code 2 is used to fetch ID of a country.
      *
-     * @author Valentin magde <valentinmagde@gmail.com>
-     * @since 2023-11-15
+     * @author Gregory Albert <gregoryalbert1209@gmail.com>
+     * @since 2023-11-21
      *
+     * @param string $iso_code_2 Iso code of a region.
      * @return \Illuminate\Http\Response
      */
-    public function getIdByIso($iso_code_2)
+    public function getIdByIso(string $iso_code_2)
     {
         try {
             return successResponse($this->countryService->getCountryIdByisoCode($iso_code_2));
@@ -115,14 +116,15 @@ class CountryController extends Controller
     }
 
     /**
-     * Display a listing of the countries.
+     *Iso code 2 is used to fetch data of a country.
      *
-     * @author Valentin magde <valentinmagde@gmail.com>
-     * @since 2023-11-15
+     * @author Gregory Albert <gregoryalbert1209@gmail.com>
+     * @since 2023-11-21
      *
+     * @param string $iso_code_2 Iso code of a region.
      * @return \Illuminate\Http\Response
      */
-    public function indexByIso($iso_code_2)
+    public function indexByIso(string $iso_code_2)
     {
         try {
             return successResponse($this->countryService->getCountryByisoCode($iso_code_2));
@@ -136,14 +138,15 @@ class CountryController extends Controller
     }
 
     /**
-     * Display a listing of the countries.
+     *Get the data of a country by its ID.
      *
-     * @author Valentin magde <valentinmagde@gmail.com>
-     * @since 2023-11-15
+     * @author Gregory Albert <gregoryalbert1209@gmail.com>
+     * @since 2023-11-21
      *
+     * @param integer $id The ID of a country.
      * @return \Illuminate\Http\Response
      */
-    public function indexById($id)
+    public function indexById(int $id)
     {
         try {
             return successResponse($this->countryService->getCountryByID($id));
@@ -157,14 +160,15 @@ class CountryController extends Controller
     }
 
     /**
-     * Display a listing of the countries.
+     * Using the numeric IP fetch the iso code for a country.
      *
-     * @author Valentin magde <valentinmagde@gmail.com>
-     * @since 2023-11-15
+     * @author Gregory Albert <gregoryalbert1209@gmail.com>
+     * @since 2023-11-21
      *
+     * @param integer $ip The numeric ip of a region.
      * @return \Illuminate\Http\Response
      */
-    public function isoByNumericIp($ip)
+    public function isoByNumericIp(int $ip)
     {
         try {
             return successResponse($this->countryService->getIsoByNumericIP($ip));
@@ -178,30 +182,31 @@ class CountryController extends Controller
     }
 
     /**
-     * Display a listing of the countries.
+     * Get all country attributes from the object
      *
-     * @author Valentin magde <valentinmagde@gmail.com>
-     * @since 2023-11-15
+     * @author Gregory Albert <gregoryalbert1209@gmail.com>
+     * @since 2023-11-21
      *
      * @return \Illuminate\Http\Response
      */
     public function getCountry()
-	{
-		return array(
-			'country'   			=> $this->country,
-        	'country_id'        	=> $this->country_id,
-        	'country_iso_code_2'  	=> $this->country_iso_id,
-        	'country_iso_code_3'  	=> $this->country_iso_id_3,
-        	'country_name' 			=> $this->country_name
+    {
+        return array(
+            'country'   			=> $this->country,
+            'country_id'        	=> $this->country_id,
+            'country_iso_code_2'  	=> $this->country_iso_id,
+            'country_iso_code_3'  	=> $this->country_iso_id_3,
+            'country_name' 			=> $this->country_name
         );
-	}
+    }
 
     /**
-     * Display a listing of the countries.
+     * Take an IPV4 to convert it to a numeric value
      *
-     * @author Valentin magde <valentinmagde@gmail.com>
-     * @since 2023-11-15
+     * @author Gregory Albert <gregoryalbert1209@gmail.com>
+     * @since 2023-11-21
      *
+     * @param Request $request Request used to fetch ip address (string).
      * @return \Illuminate\Http\Response
      */
     public function convertIPV4(Request $request)
@@ -216,5 +221,5 @@ class CountryController extends Controller
                 $e->getMessage()
             );
         }
-    } 
+    }
 }

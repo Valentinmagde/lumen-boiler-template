@@ -3,11 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Country extends Model
 {
-    protected $table = 'country';
+    protected $table = 'Country';
     protected $primaryKey = 'country_id';
     public $timestamps = false;
 
@@ -26,8 +25,16 @@ class Country extends Model
         'valid_to',
     ];
 
-    public function countryIpv4(): HasOne
+    /**
+     * Get the corresponding ipv4 of a country.
+     *
+     * @author Gregory Albert <gregoryalbert1209@gmail.com>
+     * @since 2023-11-21
+     *
+     * @return CountryIpv4
+     */
+    public function ipv4()
     {
-        return $this->hasOne(CountryIpv4::class, 'country_name', 'name');
+        return $this->hasOne(CountryIpv4::class, 'name', 'country_name');
     }
 }

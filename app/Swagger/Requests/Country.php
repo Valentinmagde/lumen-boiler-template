@@ -380,10 +380,11 @@
  *      ),
  *      @OA\Parameter(
  *              name="ip",
+ *              example=16909056,
  *              in="path",
  *              required=true,
  *              @OA\Schema(
- *                  type="string"
+ *                  type="integer"
  *              )
  *          ),
  *      @OA\Response(
