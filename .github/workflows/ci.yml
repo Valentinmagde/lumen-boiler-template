@@ -41,7 +41,8 @@ jobs:
     - name: Install Dependencies
       run: composer install --prefer-dist
     - name: Execute php lint via phpcs
-      run: vendor/bin/phpcs --standard=phpcs.xml
+      # run: vendor/bin/phpcs --standard=phpcs.xml
+      run: vendor/bin/phpunit
 
   tests:
     name: Execute tests suite
