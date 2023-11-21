@@ -66,4 +66,25 @@ class UserController extends Controller
             );
         }
     }
+    /**
+     * Send user data using their ID
+     *
+     * @author Gregory Albert <gregoryalbert1209@gmail.com>
+     * @since 2023-11-21
+     *
+     * @param integer $id ID of user to fetch.
+     * @return \Illuminate\Http\Response
+     */
+    public function indexByID(int $id)
+    {
+        try {
+            return successResponse($this->userService->getByID($id));
+        } catch (Exception $e) {
+            return errorResponse(
+                Response::HTTP_INTERNAL_SERVER_ERROR,
+                ERROR_CODE['GENERIC_ERROR'],
+                $e->getMessage()
+            );
+        }
+    }
 }

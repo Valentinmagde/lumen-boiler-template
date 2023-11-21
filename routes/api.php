@@ -13,10 +13,8 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
-
+$router->get('/', 'Controller@home');
+   
 $router->group(
     [
         'prefix' => 'api/v2'
@@ -60,7 +58,7 @@ $router->group(
         });
 
         $router->group(['prefix' => 'user'], function () use ($router) {
-            $router->get('/me', 'UserController@me');
+            $router->get('/{id}', 'UserController@indexByID');
         });
 
         /*

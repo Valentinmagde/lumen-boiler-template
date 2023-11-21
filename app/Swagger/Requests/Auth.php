@@ -90,7 +90,7 @@
  *      @OA\Parameter(
  *          name="lang",
  *          in="query",
- *          required=true,
+ *          required=false,
  *          example="en",
  *          @OA\Schema(
  *              type="string"
@@ -150,7 +150,7 @@
  *      @OA\Parameter(
  *          name="lang",
  *          in="query",
- *          required=true,
+ *          required=false,
  *          example="en",
  *          @OA\Schema(
  *              type="string"

@@ -28,6 +28,24 @@ class UserService
         }
     }
 
+    /**
+     * Fetch user data using their ID
+      *
+     * @author Gregory Albert <gregoryalbert1209@gmail.com>
+     * @since 2023-11-21
+     *
+     * @param integer $id ID of user to fetch.
+     * @return User data
+     */
+    public static function getByID(int $id)
+    {
+        try {
+            return User::find($id)->first();
+        } catch (\Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
      /**
      * Update authenticate user
      *
