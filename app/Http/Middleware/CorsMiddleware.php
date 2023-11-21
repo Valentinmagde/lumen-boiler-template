@@ -1,4 +1,5 @@
 <?php
+
 // phpcs:disable Squiz.Commenting.FunctionComment.TypeHintMissing
 namespace App\Http\Middleware;
 
