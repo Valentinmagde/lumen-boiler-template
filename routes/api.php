@@ -86,5 +86,20 @@ $router->group(
             $router->get('/{ip}/isoFromNumericIp', 'CountryController@isoByNumericIp');
             $router->get('/convertIP', 'CountryController@convertIPV4');
         });
+
+        /*
+        |--------------------------------------------------------------------------
+        | API Routes of Languages
+        |--------------------------------------------------------------------------
+        |
+        */
+        $router->group(['prefix' => 'languages'], function () use ($router) {
+            $router->get('/', 'LanguageController@indexAll');
+        });
+
+        $router->group(['prefix' => 'language'], function () use ($router) {
+            $router->get('/languageId', 'LanguageController@getId');
+            $router->get('/{languageId}/index', 'LanguageController@index');
+        });
     }
 );
