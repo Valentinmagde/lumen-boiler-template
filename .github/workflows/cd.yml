@@ -26,7 +26,7 @@ jobs:
         # uses: atymic/deployer-php-action@master
         uses: deployphp/action@v1
         with:
-          dep: deploy
+          dep: vendor/bin/dep deploy stage=staging --tag=${{ env.GITHUB_REF }} -vvv
           private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           # known-hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
           # To disable host key checking (insecure!):
