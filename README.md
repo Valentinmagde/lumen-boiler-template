@@ -13,7 +13,7 @@ Installation
 - PDO PHP Extension.
 - Mbstring PHP Extension
 
-#### 1.Setup VS code
+#### 1. Setup VS code
 
 - Follow the following link to install vscode onto your platform:
 [vscode install](https://code.visualstudio.com/download)
@@ -28,13 +28,13 @@ Installation
  Coverage Gutters| [Coverage Gutters](https://marketplace.visualstudio.com/items?itemName=ryanluker.vscode-coverage-gutters)
  phpcs           | [phpcs](https://marketplace.visualstudio.com/items?itemName=shevaua.phpcs)
 
-#### 2.Installing Composer
+#### 2. Installing Composer
 
 composer is required to get automatic installs and updates of dependencies
 - Follow the following link to walk through the installation of composer:
 [composer install](https://getcomposer.org/download/)
 
-#### 3.Installing Dependencies
+#### 3. Installing Dependencies
 
 write on `terminal` the following command:
 ```bash
