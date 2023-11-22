@@ -141,17 +141,17 @@ class ConsumerController extends Controller
      * @author Gregory Albert <gregoryalbert1209@gmail.com>
      * @since 2023-11-21
      *
-     * @param integer $consumerId ID of consumer to be updated.
      * @param Request $request Request.
+     * @param integer $consumerId ID of consumer to be updated.
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(int $consumerId, Request $request)
+    public function update(Request $request, int $consumerId)
     {
         try {
             $validator = Validator::make($request->all(), [
                 'name'                   => 'required',
                 'email'                  => 'required|email',
-                'password'               => 'required|confirmed|min:6'
+                'password'               => 'required|min:6'
             ]);
         
             if ($validator->fails()) {

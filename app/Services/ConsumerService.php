@@ -106,9 +106,17 @@ class ConsumerService
     public function update(int $consumerId, array $data)
     {
         try {
+            $consumer = Consumer::find($consumerId);
+            if (!$consumer) {
+                throw new Exception(t("consumer.notFound"));
+            }
             $data['password'] = Hash::make($data['password']);
-            $consumer = Consumer::where('id', $consumerId);
-            $consumer->update(['name'=>$data['name']]);
+            foreach ($data as $key => $value) {
+                if ($consumer->$key) {
+                    $consumer->$key = empty($value) ? null : $value;
+                }
+            }
+            $consumer->save();
             return $consumer;
         } catch (\Exception $e) {
             throw new Exception($e->getMessage());

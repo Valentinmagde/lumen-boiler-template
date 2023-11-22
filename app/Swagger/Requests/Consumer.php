@@ -194,16 +194,6 @@
  *          response=204,
  *          description="Customer deleted successfully",
  *      ),
- *      @OA\Response(
- *          response=200,
- *          description="Consumer successfully collects",
- *          @OA\JsonContent(
- *               @OA\Property(property="successMsg", type="string", example="string"),
- *               @OA\Property(property="data", type="object",
- *                   ref="#/components/schemas/Consumer"
- *               ),
- *           )
- *       ),
  *       security={
  *         {"bearer": {}}
  *       },
@@ -423,13 +413,7 @@
  *    )
  */
 
- /**
- *
- * Update Consumer
- *
- * @author Gregory Albert <gregoryalbert1209@gmail.com>
- * @since 2023-11-21
- *
+/**
  * @OA\Put(
  *      path="/api/v2/consumer/{consumerId}/update",
  *      operationId="updateProfile",
@@ -445,7 +429,7 @@
  *              type="string"
  *          )
  *      ),
- *       @OA\Parameter(
+ *      @OA\Parameter(
  *          name="consumerId",
  *          in="path",
  *          required=true,
@@ -458,31 +442,31 @@
  *         @OA\MediaType(
  *            mediaType="multipart/form-data",
  *            @OA\Schema(
- *                required={"email", "password", "password_confirmation"},
- *                @OA\Property(property="id", type="integer", example="number"),
- *                @OA\Property(property="name", type="string", example="string"),
- *                @OA\Property(property="email", type="string", example="string"),
- *                @OA\Property(property="phone", type="string", example="string"),
- *                @OA\Property(property="password", type="string", example="string"),
- *                @OA\Property(property="active", type="integer", example="number")
- *         ),
- *      ),
- *      @OA\MediaType(
- *         mediaType="application/json",
- *            @OA\Schema(
- *                required={"email", "password", "password_confirmation"},
- *                @OA\Property(property="id", type="integer", example="number"),
- *                @OA\Property(property="name", type="string", example="string"),
- *                @OA\Property(property="email", type="string", example="string"),
- *                @OA\Property(property="phone", type="string", example="string"),
- *                @OA\Property(property="password", type="string", example="string"),
- *                @OA\Property(property="active", type="integer", example="number")
+ *               type="object",
+ *               required={"id", "email", "password", "name"},
+ *               @OA\Property(property="name", type="text"),
+ *               @OA\Property(property="email", type="email"),
+ *               @OA\Property(property="phone", type="text"),
+ *               @OA\Property(property="password", type="password"),
+ *               @OA\Property(property="active", type="number"),
  *            ),
- *         ),
+ *        ),
+ *        @OA\MediaType(
+ *            mediaType="application/json",
+ *            @OA\Schema(
+ *               type="object",
+ *               required={"id", "email", "password", "name"},
+ *               @OA\Property(property="name", type="text"),
+ *               @OA\Property(property="email", type="email"),
+ *               @OA\Property(property="phone", type="text"),
+ *               @OA\Property(property="password", type="password"),
+ *               @OA\Property(property="active", type="number"),
+ *            ),
+ *        ),
  *      ),
  *      @OA\Response(
  *          response=200,
- *          description="Consumer successfully collects",
+ *          description="Consumer successfully updated",
  *          @OA\JsonContent(
  *               @OA\Property(property="successMsg", type="string", example="string"),
  *               @OA\Property(property="data", type="object",
@@ -490,9 +474,6 @@
  *               ),
  *           )
  *       ),
- *       security={
- *         {"bearer": {}}
- *       },
  *       @OA\Response(
  *           response=400,
  *           description="Bad request",
@@ -525,5 +506,8 @@
  *               @OA\Property(property="errMsg", type="string", example="string"),
  *          )
  *       ),
- *    )
+ *      security={
+ *         {"bearer": {}}
+ *      }
+ * )
  */
