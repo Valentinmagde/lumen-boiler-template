@@ -13,14 +13,14 @@ Installation
 - PDO PHP Extension.
 - Mbstring PHP Extension
 
-## VS code
+#### 1.VS code
 
 - Follow the following link to install vscode onto your platform:
 [vscode install](https://code.visualstudio.com/download)
 
 - Then go to the `Extensions` of your IDE (can be found on the left) and install the following:
 
- Extension  | Documentation
+ Extension       | Documentation
 :----------------|:-------------
  GitBlame        | [GitBlame](https://marketplace.visualstudio.com/items?itemName=waderyan.gitblame)
  GitLens         | [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
@@ -28,23 +28,29 @@ Installation
  Coverage Gutters| [CoverageGutters](https://marketplace.visualstudio.com/items?itemName=ryanluker.vscode-coverage-gutters)
  phpcs           | [phpcs](https://marketplace.visualstudio.com/items?itemName=shevaua.phpcs)
 
-## Install Dependencies
+#### 2.Installing Composer
+
+composer is required to get automatic installs and updates of dependencies
+- Follow the following link to walk through the installation of composer:
+[composer install](https://getcomposer.org/download/)
+
+#### 3.Installing Dependencies
 
 write on `terminal` the following command:
 ```bash
      composer install
 ```
-Serving Your Application
-========================
+## Serving Your Application
+
 
 write on terminal the following command:
 ```bash
      php -S localhost:8000 -t public
 ```
-Configuration
-=============
+## Configuration
 
-`DotEnv` [DotEnv](https://github.com/vlucas/phpdotenv) is used for setting up environment variables.
+
+[DotEnv](https://github.com/vlucas/phpdotenv) is used for setting up environment variables.
 - `.env` file is in gitignore and therefore you need to create it in your root directory.
 - Then copy and paste the data in your `.env.example` file into your .env.
 - Modify the variables according to your required environement variables.
