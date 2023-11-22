@@ -25,7 +25,7 @@ Installation
  GitBlame        | [GitBlame](https://marketplace.visualstudio.com/items?itemName=waderyan.gitblame)
  GitLens         | [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
  GitHistory      | [GitHistory](https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory)
- Coverage Gutters| [CoverageGutters](https://marketplace.visualstudio.com/items?itemName=ryanluker.vscode-coverage-gutters)
+ Coverage Gutters| [Coverage Gutters](https://marketplace.visualstudio.com/items?itemName=ryanluker.vscode-coverage-gutters)
  phpcs           | [phpcs](https://marketplace.visualstudio.com/items?itemName=shevaua.phpcs)
 
 #### 2.Installing Composer
