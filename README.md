@@ -1,26 +1,66 @@
-# Lumen PHP Framework
+Beachcomber API
+===============
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://img.shields.io/packagist/dt/laravel/lumen-framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://img.shields.io/packagist/v/laravel/lumen-framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://img.shields.io/packagist/l/laravel/lumen)](https://packagist.org/packages/laravel/lumen-framework)
+Beachcomber API v2 on Lumen 
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+Installation
+============
 
-> **Note:** In the years since releasing Lumen, PHP has made a variety of wonderful performance improvements. For this reason, along with the availability of [Laravel Octane](https://laravel.com/docs/octane), we no longer recommend that you begin new projects with Lumen. Instead, we recommend always beginning new projects with [Laravel](https://laravel.com).
+## Prerequisites
 
-## Official Documentation
+- PHP >= 8.0.
+- OpenSSL PHP Extension.
+- PDO PHP Extension.
+- Mbstring PHP Extension
+
+#### 1. Setup VS code
+
+- Follow the following link to install vscode onto your platform:
+[vscode install](https://code.visualstudio.com/download)
+
+- Then go to the `Extensions` of your IDE (can be found on the left) and install the following:
+
+ Extension       | Documentation
+:----------------|:-------------
+ GitBlame        | [GitBlame](https://marketplace.visualstudio.com/items?itemName=waderyan.gitblame)
+ GitLens         | [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
+ GitHistory      | [GitHistory](https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory)
+ Coverage Gutters| [Coverage Gutters](https://marketplace.visualstudio.com/items?itemName=ryanluker.vscode-coverage-gutters)
+ phpcs           | [phpcs](https://marketplace.visualstudio.com/items?itemName=shevaua.phpcs)
+
+#### 2. Installing Composer
+
+composer is required to get automatic installs and updates of dependencies
+- Follow the following link to walk through the installation of composer:
+[composer install](https://getcomposer.org/download/)
+
+#### 3. Installing Dependencies
+
+write on `terminal` the following command:
+```bash
+     composer install
+```
+## Serving Your Application
+
+
+write on terminal the following command:
+```bash
+     php -S localhost:8000 -t public
+```
+## Configuration
+
+
+[DotEnv](https://github.com/vlucas/phpdotenv) is used for setting up environment variables.
+- `.env` file is in gitignore and therefore you need to create it in the root directory of the project.
+- Then copy and paste the data in your `.env.example` file into your .env.
+- Modify the variables according to your required environement variables.
+
+### Change environment
+
+- Set the `APP_ENV` to either local', 'testing' or 'development'
+- When the application will start, the `.env` file corresponding to your set `APP_ENV` will be loaded ovewriting existing environment variables in `.env`
+
+Official Lumen Documentation
+============================
 
 Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
-
-## Contributing
-
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

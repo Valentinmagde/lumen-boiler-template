@@ -25,7 +25,7 @@ trait FileLoader
      *
      * @author Valentin magde <valentinmagde@gmail.com>
      * @since 2023-11-07
-     * 
+     *
      * @return void
      */
     public function __construct()
@@ -44,7 +44,7 @@ trait FileLoader
      *
      * @author Valentin magde <valentinmagde@gmail.com>
      * @since 2023-11-07
-     * 
+     *
      * @param string $service Name of the Service
      * @param array $params list of parameters to be passed to the service
      * constructor
@@ -62,7 +62,6 @@ trait FileLoader
             $servicePath = $service;
 
             if (!empty($namespace)) {
-
                 $servicePath = $namespace . DIRECTORY_SEPARATOR . $service;
                 $service     = $namespace . '\\' . $service;
             }
@@ -90,7 +89,7 @@ trait FileLoader
      *
      * @author Valentin magde <valentinmagde@gmail.com>
      * @since 2023-11-07
-     * 
+     *
      * @param string $service Name of the Service
      * @param array $params list of parameters to be passed to the service
      * constructor
@@ -130,7 +129,7 @@ trait FileLoader
      *
      * @author Valentin magde <valentinmagde@gmail.com>
      * @since 2023-11-07
-     * 
+     *
      * @param string $service Name of the Service
      * @param array $params list of parameters to be passed to the service constructor
      * @return object Service
@@ -157,7 +156,7 @@ trait FileLoader
 
     /**
      * Function for autoloading classes
-     * 
+     *
      * @author Valentin magde <valentinmagde@gmail.com>
      * @since 2023-11-07
      *
@@ -172,9 +171,8 @@ trait FileLoader
                 . $className . ".php";
 
             if (realpath($resourcePath)) {
-                require_once $resourcePath; 
-            } elseif (
-                $className === 'DatabaseConnection' ||
+                require_once $resourcePath;
+            } elseif ($className === 'DatabaseConnection' ||
                 $className === 'DBConnectionRateManager' ||
                 $className === 'GroupDatabaseConnection'
             ) {
@@ -193,9 +191,7 @@ trait FileLoader
 
                 if (realpath($resourcePath)) {
                     require_once $resourcePath;
-                }
-                //class file could not be loaded
-                else {
+                } else {
                     throw new Exception(
                         "cannot load class " . $className . " from " . $resourcePath,
                         E_ERROR
@@ -206,9 +202,7 @@ trait FileLoader
 
                 if (realpath($resourcePath)) {
                     require_once $resourcePath;
-                }
-                //class file could not be loaded
-                else {
+                } else {
                     throw new Exception(
                         "cannot load class " . $className . " from " . $resourcePath,
                         E_ERROR
@@ -220,9 +214,7 @@ trait FileLoader
 
                 if (realpath($resourcePath)) {
                     require_once $resourcePath;
-                }
-                //class file could not be loaded
-                else {
+                } else {
                     throw new Exception(
                         "cannot load class " . $className . " from " . $resourcePath,
                         E_ERROR
@@ -238,9 +230,7 @@ trait FileLoader
 
                 if (realpath($resourcePath)) {
                     require_once $resourcePath;
-                }
-                //class file could not be loaded
-                else {
+                } else {
                     throw new Exception(
                         "cannot load class " . $className . " from Remote directory",
                         E_ERROR

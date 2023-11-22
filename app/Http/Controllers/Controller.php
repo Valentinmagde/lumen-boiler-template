@@ -2,58 +2,49 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\File;
+use Parsedown;
 use Laravel\Lumen\Routing\Controller as BaseController;
 
-/**
- * @OA\Info(
- *      version="1.0.0",
- *      title="Beachcomber Api Documentation",
- *      description="How to use Beachcomber Api",
- *      @OA\SecurityScheme(
- *          securityScheme="bearerAuth",
- *          in="header",
- *          name="bearerAuth",
- *          type="http",
- *          scheme="bearer",
- *          bearerFormat="JWT",
- *      ),
- *      @OA\Contact(
- *          name="Beachcomber",
- *          email="mauricia@beachcomber.com",
- *      ),
- *      @OA\License(
- *          name="Terms and Condition",
- *          url="https://www.beachcomber-hotels.com/fr/terms-conditions",
- *      )
- * )
- *
- * @OA\Server(
- *      url=SWAGGER_LUME_CONST_HOST,
- *      description="Local API Server"
- * ),
- *
- * @OA\Tag(
- *     name="Authentification",
- *     description="API Endpoints of Authentification"
- * )
- * @OA\Tag(
- *     name="Users",
- *     description="API Endpoints of User"
- * )
- * @OA\Tag(
- *     name="Hotels",
- *     description="API Endpoints of Hotels"
- * )
- * @OA\Tag(
- *     name="Rooms",
- *     description="API Endpoints of Rooms"
- * )
- * @OA\Tag(
- *     name="Tariffs",
- *     description="API Endpoints of Tariffs"
- * )
- */
 class Controller extends BaseController
 {
-    //
+    /**
+     * Returns a base page for the API.
+     *
+     * @author Gregory Albert <gregoryalbert1209@gmail.com>
+     * @author Valentin magde <valentinmagde@gmail.com>
+     * @since 2023-11-21
+     * @since 2023-11-22 Add code to try catch block
+     *
+     * @return README.md file or version of the application
+     */
+    public function home()
+    {
+        try {
+            $readmePath = base_path('README.md');
+
+            if (file_exists($readmePath)) {
+                $readmeContent = File::get($readmePath);
+
+                // Use Parsedown to render Markdown content
+                $parsedown = new Parsedown();
+                $renderedContent = $parsedown->text($readmeContent);
+
+                return response($renderedContent, 200)->header('Content-Type', 'text/html');
+            } else {
+                return errorResponse(
+                    Response::HTTP_NOT_FOUND,
+                    ERROR_CODE['RESOURCE_NOT_FOUND'],
+                    t("readme.notFound")
+                );
+            }
+        } catch (\Exception $e) {
+            return errorResponse(
+                Response::HTTP_INTERNAL_SERVER_ERROR,
+                ERROR_CODE['GENERIC_ERROR'],
+                $e->getMessage()
+            );
+        }
+    }
 }

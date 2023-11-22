@@ -5,7 +5,7 @@ require_once __DIR__.'/../vendor/autoload.php';
 use Dotenv\Dotenv as Dotenv;
 use Dotenv\Exception\InvalidPathException as InvalidPathException;
 
-try{
+try {
     $dotenv = Dotenv::createMutable(__DIR__.'/../');
     $dotenv->load();
     $dotenv->required([
@@ -13,11 +13,9 @@ try{
         'DB_HOST',
         'DB_PORT',
         'DB_DATABASE',
-        'DB_USERNAME',
-        'DB_PASSWORD'
+        'DB_USERNAME'
     ])->notEmpty();
-}
-catch(InvalidPathException $e){
+} catch (InvalidPathException $e) {
     throw new InvalidPathException($e->getMessage());
 }
 
@@ -90,11 +88,11 @@ $app->configure('swagger-lume');
 */
 
 $app->middleware([
+    App\Http\Middleware\CorsMiddleware::class,
     App\Http\Middleware\SetLocaleMiddleware::class,
 ]);
 
 $app->routeMiddleware([
-    'cors' => App\Http\Middleware\CorsMiddleware::class,
     // 'auth' => App\Http\Middleware\Authenticate::class
     'jwt' => App\Http\Middleware\JwtMiddleware::class
 ]);

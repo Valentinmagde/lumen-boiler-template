@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Helpers\ApiSendingErrorException;
 use App\Services\AuthService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -12,100 +11,43 @@ use Exception;
 
 class AuthController extends Controller
 {
+    /**
+     * The instance of AuthService class.
+     *
+     * @var AuthService
+     */
     private $authService;
+
     /**
      * Create a new AuthController instance.
      *
+     * @author Valentin magde <valentinmagde@gmail.com>
+     * @since 2023-11-15
+     *
+     * @param AuthService $authService The instance of AuthService class.
      * @return void
      */
     public function __construct(AuthService $authService)
     {
-        $this->middleware('jwt:api', ['except' => ['login']]);
+        $this->middleware('jwt:api', ['except' => ['login', 'refresh']]);
         $this->authService = $authService;
     }
 
     /**
-     * @OA\Post(
-     * path="/api/v2/auth/login",
-     * operationId="authLogin",
-     * tags={"Authentification"},
-     * summary="User Login",
-     * description="Login User Here",
-     *   @OA\Parameter(
-     *          name="lang",
-     *          in="query",
-     *          required=true,
-     *          example="en",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *     @OA\RequestBody(
-     *         @OA\MediaType(
-     *            mediaType="multipart/form-data",
-     *            @OA\Schema(
-     *               type="object",
-     *               required={"user_email", "user_password"},
-     *               @OA\Property(property="user_email", type="email", example="example@beachcomber.com"),
-     *               @OA\Property(property="user_password", type="password", example="beachcomber")
-     *            ),
-     *        ),
-     *        @OA\MediaType(
-     *            mediaType="application/json",
-     *            @OA\Schema(
-     *               type="object",
-     *               required={"user_email", "user_password"},
-     *               @OA\Property(property="user_email", type="email", example="example@beachcomber.com"),
-     *               @OA\Property(property="user_password", type="password", example="beachcomber")
-     *            ),
-     *        ),
-     *    ),
-     *    @OA\Response(
-     *          response=200,
-     *          description="Login Successfully",
-     *          @OA\JsonContent(
-     *               @OA\Property(property="access_token", type="string", example="string"),
-     *               @OA\Property(property="token_type", type="string", example="string"),
-     *               @OA\Property(property="expires_in", type="integer", example="360"),
-     *               @OA\Property(property="user", type="object", example="{}"),
-     *         ),
-     *       ),
-     *       @OA\Response(
-     *           response=400, 
-     *           description="Bad request",
-     *           @OA\JsonContent(
-     *               @OA\Property(property="errNo", type="integer", example="number"),
-     *               @OA\Property(property="errMsg", type="string", example="string"),
-     *          )
-     *       ),
-     *       @OA\Response(
-     *           response=401, 
-     *           description="Unauthorized",
-     *           @OA\JsonContent(
-     *               @OA\Property(property="errNo", type="integer", example="number"),
-     *               @OA\Property(property="errMsg", type="string", example="string"),
-     *          )
-     *       ),
-     *       @OA\Response(
-     *           response=404, 
-     *           description="Resource Not Found",
-     *           @OA\JsonContent(
-     *               @OA\Property(property="errNo", type="integer", example="number"),
-     *               @OA\Property(property="errMsg", type="string", example="string"),
-     *          )
-     *       ),
-     * )
      * Get a JWT via given credentials.
      *
-     * @param  Request  $request
+     * @author Valentin magde <valentinmagde@gmail.com>
+     * @since 2023-11-15
+     *
+     * @param Request $request Request.
      * @return Response
      */
     public function login(Request $request)
     {
-        try{
+        try {
             $validator = Validator::make($request->all(), [
-                'user_email'     => 'required|email',
-                'user_password'  => 'required|min:6'
+                'email'     => 'required|email',
+                'password'  => 'required|min:6'
             ]);
         
             if ($validator->fails()) {
@@ -113,7 +55,7 @@ class AuthController extends Controller
                 
                 return errorResponse(
                     Response::HTTP_BAD_REQUEST,
-                    ERROR_CODE['VALIDATOR'], 
+                    ERROR_CODE['VALIDATOR'],
                     $error
                 );
             }
@@ -121,8 +63,7 @@ class AuthController extends Controller
             return respondWithToken(
                 $this->authService->login($request->all())
             );
-        }
-        catch(Exception $e){
+        } catch (Exception $e) {
             return errorResponse(
                 Response::HTTP_INTERNAL_SERVER_ERROR,
                 ERROR_CODE['GENERIC_ERROR'],
@@ -132,67 +73,18 @@ class AuthController extends Controller
     }
 
     /**
-     * @OA\Post(
-     * path="/api/v2/auth/logout",
-     * operationId="authLogout",
-     * tags={"Authentification"},
-     * summary="User Logout",
-     * description="Logout User Here",
-     *   @OA\Parameter(
-     *          name="lang",
-     *          in="query",
-     *          required=true,
-     *          example="en",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="Logout Successfully",
-     *          @OA\JsonContent(
-     *               @OA\Property(property="successMsg", type="string", example="string"),
-     *               @OA\Property(property="data", type="object", example="null"),
-     *          )
-     *       ),
-     *       security={
-     *         {"bearer": {}}
-     *       },
-     *      @OA\Response(
-     *           response=400, 
-     *           description="Bad request",
-     *           @OA\JsonContent(
-     *               @OA\Property(property="errNo", type="integer", example="number"),
-     *               @OA\Property(property="errMsg", type="string", example="string"),
-     *          )
-     *       ),
-     *       @OA\Response(
-     *           response=401, 
-     *           description="Unauthorized",
-     *           @OA\JsonContent(
-     *               @OA\Property(property="errNo", type="integer", example="number"),
-     *               @OA\Property(property="errMsg", type="string", example="string"),
-     *          )
-     *       ),
-     *       @OA\Response(
-     *           response=404, 
-     *           description="Resource Not Found",
-     *           @OA\JsonContent(
-     *               @OA\Property(property="errNo", type="integer", example="number"),
-     *               @OA\Property(property="errMsg", type="string", example="string"),
-     *          )
-     *       ),
-     * )
      * Log the user out (Invalidate the token).
+     *
+     * @author Valentin magde <valentinmagde@gmail.com>
+     * @since 2023-11-15
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function logout()
     {
-        try{
+        try {
             return successResponse($this->authService->logout());
-        }
-        catch(Exception $e){
+        } catch (Exception $e) {
             return errorResponse(
                 Response::HTTP_INTERNAL_SERVER_ERROR,
                 ERROR_CODE['GENERIC_ERROR'],
@@ -202,69 +94,18 @@ class AuthController extends Controller
     }
 
     /**
-     * @OA\Post(
-     * path="/api/v2/auth/refresh",
-     * operationId="authRefresh",
-     * tags={"Authentification"},
-     * summary="Refresh token",
-     * description="Refresh Token Here",
-     *   @OA\Parameter(
-     *          name="lang",
-     *          in="query",
-     *          required=true,
-     *          example="en",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *       security={
-     *         {"bearer": {}}
-     *       },
-     *      @OA\Response(
-     *          response=200,
-     *          description="Refresh Successfully",
-     *          @OA\JsonContent(
-     *               @OA\Property(property="access_token", type="string", example="string"),
-     *               @OA\Property(property="token_type", type="string", example="string"),
-     *               @OA\Property(property="expires_in", type="integer", example="360"),
-     *               @OA\Property(property="user", type="object", example="{}"),
-     *         ),
-     *       ),
-     *      @OA\Response(
-     *           response=400, 
-     *           description="Bad request",
-     *           @OA\JsonContent(
-     *               @OA\Property(property="errNo", type="integer", example="number"),
-     *               @OA\Property(property="errMsg", type="string", example="string"),
-     *          )
-     *       ),
-     *       @OA\Response(
-     *           response=401, 
-     *           description="Unauthorized",
-     *           @OA\JsonContent(
-     *               @OA\Property(property="errNo", type="integer", example="number"),
-     *               @OA\Property(property="errMsg", type="string", example="string"),
-     *          )
-     *       ),
-     *       @OA\Response(
-     *           response=404, 
-     *           description="Resource Not Found",
-     *           @OA\JsonContent(
-     *               @OA\Property(property="errNo", type="integer", example="number"),
-     *               @OA\Property(property="errMsg", type="string", example="string"),
-     *          )
-     *       ),
-     * )
      * Refresh a token.
+     *
+     * @author Valentin magde <valentinmagde@gmail.com>
+     * @since 2023-11-15
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function refresh()
     {
-        try{
+        try {
             return respondWithToken($this->authService->refresh());
-        }
-        catch(Exception $e){
+        } catch (Exception $e) {
             return errorResponse(
                 Response::HTTP_INTERNAL_SERVER_ERROR,
                 ERROR_CODE['GENERIC_ERROR'],

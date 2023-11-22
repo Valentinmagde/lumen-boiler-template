@@ -1,8 +1,10 @@
 <?php
 
+// phpcs:disable Squiz.Commenting.FunctionComment.TypeHintMissing
 namespace App\Http\Middleware;
 
 use Closure;
+use Exception;
 use Illuminate\Contracts\Auth\Factory as Auth;
 
 class Authenticate
@@ -17,7 +19,7 @@ class Authenticate
     /**
      * Create a new middleware instance.
      *
-     * @param  \Illuminate\Contracts\Auth\Factory  $auth
+     * @param  Auth  $auth The Auth instance.
      * @return void
      */
     public function __construct(Auth $auth)
@@ -28,16 +30,15 @@ class Authenticate
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  string|null  $guard
+     * @param  \Illuminate\Http\Request  $request Request.
+     * @param  \Closure  $next Next.
+     * @param  string|null  $guard Guard.
      * @return mixed
      */
     public function handle($request, Closure $next, $guard = null)
     {
         if ($this->auth->guard($guard)->guest()) {
-            var_dump($this->auth->guard($guard));
-            return response('Unauthorized.', 401);
+            return response('Unauthorized', 401);
         }
 
         return $next($request);

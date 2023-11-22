@@ -2,72 +2,92 @@
 
 namespace App\Services;
 
-use Illuminate\Http\Response;
-use App\Models\User;
-use App\Http\Helpers\HelperFunctions;
-use App\Http\Helpers\ApiSendingResponse;
-use App\Http\Helpers\ApiSendingErrorException;
-use App\Http\Helpers\ApiErrorNumbers;
+use App\Models\Consumer;
 use Exception;
+use Illuminate\Support\Facades\Hash;
+use stdClass;
 
 class AuthService
 {
     /**
      * Get a JWT via given credentials.
-     * 
-     * @param mixed $data
-     * 
+     *
+     * @author Valentin magde <valentinmagde@gmail.com>
+     * @since 2023-11-09
+     *
+     * @param array $data The authentication credentials.
+     *
      * @return token
      */
-    public static function login($data)
+    public static function login(array $data)
     {
         try {
-            $user = User::where('user_email', $data['user_email'])
-                ->where('user_password', md5($data['user_password']))
+            $consumer = Consumer::where('email', $data['email'])
+                ->get(['id', 'name', 'password'])
                 ->first();
 
-            if($user) $token = auth()->login($user);
-            else throw new Exception(t('auth.incorrectUserEmailOrPassword'));
+            if ($consumer &&
+                $consumer->makeVisible(['password']) &&
+                Hash::check($data['password'], $consumer->password)
+            ) {
+                $token = auth()
+                    ->claims([
+                        'consumer' => $consumer->makeHidden(['password']),
+                        'roles' => array()
+                    ])
+                    ->login($consumer);
+            } else {
+                throw new Exception(t('auth.incorrectUserEmailOrPassword'));
+            }
 
             return $token;
         } catch (\Exception $e) {
             throw new Exception($e->getMessage());
-        } 
+        }
     }
 
     /**
      * Log the user out (Invalidate the token).
-     * 
+     *
+     * @author Valentin magde <valentinmagde@gmail.com>
+     * @since 2023-11-09
+     *
      * @return mixed
      */
     public static function logout()
     {
-        try{
+        try {
             auth()->logout();
 
             return null;
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             throw new Exception($e->getMessage());
-        } 
+        }
     }
 
     /**
      * Refresh a token.
-     * 
-     * @return new token 
+     *
+     * @author Valentin magde <valentinmagde@gmail.com>
+     * @since 2023-11-09
+     *
+     * @return new token
      */
     public static function refresh()
     {
-        try{
+        try {
             return auth()->refresh();
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             throw new Exception($e->getMessage());
         }
     }
-    
+
     /**
      * Get authenticate user
-     * 
+     *
+     * @author Valentin magde <valentinmagde@gmail.com>
+     * @since 2023-11-09
+     *
      * @return $user
      */
     public static function show()
@@ -76,6 +96,6 @@ class AuthService
             return auth()->user();
         } catch (\Exception $e) {
             throw new Exception($e->getMessage());
-        } 
+        }
     }
 }

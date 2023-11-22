@@ -2,6 +2,9 @@
     "home": {
         "message": "Welcome to Bootstraping Laravel API"
     },
+    "consumer": {
+        "notFound" : "Consumer not found."
+    },
     "auth": {
         "failed" : "These credentials do not match our records.",
         "password" : "The provided password is incorrect.",
@@ -193,6 +196,9 @@
         "imageUploadedSuccessfully" : "Image uploaded successfully",
         "tariffUpdatedSuccessfully" : "Tariff updated successfully",
         "tariffDeletedSuccessfully" : "Tariff deleted successfully"
+    },
+    "readme": {
+        "notFound" : "Readme file doesn't exist."
     }
     
 }

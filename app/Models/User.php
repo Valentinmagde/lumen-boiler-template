@@ -2,32 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Lumen\Auth\Authorizable;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
- * @OA\Schema(
- *  @OA\Xml(name="User"),
- *  required={"user_email", "user_password", "user_password_confirmation", "user_surname"},
- *  @OA\Property(property="user_id", type="integer", example="number"),
- *  @OA\Property(property="user_type_id", type="integer", example="number"),
- *  @OA\Property(property="user_group_id", type="integer", example="number"),
- *  @OA\Property(property="user_surname", type="string", example="string"),
- *  @OA\Property(property="user_othername", type="string", example="string"),
- *  @OA\Property(property="user_email", type="string", example="string"),
- *  @OA\Property(property="user_jobtitle", type="string", example="string"),
- *  @OA\Property(property="user_phone", type="string", example="string"),
- *  @OA\Property(property="user_name", type="string", example="string"),
- *  @OA\Property(property="user_password", type="string", example="string"),
- *  @OA\Property(property="active", type="integer", example="number")
- * )
- * 
+ *
  * Class User
- * 
+ *
  * @property int $user_id
  * @property int $user_type_id
  * @property int $user_group_id
@@ -39,17 +19,14 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  * @property string $user_name
  * @property string $user_password
  * @property int $active
- * 
+ *
  * @package App\Models
  */
-class User extends Model implements AuthenticatableContract,
-AuthorizableContract, JWTSubject
+class User extends Model
 {
-	use Authenticatable, Authorizable;
-
-	protected $table = 'User';
-	protected $primaryKey = 'user_id';
-	public $timestamps = false;
+    protected $table = 'User';
+    protected $primaryKey = 'user_id';
+    public $timestamps = false;
 
     /**
      * The attributes that should be hidden for arrays.
@@ -58,13 +35,13 @@ AuthorizableContract, JWTSubject
         'user_password'
     ];
 
-	protected $casts = [
-		'user_id' => 'int'
-	];
+    protected $casts = [
+        'user_id' => 'int'
+    ];
 
     protected $attributes = [
         'user_id' => 0,
-		'user_type_id' => 0,
+        'user_type_id' => 0,
         'user_group_id' => 0,
         'user_surname' => 0,
         'user_othername' => 0,
@@ -75,9 +52,9 @@ AuthorizableContract, JWTSubject
         'active' => 0,
     ];
 
-	protected $fillable = [
-		'user_id',
-		'user_type_id',
+    protected $fillable = [
+        'user_id',
+        'user_type_id',
         'user_group_id',
         'user_surname',
         'user_othername',
@@ -87,15 +64,15 @@ AuthorizableContract, JWTSubject
         'user_name',
         'user_password',
         'active'
-	];
+    ];
 
     /**
      * /------------------------------------------------------------------------
      * / JWT Functions
      * /------------------------------------------------------------------------
-    */
+     */
 
-	/**
+    /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
      * @return mixed
