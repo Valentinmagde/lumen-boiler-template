@@ -13,7 +13,7 @@ Installation
 - PDO PHP Extension.
 - Mbstring PHP Extension
 
-#### 1.VS code
+#### 1.Setup VS code
 
 - Follow the following link to install vscode onto your platform:
 [vscode install](https://code.visualstudio.com/download)
