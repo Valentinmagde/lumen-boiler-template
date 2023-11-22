@@ -45,7 +45,6 @@ host('staging')
     ->set('remote_user', 'root')
     ->set('port', '22')
     ->set('labels', ['stage' => 'staging'])
-    ->set('config_file', '~/.ssh/config')
     ->set('deploy_path', '/var/www/lumen-boiler-template');
 
 after('deploy:failed', 'deploy:unlock');
