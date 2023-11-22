@@ -51,7 +51,7 @@ write on terminal the following command:
 
 
 [DotEnv](https://github.com/vlucas/phpdotenv) is used for setting up environment variables.
-- `.env` file is in gitignore and therefore you need to create it in your root directory.
+- `.env` file is in gitignore and therefore you need to create it in the root directory of the project.
 - Then copy and paste the data in your `.env.example` file into your .env.
 - Modify the variables according to your required environement variables.
 
