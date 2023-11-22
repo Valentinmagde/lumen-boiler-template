@@ -21,4 +21,8 @@
  *     name="Hotel",
  *     description="API Endpoints of Hotels"
  * )
+ * @OA\Tag(
+ *     name="Language",
+ *     description="API Endpoints of Languages"
+ * )
  */

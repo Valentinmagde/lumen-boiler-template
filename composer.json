@@ -14,11 +14,11 @@
         "zircote/swagger-php": "3.*"
     },
     "require-dev": {
+        "deployer/deployer": "^7.3",
+        "deployer/recipes": "^6.2",
         "fakerphp/faker": "^1.9.1",
         "mockery/mockery": "^1.4.4",
         "phpunit/phpunit": "^10.0",
-        "deployer/deployer": "^7.3",
-        "deployer/recipes": "^6.2",
         "squizlabs/php_codesniffer": "^3.7"
     },
     "autoload": {

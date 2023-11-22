@@ -12,7 +12,7 @@
  *   @OA\Parameter(
  *          name="lang",
  *          in="query",
- *          required=true,
+ *          required=false,
  *          example="en",
  *          @OA\Schema(
  *              type="string"
@@ -88,23 +88,32 @@
  */
 
 /**
- * Get Authenticated User
+ * Get User data
  *
  * @OA\Get(
- *      path="/api/v2/user/me",
+ *      path="/api/v2/user/{userId}",
  *      operationId="getProfile",
  *      tags={"User"},
- *      summary="Get the logged in user",
- *      description="Returns current user",
+ *      summary="Get User data",
+ *      description="Fetch user data using their ID",
  *   @OA\Parameter(
  *          name="lang",
  *          in="query",
- *          required=true,
+ *          required=false,
  *          example="en",
  *          @OA\Schema(
  *              type="string"
  *          )
  *      ),
+ *   @OA\Parameter(
+ *         name="userId",
+ *         in="path",
+ *         required=false,
+ *         example="1",
+ *         @OA\Schema(
+ *             type="integer"
+ *         )
+ *     ),
  *      @OA\Response(
  *          response=200,
  *          description="User successfully collects",
@@ -115,9 +124,6 @@
  *               ),
  *           )
  *       ),
- *       security={
- *         {"bearer": {}}
- *       },
  *       @OA\Response(
  *           response=400,
  *           description="Bad request",

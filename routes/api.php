@@ -15,10 +15,8 @@ use Illuminate\Http\Request;
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
-
+$router->get('/', 'Controller@home');
+   
 $router->group(
     [
         'prefix' => 'api/v2'
@@ -50,9 +48,12 @@ $router->group(
 
             $router->group(['prefix' => 'consumer'], function () use ($router) {
                 $router->get('/me', 'ConsumerController@me');
+                $router->delete('/{consumerId}/delete', 'ConsumerController@delete');
+                $router->get('/{consumerId}/restore', 'ConsumerController@restore');
+                $router->patch('/{consumerId}/patch', 'ConsumerController@patch');
+                $router->put('/{consumerId}/update', 'ConsumerController@update');
             });
         });
-
         /*
         |--------------------------------------------------------------------------
         | API Routes of User
@@ -65,7 +66,7 @@ $router->group(
             });
 
             $router->group(['prefix' => 'user'], function () use ($router) {
-                $router->get('/me', 'UserController@me');
+                $router->get('/{userId}', 'UserController@indexByID');
             });
         });
 
@@ -101,12 +102,20 @@ $router->group(
                 $router->get('/convertIP', 'CountryController@convertIPV4');
             });
         });
+
+        /*
+        |--------------------------------------------------------------------------
+        | API Routes of Languages
+        |--------------------------------------------------------------------------
+        |
+        */
+        $router->group(['prefix' => 'languages'], function () use ($router) {
+            $router->get('/', 'LanguageController@indexAll');
+        });
+
+        $router->group(['prefix' => 'language'], function () use ($router) {
+            $router->get('/languageId', 'LanguageController@getId');
+            $router->get('/{languageId}/index', 'LanguageController@index');
+        });
     }
 );
-
-/** 
- * Handle not found route exception
- */ 
-// $router->options('/{any:.*}', function (Request $req) {
-//     return "Route not found";
-// });
