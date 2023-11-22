@@ -18,7 +18,8 @@
         "mockery/mockery": "^1.4.4",
         "phpunit/phpunit": "^10.0",
         "deployer/deployer": "^7.3",
-        "deployer/recipes": "^6.2"
+        "deployer/recipes": "^6.2",
+        "squizlabs/php_codesniffer": "^3.7"
     },
     "autoload": {
         "psr-4": {
