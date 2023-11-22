@@ -74,8 +74,11 @@ jobs:
       #   with:
       #     ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       #     ssh-known-hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
-      #     # To disable host key checking (insecure!):
       #     ssh-disable-host-key-checking: true
+      # - name: Deploy to Prod
+      #   env:
+      #     DOT_ENV: ${{ secrets.DOT_ENV_PRODUCTION }}
+      #   run: vendor/bin/dep deploy stage=production --tag=${{ env.GITHUB_REF }} -vvv
       - name: Deploy to PRODUCTION Server
         uses: appleboy/ssh-action@master
         with:
@@ -85,6 +88,6 @@ jobs:
           port: 22
           script: |
             cd /var/www/lumen-boiler-template
-            # git pull --ff-only
+            git pull --ff-only
             # composer i
             # php artisan migrate --force
