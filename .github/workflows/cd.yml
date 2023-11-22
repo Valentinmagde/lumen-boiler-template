@@ -33,6 +33,8 @@ jobs:
   #     run: vendor/bin/phpunit
   deploy-staging:
     name: Deploy Project to STAGING Server
+    environment:
+      name: staging
     permissions:
       actions: write
       deployments: write
