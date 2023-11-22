@@ -1,5 +1,5 @@
 Beachcomber API
-==========
+===============
 
 Beachcomber API v2 on Lumen 
 
@@ -35,14 +35,14 @@ write on `terminal` the following command:
      composer install
 ```
 Serving Your Application
-============
+========================
 
 write on terminal the following command:
 ```bash
      php -S localhost:8000 -t public
 ```
 Configuration
-============
+=============
 
 `DotEnv` [DotEnv](https://github.com/vlucas/phpdotenv) is used for setting up environment variables.
 - `.env` file is in gitignore and therefore you need to create it in your root directory.
@@ -55,6 +55,6 @@ Configuration
 - When the application will start, the `.env` file corresponding to your set `APP_ENV` will be loaded ovewriting existing environment variables in `.env`
 
 Official Lumen Documentation
-============
+============================
 
 Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
