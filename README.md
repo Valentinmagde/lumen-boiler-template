@@ -7,9 +7,9 @@ Laravel Lumen is a stunningly fast PHP micro-framework for building web applicat
 ### Installation
 
 PHP >= 8.0
-    OpenSSL PHP Extension
-    PDO PHP Extension
-    Mbstring PHP Extension
+OpenSSL PHP Extension
+PDO PHP Extension
+Mbstring PHP Extension
 
 ### Install Dependencies
 
