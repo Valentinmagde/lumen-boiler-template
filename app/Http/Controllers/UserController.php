@@ -24,7 +24,6 @@ class UserController extends Controller
      */
     public function __construct(UserService $userService)
     {
-        $this->middleware('jwt:api', ['except' => ['register']]);
         $this->userService = $userService;
     }
 
@@ -58,6 +57,27 @@ class UserController extends Controller
             }
     
             return successResponse($this->userService->register($request->all()));
+        } catch (Exception $e) {
+            return errorResponse(
+                Response::HTTP_INTERNAL_SERVER_ERROR,
+                ERROR_CODE['GENERIC_ERROR'],
+                $e->getMessage()
+            );
+        }
+    }
+    /**
+     * Send user data using their ID
+     *
+     * @author Gregory Albert <gregoryalbert1209@gmail.com>
+     * @since 2023-11-21
+     *
+     * @param integer $userId ID of user to fetch.
+     * @return \Illuminate\Http\Response
+     */
+    public function indexByID(int $userId)
+    {
+        try {
+            return successResponse($this->userService->getById($userId));
         } catch (Exception $e) {
             return errorResponse(
                 Response::HTTP_INTERNAL_SERVER_ERROR,

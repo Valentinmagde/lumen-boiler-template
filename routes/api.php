@@ -13,10 +13,8 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
-
+$router->get('/', 'Controller@home');
+   
 $router->group(
     [
         'prefix' => 'api/v2'
@@ -47,6 +45,10 @@ $router->group(
 
         $router->group(['prefix' => 'consumer'], function () use ($router) {
             $router->get('/me', 'ConsumerController@me');
+            $router->delete('/{consumerId}/delete', 'ConsumerController@delete');
+            $router->get('/{consumerId}/restore', 'ConsumerController@restore');
+            $router->patch('/{consumerId}/patch', 'ConsumerController@patch');
+            $router->put('/{consumerId}/update', 'ConsumerController@update');
         });
 
         /*
@@ -60,7 +62,7 @@ $router->group(
         });
 
         $router->group(['prefix' => 'user'], function () use ($router) {
-            $router->get('/me', 'UserController@me');
+            $router->get('/{userId}', 'UserController@indexByID');
         });
 
         /*
@@ -87,6 +89,21 @@ $router->group(
             $router->get('/{id}/id', 'CountryController@indexByID');
             $router->get('/{ip}/isoFromNumericIp', 'CountryController@isoByNumericIp');
             $router->get('/convertIP', 'CountryController@convertIPV4');
+        });
+
+        /*
+        |--------------------------------------------------------------------------
+        | API Routes of Languages
+        |--------------------------------------------------------------------------
+        |
+        */
+        $router->group(['prefix' => 'languages'], function () use ($router) {
+            $router->get('/', 'LanguageController@indexAll');
+        });
+
+        $router->group(['prefix' => 'language'], function () use ($router) {
+            $router->get('/languageId', 'LanguageController@getId');
+            $router->get('/{languageId}/index', 'LanguageController@index');
         });
     }
 );
