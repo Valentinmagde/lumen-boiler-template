@@ -54,4 +54,4 @@ write on terminal the following command:
 
 ## Official Lumen Documentation
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).```php
+Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
