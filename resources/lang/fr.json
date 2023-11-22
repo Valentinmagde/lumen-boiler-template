@@ -196,7 +196,9 @@
         "imageUploadedSuccessfully" : "Image téléchargée avec succès",
         "tariffUpdatedSuccessfully" : "Tariff mis à jour avec succès",
         "tariffDeletedSuccessfully" : "Tariff deleted successfully"
+    },
+    "readme": {
+        "notFound" : "Le fichier Readme n'existe pas."
     }
-    
    
 }
