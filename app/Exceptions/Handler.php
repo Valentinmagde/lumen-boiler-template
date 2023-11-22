@@ -1,6 +1,7 @@
 <?php
 
 // phpcs:disable Squiz.Commenting.FunctionComment.TypeHintMissing
+
 namespace App\Exceptions;
 
 use Illuminate\Auth\Access\AuthorizationException;

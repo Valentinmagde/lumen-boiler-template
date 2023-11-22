@@ -8,10 +8,10 @@ use Exception;
 
 /**
  * Class ExampleService
- * 
+ *
  * This service is a concrete example of how to call an external API
  * and a remote service from the depot engine.
- * 
+ *
  * @author Valentin magde <valentinmagde@gmail.com>
  * @since 2023-11-21
  */

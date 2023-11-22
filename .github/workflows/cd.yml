@@ -1,10 +1,8 @@
-name: API V2 CD
+name: Release API V2
 
 on:
   push:
-    branches: [ "main", "staging" ]
-  pull_request:
-    branches: [ "main", "staging" ]
+    branches: [ "main" ]
 
 jobs:
   tests:
