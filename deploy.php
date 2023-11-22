@@ -69,3 +69,34 @@ task('deploy', [
     'deploy:unlock',
     'deploy:cleanup',
 ]);
+
+desc('Prepares a new release');
+task('deploy:prepare', [
+    'deploy:info',
+    'deploy:lock',
+    'deploy:release',
+    'rsync',
+    'deploy:secrets',
+    'deploy:shared',
+    'deploy:vendors',
+    'deploy:writable',
+    'artisan:storage:link',
+    'artisan:view:cache',
+    'artisan:config:cache',
+    'artisan:migrate',
+    'artisan:queue:restart',
+]);
+
+desc('Publishes the release');
+task('deploy:publish', [
+    'deploy:symlink',
+    'deploy:unlock',
+    'deploy:cleanup',
+    'deploy:success',
+]);
+
+desc('Deploys your project');
+task('deploy', [
+    'deploy:prepare',
+    'deploy:publish',
+]);
