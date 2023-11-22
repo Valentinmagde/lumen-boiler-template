@@ -1,10 +1,8 @@
-name: API V2 CI
+name: Build API V2
 
 on:
-  push:
-    branches: [ "develop" ]
   pull_request:
-    branches: [ "develop" ]
+    branches: [ "main" ]
 
 jobs:
   validate:

@@ -10,7 +10,7 @@
         <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamName" />
     </rule>
 
-    <!-- PSR12 -->
+    <!-- PSR2 -->
     <rule ref="PSR2">
         <properties>
             <property name="lineLimit" value="110"/>

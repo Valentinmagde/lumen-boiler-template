@@ -55,6 +55,27 @@ class CountryService
     }
 
     /**
+     * Get the visitor's country.
+     *
+     * @author Valentin magde <valentinmagde@gmail.com>
+     * @since 2023-11-21
+     *
+     * @param string $ipAddress The visitor ip address.
+     * @return mixed
+     */
+    public function getVisitorCountry(string $ipAddress)
+    {
+        try {
+            // Convert an IP address into numeric format.
+            $numericIpAddress = $this->convertIPV4ToNumericFormat($ipAddress);
+
+            return $this->getCountryByNumericIP($numericIpAddress);
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    /**
      * Fetch ID of a country from its iso code.
      *
      * @author Gregory Albert <gregoryalbert1209@gmail.com>
@@ -128,6 +149,29 @@ class CountryService
             ])->first();
         
             return $result->country->iso_code_2;
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    /**
+     * Fetch country from its numeric IP.
+     *
+     * @author Valentin magde <valentinmagde@gmail.com>
+     * @since 2023-11-21
+     *
+     * @param integer $ip Numeric IP of a country.
+     * @return Country country
+     */
+    public function getCountryByNumericIP(int $ip)
+    {
+        try {
+            $result = CountryIpv4::where([
+                ['start_ip_num', '<=', $ip],
+                ['end_ip_num', '>=', $ip],
+            ])->first();
+        
+            return $result->country;
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }

@@ -1,6 +1,7 @@
 <?php
 
 // phpcs:disable Squiz.Commenting.FunctionComment.TypeHintMissing
+
 namespace App\Exceptions;
 
 use Illuminate\Auth\Access\AuthorizationException;
@@ -13,6 +14,7 @@ use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -75,10 +77,18 @@ class Handler extends ExceptionHandler
             if ($exception instanceof ModelNotFoundException) {
                 return errorResponse(
                     Response::HTTP_NOT_FOUND,
-                    ERROR_CODE['GENERIC_ERROR'],
+                    ERROR_CODE['RESOURCE_NOT_FOUND'],
                     'Entry for ' . str_replace('App\\', '', $exception->getModel()) . ' not found'
                 );
             }
+
+            // if ($exception instanceof NotFoundHttpException) {
+            //     return errorResponse(
+            //         Response::HTTP_NOT_FOUND,
+            //         ERROR_CODE['RESOURCE_NOT_FOUND'],
+            //         $exception->getMessage()
+            //     );
+            // }
 
             if ($exception instanceof ValidationException) {
                 return errorResponse(
