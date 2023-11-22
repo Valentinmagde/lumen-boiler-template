@@ -1,30 +1,57 @@
-# Beachcomber API v2
+Beachcomber API
+==========
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+Beachcomber API v2 on Lumen 
 
-## Installation
+Installation
+============
 
-### Installation
+## Prerequisites
 
-PHP >= 8.0 \n
-OpenSSL PHP Extension \n
-PDO PHP Extension \n
-Mbstring PHP Extension\n
+- PHP >= 8.0.
+- OpenSSL PHP Extension.
+- PDO PHP Extension.
+- Mbstring PHP Extension
 
-### Install Dependencies
+## VS code
 
-    write on terminal the following command:
-    composer install
+- Follow the following link to install vscode onto your platform:
+[vscode install](https://code.visualstudio.com/download)
 
-### Serving Your Application
+- Then go to the `Extensions` of your IDE (can be found on the left) and install the following:
 
-    write on terminal the following command:
-    php -S localhost:8000 -t public
+ Extension  | Documentation
+:----------------|:-------------
+ GitBlame        | [GitBlame](https://marketplace.visualstudio.com/items?itemName=waderyan.gitblame)
+ GitLens         | [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
+ GitHistory      | [GitHistory](https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory)
+ Coverage Gutters| [CoverageGutters](https://marketplace.visualstudio.com/items?itemName=ryanluker.vscode-coverage-gutters)
+ phpcs           | [phpcs](https://marketplace.visualstudio.com/items?itemName=shevaua.phpcs)
 
-### Configuration
+## Install Dependencies
 
-    All of the configuration options for the Lumen framework are stored in the .env file.
-    
-## Official Documentation
+write on `terminal` the following command:
+```bash
+     composer install
+```
+## Serving Your Application
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+write on terminal the following command:
+```bash
+     php -S localhost:8000 -t public
+```
+## Configuration
+
+`DotEnv` [DotEnv](https://github.com/vlucas/phpdotenv) is used for setting up environment variables.
+- `.env` file is in gitignore and therefore you need to create it in your root directory.
+- Then copy and paste the data in your `.env.example` file into your .env.
+- Modify the variables according to your required environement variables.
+
+### Change environment
+
+- Set the `APP_ENV` to either local', 'testing' or 'development'
+- When the application will start, the `.env` file corresponding to your set `APP_ENV` will be loaded ovewriting existing environment variables in `.env`
+
+## Official Lumen Documentation
+
+Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).```php
