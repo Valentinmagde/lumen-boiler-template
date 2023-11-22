@@ -34,13 +34,15 @@ write on `terminal` the following command:
 ```bash
      composer install
 ```
-## Serving Your Application
+Serving Your Application
+============
 
 write on terminal the following command:
 ```bash
      php -S localhost:8000 -t public
 ```
-## Configuration
+Configuration
+============
 
 `DotEnv` [DotEnv](https://github.com/vlucas/phpdotenv) is used for setting up environment variables.
 - `.env` file is in gitignore and therefore you need to create it in your root directory.
@@ -52,6 +54,7 @@ write on terminal the following command:
 - Set the `APP_ENV` to either local', 'testing' or 'development'
 - When the application will start, the `.env` file corresponding to your set `APP_ENV` will be loaded ovewriting existing environment variables in `.env`
 
-## Official Lumen Documentation
+Official Lumen Documentation
+============
 
 Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
