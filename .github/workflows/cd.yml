@@ -26,14 +26,15 @@ jobs:
         # uses: atymic/deployer-php-action@master
         uses: deployphp/action@v1
         with:
+          dep: deploy
           private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known-hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+          # known-hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
           # To disable host key checking (insecure!):
           # ssh-disable-host-key-checking: true
-      - name: Deploy to Prod
-        env:
-          DOT_ENV: ${{ secrets.DOT_ENV_STAGING }}
-        run: vendor/bin/dep deploy stage=staging --tag=${{ env.GITHUB_REF }} -vvv
+      # - name: Deploy to Staging
+      #   env:
+      #     DOT_ENV: ${{ secrets.DOT_ENV_STAGING }}
+      #   run: vendor/bin/dep deploy stage=staging --tag=${{ env.GITHUB_REF }} -vvv
 
   deploy-production:
     name: Deploy Project to PRODUCTION Server
