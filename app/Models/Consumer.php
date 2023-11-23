@@ -45,7 +45,7 @@ class Consumer extends Model implements
     ];
 
     protected $attributes = [
-        //
+        'active' => 1,
     ];
 
     protected $fillable = [

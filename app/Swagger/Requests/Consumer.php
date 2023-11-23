@@ -440,10 +440,10 @@
  *      ),
  *      @OA\RequestBody(
  *         @OA\MediaType(
- *            mediaType="multipart/form-data",
+ *            mediaType="application/x-www-form-urlencoded",
  *            @OA\Schema(
  *               type="object",
- *               required={"id", "email", "password", "name"},
+ *               required={"email", "password", "name"},
  *               @OA\Property(property="name", type="text"),
  *               @OA\Property(property="email", type="email"),
  *               @OA\Property(property="phone", type="text"),
