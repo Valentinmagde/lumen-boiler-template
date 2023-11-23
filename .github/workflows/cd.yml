@@ -6,11 +6,11 @@ on:
 
 # It is important to specify "concurrency" for the workflow,
 # to prevent concurrency between different deploys.
-concurrency: production_environment
+# concurrency: production_environment
 
 jobs:
   deploy-staging:
-    name: Deploy Project to STAGING Server
+    name: Deploy on Staging
     environment:
       name: staging
     permissions:
@@ -45,40 +45,15 @@ jobs:
               IdentityFile ~/.ssh/lumen-boiler-template 
               StrictHostKeyChecking no
           END
-      - name: Setup Deployer
-        uses: atymic/deployer-php-action@master
+      - name: Deploy to Staging
+        uses: deployphp/action@master
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          ssh-known-hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
-          ssh-disable-host-key-checking: true
-      - name: Deploy to Staging server
-        env:
-          DOT_ENV: ${{ secrets.DOT_ENV_PRODUCTION }}
-        run: vendor/bin/dep deploy stage=staging --tag=${{ env.GITHUB_REF }} -vvv
-      # - name: Set Up Deployer
-      #   run: curl -LO https://deployer.org/deployer.phar && mv deployer.phar vendor/bin/dep && sudo chmod +x vendor/bin/dep
-      # - name: Deploy to STAGING server
-      #   uses: deployphp/action@master
-      #   with:
-      #     private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      #     known-hosts: ${{ secrets.KNOWN_HOSTS }}
-      #     dep: deploy stage=staging --tag=${{ env.GITHUB_REF }} -vvv
-      # - name: Setup Deployer
-      #   uses: deployphp/action@v1
-      #   with:
-      #     # dep: deploy stage=staging --tag=${{ env.GITHUB_REF }} -vvv
-      #     private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      #     # DOT_ENV: ${{ secrets.DOT_ENV_STAGING }}
-      #     known-hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
-      #     # To disable host key checking (insecure!):
-      #     # ssh-disable-host-key-checking: true
-      # - name: Deploy to Staging
-      #   env:
-      #     DOT_ENV: ${{ secrets.DOT_ENV_STAGING }}
-      #   run: vendor/bin/dep deploy stage=staging --tag=${{ env.GITHUB_REF }} -vvv
+          private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known-hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+          dep: deploy stage=staging --tag=${{ env.GITHUB_REF }} -vvv
 
   deploy-production:
-    name: Deploy Project to PRODUCTION Server
+    name: Deploy to Production
     environment:
       name: production
     runs-on: ubuntu-latest
@@ -92,25 +67,29 @@ jobs:
           php-version: 8.2
       - name: Composer install
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
-      # - name: Setup Deployer
-      #   uses: atymic/deployer-php-action@master
-      #   with:
-      #     ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      #     ssh-known-hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
-      #     ssh-disable-host-key-checking: true
-      # - name: Deploy to Prod
-      #   env:
-      #     DOT_ENV: ${{ secrets.DOT_ENV_PRODUCTION }}
-      #   run: vendor/bin/dep deploy stage=production --tag=${{ env.GITHUB_REF }} -vvv
-      - name: Deploy to PRODUCTION Server
-        uses: appleboy/ssh-action@master
+      - name: Configure SSH
+        env:
+          SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOST }}
+          SSH_HOST: ${{ secrets.HOST }}
+          SSH_USER: ${{ secrets.USERNAME }}
+          DOT_ENV: ${{ secrets.DOT_ENV_PRODUCTION }}
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+          echo "$SSH_KEY" > ~/.ssh/lumen-boiler-template 
+          chmod 600 ~/.ssh/lumen-boiler-template 
+          cat >>~/.ssh/config <<END
+            Host *
+              HostName $SSH_HOST
+              User $SSH_USER
+              IdentityFile ~/.ssh/lumen-boiler-template 
+              StrictHostKeyChecking no
+          END
+      - name: Deploy to Prod
+        uses: deployphp/action@master
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          script: |
-            cd /var/www/lumen-boiler-template
-            git pull --ff-only
-            # composer i
-            # php artisan migrate --force
+          private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known-hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+          dep: deploy stage=production --tag=${{ env.GITHUB_REF }} -vvv
+
