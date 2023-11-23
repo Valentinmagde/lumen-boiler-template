@@ -189,6 +189,19 @@ set('sudo_askpass', function () {
     }
 });
 
+host('production')
+    ->set('hostname', '137.184.133.101')
+    ->set('remote_user', 'root')
+    ->set('labels', ['stage' => 'production'])
+    ->set('deploy_path', '/var/www/lumen-boiler-template');
+
+host('staging')
+    ->set('hostname', '137.184.133.101')
+    ->set('remote_user', 'root')
+    ->set('port', '22')
+    ->set('labels', ['stage' => 'staging'])
+    ->set('deploy_path', '/var/www/lumen-boiler-template');
+
 desc('Prepares a new release');
 task('deploy:prepare', [
     'deploy:info',
