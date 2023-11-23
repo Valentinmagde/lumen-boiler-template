@@ -47,6 +47,8 @@ jobs:
           END
       - name: Deploy to Staging
         uses: deployphp/action@master
+        env:
+          DOT_ENV: ${{ secrets.DOT_ENV_STAGING }}
         with:
           private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           known-hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
