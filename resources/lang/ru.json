@@ -1,199 +1,204 @@
 {
     "home": {
-        "message": "Bienvenue à Bootstraping Laravel API"
+        "message": "Добро пожаловать в Bootstraping Laravel API"
     },
-    "auth":{
-        "failed" : "Ces informations d'identification ne correspondent pas à nos dossiers.",
-        "password" : "Le mot de passe fourni est incorrect.",
-        "throttle" : "Trop de tentatives de connexion. Veuillez réessayer dans :seconds seconds.",
-        "invalidToken" : "Le jeton est invalide",
-        "expiredToken" : "Le jeton est expiré",
-        "blacklistedToken" : "Le jeton est sur liste noire",
-        "tokenNotFound" : "Jeton d'autorisation non trouvé",
-        "theMethod" : "La méthode",
-        "isNotSupportedForThisRoute" : "n'est pas prise en charge pour cet itinéraire. Méthodes prises en charge :",
-        "ressourceNotFound" : "Ressource non trouvée",
-        "cantConnectToLocalMySQL" : "Impossible de se connecter au serveur MySQL local",
-        "cantConnectToMySQLServer" : "Impossible de se connecter au serveur MySQL",
-        "unknownMySQLHost" : "Hôte inconnu du serveur MySQL",
-        "mySQLServerGoneAway" : "Le serveur MySQL a disparu",
-        "mySQLRanOutMemory" : "Le client MySQL a manqué de mémoire",
-        "lostConnectionToMySQLQuery" : "Perte de connexion au serveur MySQL pendant une",
-        "unknownMySQLError" : "Erreur MySQL inconnue",
-        "incorrectUserEmailOrPassword": "Adresse electronique ou mot de passe incorrect"
+    "consumer": {
+        "notFound": "Потребитель не найден."
     },
-    "validation":{
-        "accepted": "Le :attribute doit être acceptée.",
-        "accepted_if": "Le :attribute doit être accepté lorsque :other est :value.",
-        "active_url": "Le :attribute n'est pas une URL valide.",
-        "after": "Le :attribute doit être une date postérieure à :date.",
-        "after_or_equal": "Le :attribute doit être une date postérieure ou égale à  :date.",
-        "alpha": "Le :attribute ne doit contenir que des lettres.",
-        "alpha_dash": "Le :attribute ne doit contenir que des lettres, des chiffres, des tirets et des caractères de soulignement.",
-        "alpha_num": "Le :attribute ne doit contenir que des lettres et des chiffres.",
-        "array": "Le :attribute doit être un tableau.",
-        "before": "Le :attribute doit être une date antérieure à :date.",
-        "before_or_equal": "Le :attribute doit être une date antérieure ou égale à :date.",
+    "auth": {
+        "failed": "Эти учетные данные не совпадают с нашими записями.",
+        "password": "Указанный пароль неверен.",
+        "throttle": "Слишком много попыток входа. Пожалуйста, попробуйте снова через :seconds секунд.",
+        "invalidToken": "Неверный токен",
+        "expiredToken": "Токен устарел",
+        "blacklistedToken": "Токен в чёрном списке",
+        "tokenNotFound": "Токен авторизации не найден",
+        "theMethod": "Метод",
+        "isNotSupportedForThisRoute": "не поддерживается для этого маршрута. Поддерживаемые методы:",
+        "ressourceNotFound": "Ресурс не найден",
+        "cantConnectToLocalMySQL": "Невозможно подключиться к локальному серверу MySQL",
+        "cantConnectToMySQLServer": "Невозможно подключиться к серверу MySQL",
+        "unknownMySQLHost": "Неизвестный хост сервера MySQL",
+        "mySQLServerGoneAway": "Сервер MySQL отключился",
+        "mySQLRanOutMemory": "Клиент MySQL исчерпал память",
+        "lostConnectionToMySQLQuery": "Потеряно соединение с сервером MySQL во время запроса",
+        "unknownMySQLError": "Неизвестная ошибка MySQL",
+        "incorrectUserEmailOrPassword": "Неверный электронный адрес пользователя или пароль"
+    },
+    "validation": {
+        "accepted": "Поле :attribute должно быть принято.",
+        "accepted_if": "Поле :attribute должно быть принято, когда :other равен :value.",
+        "active_url": "Поле :attribute не является допустимым URL.",
+        "after": "Поле :attribute должно быть датой после :date.",
+        "after_or_equal": "Поле :attribute должно быть датой после или равной :date.",
+        "alpha": "Поле :attribute должно содержать только буквы.",
+        "alpha_dash": "Поле :attribute должно содержать только буквы, цифры, тире и подчеркивания.",
+        "alpha_num": "Поле :attribute должно содержать только буквы и цифры.",
+        "array": "Поле :attribute должно быть массивом.",
+        "before": "Поле :attribute должно быть датой до :date.",
+        "before_or_equal": "Поле :attribute должно быть датой до или равной :date.",
         "between": {
-            "numeric": "Le :attribute doit être comprise entre :min et :max.",
-            "file": "Le :attribute doit être comprise entre :min et :max kilo-octets.",
-            "string": "Le :attribute doit être comprise entre :min et :max characters.",
-            "array": "Le :attribute doit avoir entre :min et :max items."
+            "numeric": "Поле :attribute должно быть между :min и :max.",
+            "file": "Поле :attribute должно быть между :min и :max килобайт.",
+            "string": "Поле :attribute должно быть между :min и :max символами.",
+            "array": "Поле :attribute должно иметь от :min до :max элементов."
         },
-        "boolean": "Le :attribute doit être vrai ou faux.",
-        "confirmed": "La confirmation de :attribute ne correspond pas.",
-        "current_password": "Le le mot de passe est incorrect.",
-        "date": "Le :attribute n'est pas une date valide.",
-        "date_equals": "Le :attribute doit être une date égale à :date.",
-        "date_format": "Le :attribute ne correspond pas au format :format.",
-        "declined": "Le :attribute doit être refusé.",
-        "declined_if": "Le :attribute doit être refusé lorsque :other est :value.",
-        "different": "Le :attribute et :other doivent être différentes.",
-        "digits": "Le :attribute doit être :digits chiffres.",
-        "digits_between": "Le :attribute doit être comprise entre :min et :max chiffres.",
-        "dimensions": "Le :attribute a des dimensions d'image invalides.",
-        "distinct": "Le :attribute a une valeur en double.",
-        "email": "Le :attribute doit être une adresse électronique valide.",
-        "ends_with": "Le :attribute doit se terminer par l'un des éléments suivants : :values.",
-        "enum": "La sélection :attribute est invalid.",
-        "exists": "La sélection :attribute est invalid.",
-        "file": "Le :attribute doit être un fichier.",
-        "filled": "Le :attribute doit avoir une valeur.",
+        "boolean": "Поле :attribute должно быть true или false.",
+        "confirmed": "Подтверждение поля :attribute не совпадает.",
+        "current_password": "Пароль неверен.",
+        "date": "Поле :attribute не является допустимой датой.",
+        "date_equals": "Поле :attribute должно быть датой, равной :date.",
+        "date_format": "Поле :attribute не соответствует формату :format.",
+        "declined": "Поле :attribute должно быть отклонено.",
+        "declined_if": "Поле :attribute должно быть отклонено, когда :other равен :value.",
+        "different": "Поля :attribute и :other должны отличаться.",
+        "digits": "Поле :attribute должно содержать :digits цифр.",
+        "digits_between": "Поле :attribute должно быть от :min до :max цифр.",
+        "dimensions": "Поле :attribute имеет недопустимые размеры изображения.",
+        "distinct": "Поле :attribute имеет повторяющееся значение.",
+        "email": "Поле :attribute должно быть действительным адресом электронной почты.",
+        "ends_with": "Поле :attribute должно заканчиваться одним из следующих: :values.",
+        "enum": "Выбранный :attribute недопустим.",
+        "exists": "Выбранный :attribute недопустим.",
+        "file": "Поле :attribute должно быть файлом.",
+        "filled": "Поле :attribute должно иметь значение.",
         "gt": {
-            "numeric": "Le :attribute doit être supérieure à :value.",
-            "file": "Le :attribute doit être supérieure à :value kilo-octets.",
-            "string": "Le :attribute doit être supérieure à :value caractères.",
-            "array": "Le :attribute doit avoir plus que :value éléments."
+            "numeric": "Поле :attribute должно быть больше :value.",
+            "file": "Поле :attribute должно быть больше :value килобайт.",
+            "string": "Поле :attribute должно быть больше :value символов.",
+            "array": "Поле :attribute должно иметь более :value элементов."
         },
         "gte": {
-            "numeric": "Le :attribute doit être supérieure ou égale à :value.",
-            "file": "Le :attribute doit être supérieure ou égale à :value kilo-octets.",
-            "string": "Le :attribute doit être supérieure ou égale à :value caractères.",
-            "array": "Le :attribute doit avoir :value ou plus."
+            "numeric": "Поле :attribute должно быть больше или равно :value.",
+            "file": "Поле :attribute должно быть больше или равно :value килобайт.",
+            "string": "Поле :attribute должно быть больше или равно :value символов.",
+            "array": "Поле :attribute должно иметь :value элементов или больше."
         },
-        "image": "Le :attribute doit être une image.",
-        "in": "Le :attribute sélectionné n'est pas valide.",
-        "in_array": "Le :attribute n'existe pas dans :other.",
-        "integer": "Le :attribute doit être un nombre entier.",
-        "ip": "Le :attribute doit être une adresse IP valide.",
-        "ipv4": "Le :attribute doit être une adresse IPv4 valide.",
-        "ipv6": "Le :attribute doit être une adresse IPv6 valide.",
-        "json": "Le :attribute doit être une chaîne JSON valide.",
+        "image": "Поле :attribute должно быть изображением.",
+        "in": "Выбранный :attribute недопустим.",
+        "in_array": "Поле :attribute не существует в :other.",
+        "integer": "Поле :attribute должно быть целым числом.",
+        "ip": "Поле :attribute должно быть допустимым IP-адресом.",
+        "ipv4": "Поле :attribute должно быть допустимым IPv4-адресом.",
+        "ipv6": "Поле :attribute должно быть допустимым IPv6-адресом.",
+        "json": "Поле :attribute должно быть допустимой JSON-строкой.",
         "lt": {
-            "numeric": "Le :attribute doit être inférieur à :value.",
-            "file": "Le :attribute doit être inférieur à :value kilo-octets.",
-            "string": "Le :attribute doit être inférieur à :value caractères.",
-            "array": "Le :attribute doit avoir moins de :value éléments."
+            "numeric": "Поле :attribute должно быть меньше :value.",
+            "file": "Поле :attribute должно быть меньше :value килобайт.",
+            "string": "Поле :attribute должно быть меньше :value символов.",
+            "array": "Поле :attribute должно иметь менее :value элементов."
         },
         "lte": {
-            "numeric": "Le :attribute doit être inférieur ou égal à :value.",
-            "file": "Le :attribute doit être inférieur ou égal à :value kilo-octets.",
-            "string": "Le :attribute doit être inférieur ou égal à :value caractères.",
-            "array": "Le :attribute ne doit pas avoir plus de :value items."
+            "numeric": "Поле :attribute должно быть меньше или равно :value.",
+            "file": "Поле :attribute должно быть меньше или равно :value килобайт.",
+            "string": "Поле :attribute должно быть меньше или равно :value символов.",
+            "array": "Поле :attribute не должно иметь более :value элементов."
         },
-        "mac_address": "Le :attribute doit être une adresse MAC valide.",
+        "mac_address": "Поле :attribute должно быть допустимым MAC-адресом.",
         "max": {
-            "numeric": "Le :attribute ne doit pas être supérieure à :max.",
-            "file": "Le :attribute ne doit pas être supérieure à :max kilo-octets.",
-            "string": "Le :attribute ne doit pas être supérieure à :max caractères",
-            "array": "Le :attribute ne doit pas avoir plus de :max éléments."
+            "numeric": "Поле :attribute не должно быть больше :max.",
+            "file": "Поле :attribute не должно быть больше :max килобайт.",
+            "string": "Поле :attribute не должно быть больше :max символов.",
+            "array": "Поле :attribute не должно иметь более :max элементов."
         },
-        "mimes": "Le :attribute doit être un fichier de type: :values.",
-        "mimetypes": "Le :attribute doit être un fichier de type: :values.",
+        "mimes": "Поле :attribute должно быть файлом типа: :values.",
+        "mimetypes": "Поле :attribute должно быть файлом типа: :values.",
         "min": {
-            "numeric": "Le :attribute doit être au moins :min.",
-            "file": "Le :attribute doit être au moins :min kilo-octets.",
-            "string": "Le :attribute doit être au moins :min caractères",
-            "array": "Le :attribute doit avoir au moins :min éléments."
+            "numeric": "Поле :attribute должно быть не менее :min.",
+            "file": "Поле :attribute должно быть не менее :min килобайт.",
+            "string": "Поле :attribute должно быть не менее :min символов.",
+            "array": "Поле :attribute должно иметь не менее :min элементов."
         },
-        "multiple_of": "Le :attribute doit être un multiple de :value.",
-        "not_in": "Le:attribute sélectionné n'est pas valide.",
-        "not_regex": "Le :attribute est invalide.",
-        "numeric": "Le :attribute doit être un nombre.",
-        "password": "Le mot de passe est incorrect.",
-        "present": "Le :attribute doit être présent.",
-        "prohibited": "Le :attribute est interdite.",
-        "prohibited_if": "Le :attribute est interdit lorsque :other est :value.",
-        "prohibited_unless": "Le :attribute Le champ est interdit sauf si :other est en :values.",
-        "prohibits": "Le :attribute Le champ interdit :other d'être présent.",
-        "regex": "Le :attribute est invalide.",
-        "required": "Le :attribute est obligatoire.",
-        "required_array_keys": "Le :attribute doit contenir des entrées pour: :values.",
-        "required_if": "Le :attribute Le champ est obligatoire lorsque :other est :value.",
-        "required_unless": "Le :attribute Le champ est obligatoire sauf si :other est en :values.",
-        "required_with": "Le :attribute Le champ est obligatoire lorsque :values est présent.",
-        "required_with_all": "Le :attribute Le champ est obligatoire lorsque :values sont présents.",
-        "required_without": "Le :attribute Le champ est obligatoire lorsque :values n'est pas présent.",
-        "required_without_all": "Le :attribute est requis lorsqu'aucun des champs :values sont présents.",
-        "same": "Le :attribute et :other doivent correspondre.",
+        "multiple_of": "Поле :attribute должно быть кратным :value.",
+        "not_in": "Выбранный :attribute недопустим.",
+        "not_regex": "Формат поля :attribute недопустим.",
+        "numeric": "Поле :attribute должно быть числом.",
+        "password": "Пароль неверен.",
+        "present": "Поле :attribute должно быть присутствующим.",
+        "prohibited": "Поле :attribute запрещено.",
+        "prohibited_if": "Поле :attribute запрещено, когда :other равен :value.",
+        "prohibited_unless": "Поле :attribute запрещено, если :other не в :values.",
+        "prohibits": "Поле :attribute запрещает :other быть присутствующим.",
+        "regex": "Формат поля :attribute недопустим.",
+        "required": "Поле :attribute обязательно для заполнения.",
+        "required_array_keys": "Поле :attribute должно содержать записи для: :values.",
+        "required_if": "Поле :attribute обязательно, когда :other равен :value.",
+        "required_unless": "Поле :attribute обязательно, если :other не в :values.",
+        "required_with": "Поле :attribute обязательно, когда присутствует :values.",
+        "required_with_all": "Поле :attribute обязательно, когда присутствуют :values.",
+        "required_without": "Поле :attribute обязательно, когда :values отсутствует.",
+        "required_without_all": "Поле :attribute обязательно, когда отсутствуют все значения :values.",
+        "same": "Поля :attribute и :other должны совпадать.",
         "size": {
-            "numeric": "Le :attribute doit être :size.",
-            "file": "Le :attribute doit être :size kilo-octets.",
-            "string": "Le :attribute doit être :size caractères.",
-            "array": "Le :attribute doit contenir :size éléments."
+            "numeric": "Поле :attribute должно быть :size.",
+            "file": "Поле :attribute должно быть :size килобайт.",
+            "string": "Поле :attribute должно быть :size символов.",
+            "array": "Поле :attribute должно содержать :size элементов."
         },
-        "starts_with": "Le :attribute doit commencer par l'un des éléments suivants: :values.",
-        "string": "Le :attribute doit être une chaîne de caractères.",
-        "timezone": "Le :attribute doit être un fuseau horaire valide.",
-        "unique": "Le :attribute a déjà été prise.",
-        "uploaded": "Le :attribute a échoué à télécharger.",
-        "url": "Le :attribute doit être une URL valide.",
-        "uuid": "Le :attribute doit être un UUID valide.",
+        "starts_with": "Поле :attribute должно начинаться с одного из следующих: :values.",
+        "string": "Поле :attribute должно быть строкой.",
+        "timezone": "Поле :attribute должно быть допустимым часовым поясом.",
+        "unique": "Поле :attribute уже занято.",
+        "uploaded": "Не удалось загрузить поле :attribute.",
+        "url": "Поле :attribute должно быть действительным URL.",
+        "uuid": "Поле :attribute должно быть действительным UUID.",
         "custom": {
             "attribute-name": {
-                "rule-name": "custom-message"
+                "rule-name": "пользовательское-сообщение"
             }
         },
         "attributes": {}
     },
-    "passwords":{
-        "reset" : "Votre mot de passe a été réinitialisé!",
-        "sent" : "Nous avons envoyé par e-mail le lien de réinitialisation de votre mot de passe!",
-        "throttled" : "Veuillez patienter avant de réessayer.",
-        "token" : "Ce jeton de réinitialisation de mot de passe est invalide.",
-        "user" : "Nous ne trouvons pas d'utilisateur avec cette adresse e-mail."
+    "passwords": {
+        "reset": "Ваш пароль был сброшен!",
+        "sent": "Мы отправили по электронной почте ссылку для сброса пароля!",
+        "throttled": "Пожалуйста, подождите перед повторной попыткой.",
+        "token": "Этот токен сброса пароля недействителен.",
+        "user": "Мы не можем найти пользователя с этим адресом электронной почты."
     },
-    "pagination":{
-        "previous":"&laquo; Précédent",
-        "next":"Suivant &raquo;"
+    "pagination": {
+        "previous": "&laquo; Предыдущая",
+        "next": "Следующая &raquo;"
     },
-    "user":{
-        "userNotExist" : "Cet utilisateur n'existe pas",
-        "successfulOperation" : "Opération réussie",
-        "groupNotExist" : "Ce groupe n'existe pas",
-        "avatarUploadedSuccessfully" : "Avatar téléchargé avec succès",
-        "userUpdatedSuccessfully" : "Utilisateur mis à jour avec succès",
-        "groupAssignedSuccessfully" : "Groupe assigné avec succès",
-        "groupNotAssignedToUser" : "Ce groupe n'est pas attribué à cet utilisateur",
-        "groupUnassignedSuccessfully" : "Groupe non assigné avec succès",
-        "userActivatedSuccessfully" : "Utilisateur activé avec succès",
-        "userDeactivatedSuccessfully" : "Utilisateur désactivé avec succès",
-        "userDeletedSuccessfully" : "Utilisateur supprimé avec succès"
+    "user": {
+        "userNotExist": "Этот пользователь не существует",
+        "successfulOperation": "Успешная операция",
+        "groupNotExist": "Эта группа не существует",
+        "avatarUploadedSuccessfully": "Аватар успешно загружен",
+        "userUpdatedSuccessfully": "Пользователь успешно обновлен",
+        "groupAssignedSuccessfully": "Группа успешно назначена",
+        "groupNotAssignedToUser": "Эта группа не назначена этому пользователю",
+        "groupUnassignedSuccessfully": "Группа успешно отменена",
+        "userActivatedSuccessfully": "Пользователь успешно активирован",
+        "userDeactivatedSuccessfully": "Пользователь успешно деактивирован",
+        "userDeletedSuccessfully": "Пользователь успешно удален"
     },
-    "hotel":{
-        "hotelNotExist" : "Cet hôtel n'existe pas",
-        "successfulOperation" : "Opération réussie",
-        "successfullyCreatedHotel" : "Hôtel créé avec succès",
-        "imageUploadedSuccessfully" : "Image téléchargée avec succès",
-        "hotelUpdatedSuccessfully" : "Hôtel mis à jour avec succès",
-        "hotelDeletedSuccessfully" : "Hotel deleted successfully"
+    "hotel": {
+        "hotelNotExist": "Этот отель не существует",
+        "successfulOperation": "Успешная операция",
+        "successfullyCreatedHotel": "Отель успешно создан",
+        "imageUploadedSuccessfully": "Изображение успешно загружено",
+        "hotelUpdatedSuccessfully": "Отель успешно обновлен",
+        "hotelDeletedSuccessfully": "Отель успешно удален"
     },
-    "room":{
-        "roomNotExist" : "Cette chambre n'existe pas",
-        "successfulOperation" : "Opération réussie",
-        "successfullyCreatedRoom" : "Chambre créée avec succès",
-        "imageUploadedSuccessfully" : "Image téléchargée avec succès",
-        "roomUpdatedSuccessfully" : "Chambre mis à jour avec succès",
-        "roomDeletedSuccessfully" : "Chambre deleted successfully"
+    "room": {
+        "roomNotExist": "Эта комната не существует",
+        "successfulOperation": "Успешная операция",
+        "successfullyCreatedRoom": "Комната успешно создана",
+        "imageUploadedSuccessfully": "Изображение успешно загружено",
+        "roomUpdatedSuccessfully": "Комната успешно обновлена",
+        "roomDeletedSuccessfully": "Комната успешно удалена"
     },
-    "tariff":{
-        "tariffNotExist" : "Ce tarif n'existe pas",
-        "successfulOperation" : "Opération réussie",
-        "successfullyCreatedTariff" : "Tarif créé avec succès",
-        "imageUploadedSuccessfully" : "Image téléchargée avec succès",
-        "tariffUpdatedSuccessfully" : "Tariff mis à jour avec succès",
-        "tariffDeletedSuccessfully" : "Tariff deleted successfully"
+    "tariff": {
+        "tariffNotExist": "Этот тариф не существует",
+        "successfulOperation": "Успешная операция",
+        "successfullyCreatedTariff": "Тариф успешно создан",
+        "imageUploadedSuccessfully": "Изображение успешно загружено",
+        "tariffUpdatedSuccessfully": "Тариф успешно обновлен",
+        "tariffDeletedSuccessfully": "Тариф успешно удален"
+    },
+    "readme": {
+        "notFound": "Файл README не существует."
     }
-    
-   
 }
+
