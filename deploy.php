@@ -79,9 +79,9 @@ task('deploy:prepare', [
     'deploy:info',
     'deploy:setup',
     'deploy:lock',
-    // 'deploy:release',
+    'deploy:release',
     'deploy:update_code',
-    // 'deploy:shared',
+    'deploy:shared',
     'deploy:writable',
 ])->desc('Prepares a new release');
 
