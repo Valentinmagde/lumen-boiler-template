@@ -89,7 +89,10 @@ task('deploy:publish', [
     'deploy:secrets',
     'deploy:vendors',
     'artisan:migrate',
-    'deploy:publish',
+    'deploy:symlink',
+    'deploy:unlock',
+    'deploy:cleanup',
+    'deploy:success',
      
 ])->desc('Publishes the release');
 
