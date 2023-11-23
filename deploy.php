@@ -48,27 +48,27 @@ host('137.184.133.101')
 
 after('deploy:failed', 'deploy:unlock');
 
-desc('Deploy the application');
+// desc('Deploy the application');
 
-task('deploy', [
-    'deploy:info',
-    'deploy:prepare',
-    'deploy:lock',
-    'deploy:release',
-    'rsync',
-    'deploy:secrets',
-    'deploy:shared',
-    'deploy:vendors',
-    'deploy:writable',
-    'artisan:storage:link',
-    'artisan:view:cache',
-    'artisan:config:cache',
-    'artisan:migrate',
-    'artisan:queue:restart',
-    'deploy:symlink',
-    'deploy:unlock',
-    'deploy:cleanup',
-]);
+// task('deploy', [
+//     'deploy:info',
+//     'deploy:prepare',
+//     'deploy:lock',
+//     'deploy:release',
+//     'rsync',
+//     'deploy:secrets',
+//     'deploy:shared',
+//     'deploy:vendors',
+//     'deploy:writable',
+//     'artisan:storage:link',
+//     'artisan:view:cache',
+//     'artisan:config:cache',
+//     'artisan:migrate',
+//     'artisan:queue:restart',
+//     'deploy:symlink',
+//     'deploy:unlock',
+//     'deploy:cleanup',
+// ]);
 
 desc('Prepares a new release');
 task('deploy:prepare', [
@@ -95,8 +95,36 @@ task('deploy:publish', [
     'deploy:success',
 ]);
 
-desc('Deploys your project');
+desc('Deploy the application');
 task('deploy', [
     'deploy:prepare',
     'deploy:publish',
 ]);
+
+/**
+ * Prints success message
+ */
+task('deploy:success', function () {
+    info('successfully deployed!');
+})->hidden();
+
+/**
+ * Hook on deploy failure.
+ */
+task('deploy:failed', function () {
+})->hidden();
+
+fail('deploy', 'deploy:failed');
+
+/**
+ * Follows latest application logs.
+ */
+desc('Shows application logs');
+task('logs:app', function () {
+    if (!has('log_files')) {
+        warning("Please, specify \"log_files\" option.");
+        return;
+    }
+    cd('{{current_path}}');
+    run('tail -f {{log_files}}');
+})->verbose();

@@ -17,7 +17,7 @@ class Controller extends BaseController
      * @since 2023-11-21
      * @since 2023-11-22 Add code to try catch block
      *
-     * @return README.md file or version of the application
+     * @return README.md file
      */
     public function home()
     {
