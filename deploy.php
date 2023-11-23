@@ -29,10 +29,10 @@ add('rsync', [
     ],
 ]);
 
-// task('deploy:secrets', function () {
-//     file_put_contents(__DIR__ . '/.env', getenv('DOT_ENV'));
-//     upload('.env', get('deploy_path') . '/shared');
-// });
+task('deploy:secrets', function () {
+    file_put_contents(__DIR__ . '/.env', getenv('DOT_ENV'));
+    upload('.env', get('deploy_path') . '/shared');
+});
 
 host('production')
     ->set('hostname', '137.184.133.101')
@@ -51,22 +51,35 @@ after('deploy:failed', 'deploy:unlock');
 
 desc('Deploy the application');
 
+// task('deploy', [
+//     'deploy:info',
+//     'deploy:prepare',
+//     'deploy:lock',
+//     'deploy:release',
+//     'rsync',
+//     'deploy:secrets',
+//     'deploy:shared',
+//     'deploy:vendors',
+//     'deploy:writable',
+//     'artisan:storage:link',
+//     'artisan:view:cache',
+//     'artisan:config:cache',
+//     'artisan:migrate',
+//     'artisan:queue:restart',
+//     'deploy:symlink',
+//     'deploy:unlock',
+//     'deploy:cleanup',
+// ]);
+
+desc('Deploys your project');
 task('deploy', [
-    'deploy:info',
     'deploy:prepare',
-    'deploy:lock',
-    'deploy:release',
-    'rsync',
-    'deploy:secrets',
-    'deploy:shared',
     'deploy:vendors',
-    'deploy:writable',
     'artisan:storage:link',
-    'artisan:view:cache',
     'artisan:config:cache',
+    'artisan:route:cache',
+    'artisan:view:cache',
+    'artisan:event:cache',
     'artisan:migrate',
-    'artisan:queue:restart',
-    'deploy:symlink',
-    'deploy:unlock',
-    'deploy:cleanup',
+    'deploy:publish',
 ]);
