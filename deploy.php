@@ -31,7 +31,7 @@ add('rsync', [
     ],
 ]);
 
-env('lock_path', '{{deploy_path}}/.dep/deploy.lock');
+env('lock_path', '{{deploy_path}}/deploy.lock');
 
 task('deploy:lock', function () {
     $res = run('[ -f {{lock_path}} ] && echo Locked || echo OK');
