@@ -78,7 +78,7 @@ $router->group(
         */
         $router->group([], function () use ($router) {
             $router->group(['prefix' => 'hotels'], function () use ($router) {
-                $router->post('/', 'HotelController@index');
+                $router->get('/', 'HotelController@index');
             });
         });
 
