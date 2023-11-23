@@ -5,23 +5,6 @@ namespace Deployer;
 require 'recipe/laravel.php';
 require 'contrib/rsync.php';
 
-require __DIR__ . '/provision.php';
-require __DIR__ . '/deploy/check_remote.php';
-require __DIR__ . '/deploy/cleanup.php';
-require __DIR__ . '/deploy/clear_paths.php';
-require __DIR__ . '/deploy/copy_dirs.php';
-require __DIR__ . '/deploy/info.php';
-require __DIR__ . '/deploy/lock.php';
-require __DIR__ . '/deploy/push.php';
-require __DIR__ . '/deploy/release.php';
-require __DIR__ . '/deploy/rollback.php';
-require __DIR__ . '/deploy/setup.php';
-require __DIR__ . '/deploy/shared.php';
-require __DIR__ . '/deploy/symlink.php';
-require __DIR__ . '/deploy/update_code.php';
-require __DIR__ . '/deploy/vendors.php';
-require __DIR__ . '/deploy/writable.php';
-
 use Deployer\Exception\ConfigurationException;
 use Deployer\Exception\RunException;
 
