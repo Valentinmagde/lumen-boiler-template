@@ -2,6 +2,8 @@
 
 namespace Deployer;
 
+use RuntimeException;
+
 require 'recipe/laravel.php';
 require 'contrib/rsync.php';
 
@@ -29,6 +31,28 @@ add('rsync', [
     ],
 ]);
 
+env('lock_path', '{{deploy_path}}/.dep/deploy.lock');
+
+task('deploy:lock', function () {
+    $res = run('[ -f {{lock_path}} ] && echo Locked || echo OK');
+
+    if (trim($res) === "Locked") {
+        throw new RuntimeException("Deployement is locked.");
+    }
+
+    run('touch {{lock_path}}');
+});
+
+task('deploy:unlock', function () {
+    $res = run('[ -f {{lock_path}} ] && echo Locked || echo OK');
+
+    if (trim($res) === "Locked") {
+        run('rm {{lock_path}}');
+    }
+});
+
+after('deploy:prepare', 'deploy:lock');
+after('deploy:symlink', 'deploy:unlock');
 task('deploy:secrets', function () {
     file_put_contents(__DIR__ . '/.env', getenv('DOT_ENV'));
     upload('.env', get('deploy_path') . '/shared');
@@ -51,35 +75,22 @@ after('deploy:failed', 'deploy:unlock');
 
 desc('Deploy the application');
 
-// task('deploy', [
-//     'deploy:info',
-//     'deploy:prepare',
-//     'deploy:lock',
-//     'deploy:release',
-//     'rsync',
-//     'deploy:secrets',
-//     'deploy:shared',
-//     'deploy:vendors',
-//     'deploy:writable',
-//     'artisan:storage:link',
-//     'artisan:view:cache',
-//     'artisan:config:cache',
-//     'artisan:migrate',
-//     'artisan:queue:restart',
-//     'deploy:symlink',
-//     'deploy:unlock',
-//     'deploy:cleanup',
-// ]);
-
-desc('Deploys your project');
 task('deploy', [
+    'deploy:info',
     'deploy:prepare',
+    'deploy:lock',
+    'deploy:release',
+    'rsync',
+    'deploy:secrets',
+    'deploy:shared',
     'deploy:vendors',
+    'deploy:writable',
     'artisan:storage:link',
-    'artisan:config:cache',
-    'artisan:route:cache',
     'artisan:view:cache',
-    'artisan:event:cache',
+    'artisan:config:cache',
     'artisan:migrate',
-    'deploy:publish',
+    'artisan:queue:restart',
+    'deploy:symlink',
+    'deploy:unlock',
+    'deploy:cleanup',
 ]);
