@@ -29,10 +29,10 @@ add('rsync', [
     ],
 ]);
 
-task('deploy:secrets', function () {
-    file_put_contents(__DIR__ . '/.env', getenv('DOT_ENV'));
-    upload('.env', get('deploy_path') . '/shared');
-});
+// task('deploy:secrets', function () {
+//     file_put_contents(__DIR__ . '/.env', getenv('DOT_ENV'));
+//     upload('.env', get('deploy_path') . '/shared');
+// });
 
 host('production')
     ->set('hostname', '137.184.133.101')
