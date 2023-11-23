@@ -47,23 +47,48 @@ host('staging')
     ->set('labels', ['stage' => 'staging'])
     ->set('deploy_path', '/var/www/lumen-boiler-template');
 
-desc('Deploy the application');
-task('deploy', [
+// desc('Deploy the application');
+// task('deploy', [
+//     'deploy:info',
+//     'deploy:prepare',
+//     'deploy:release',
+//     'rsync',
+//     'deploy:secrets',
+//     'deploy:shared',
+//     'deploy:vendors',
+//     'deploy:writable',
+//     'artisan:storage:link',
+//     'artisan:view:cache',
+//     'artisan:config:cache',
+//     'artisan:migrate',
+//     'artisan:queue:restart',
+//     'deploy:symlink',
+//     'deploy:cleanup',
+// ]);
+
+desc('Prepares a new release');
+task('deploy:prepare', [
     'deploy:info',
-    'deploy:prepare',
+    'deploy:setup',
+    'deploy:lock',
     'deploy:release',
-    'rsync',
-    'deploy:secrets',
+    'deploy:update_code',
     'deploy:shared',
-    'deploy:vendors',
     'deploy:writable',
-    'artisan:storage:link',
-    'artisan:view:cache',
-    'artisan:config:cache',
-    'artisan:migrate',
-    'artisan:queue:restart',
+]);
+
+desc('Publishes the release');
+task('deploy:publish', [
     'deploy:symlink',
+    'deploy:unlock',
     'deploy:cleanup',
+    'deploy:success',
+]);
+
+desc('Deploys your project');
+task('deploy', [
+    'deploy:prepare',
+    'deploy:publish',
 ]);
 
 after('deploy:failed', 'deploy:unlock');
