@@ -45,8 +45,8 @@ jobs:
               IdentityFile ~/.ssh/lumen-boiler-template 
               StrictHostKeyChecking no
           END
-      # - name: Set Up Deployer
-      #   run: curl -LO https://deployer.org/deployer.phar && mv deployer.phar bin/dep && sudo chmod +x bin/dep
+      - name: Set Up Deployer
+        run: curl -LO https://deployer.org/deployer.phar && mv deployer.phar vendor/bin/dep && sudo chmod +x vendor/bin/dep
       - name: Deploy to STAGING server
         uses: deployphp/action@master
         with:
