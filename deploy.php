@@ -19,17 +19,30 @@ set('rsync_src', function () {
 // add('shared_dirs', []);
 // add('writable_dirs', []);
 
-add('rsync', [
-    'exclude' => [
-        '.git',
-        '/.env',
-        '/storage/',
-        '/vendor/',
-        '/node_modules/',
-        '.github',
-        'deploy.php',
-    ],
-]);
+// add('rsync', [
+//     'exclude' => [
+//         '.git',
+//         '/.env',
+//         '/storage/',
+//         '/vendor/',
+//         '/node_modules/',
+//         '.github',
+//         'deploy.php',
+//     ],
+// ]);
+
+host('production')
+    ->set('hostname', '137.184.133.101')
+    ->set('remote_user', 'root')
+    ->set('labels', ['stage' => 'production'])
+    ->set('deploy_path', '/var/www/lumen-boiler-template');
+
+host('staging')
+    ->set('hostname', '137.184.133.101')
+    ->set('remote_user', 'root')
+    ->set('port', '22')
+    ->set('labels', ['stage' => 'staging'])
+    ->set('deploy_path', '/var/www/api-beachcomber-v3');
 
 set('lock_path', '{{deploy_path}}/deploy.lock');
 
@@ -52,28 +65,10 @@ task('deploy:unlock', function () {
     }
 });
 
-after('deploy:prepare', 'deploy:lock');
-after('deploy:symlink', 'deploy:unlock');
-
 task('deploy:secrets', function () {
     file_put_contents(__DIR__ . '/.env', getenv('DOT_ENV'));
     upload('.env', get('deploy_path') . '/shared');
 });
-
-host('production')
-    ->set('hostname', '137.184.133.101')
-    ->set('remote_user', 'root')
-    ->set('labels', ['stage' => 'production'])
-    ->set('deploy_path', '/var/www/lumen-boiler-template');
-
-host('staging')
-    ->set('hostname', '137.184.133.101')
-    ->set('remote_user', 'root')
-    ->set('port', '22')
-    ->set('labels', ['stage' => 'staging'])
-    ->set('deploy_path', '/var/www/api-beachcomber-v2');
-
-after('deploy:failed', 'deploy:unlock');
 
 task('deploy:prepare', [
     'deploy:info',
@@ -100,3 +95,7 @@ task('deploy', [
     'deploy:prepare',
     'deploy:publish'
 ])->desc('Deploy the application');
+
+after('deploy:prepare', 'deploy:lock');
+after('deploy:symlink', 'deploy:unlock');
+after('deploy:failed', 'deploy:unlock');
