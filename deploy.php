@@ -37,7 +37,8 @@ task('deploy:lock', function () {
     $res = run('[ -f {{lock_path}} ] && echo Locked || echo OK');
 
     if (trim($res) === "Locked") {
-        throw new RuntimeException("Deployement is locked.");
+        run('rm -f {{lock_path}}');
+        // throw new RuntimeException("Deployement is locked.");
     }
 
     run('touch {{lock_path}}');
@@ -78,6 +79,7 @@ desc('Deploy the application');
 task('deploy', [
     'deploy:info',
     'deploy:prepare',
+    'deploy:lock',
     'deploy:release',
     'rsync',
     'deploy:secrets',
