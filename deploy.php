@@ -71,7 +71,7 @@ host('staging')
     ->set('remote_user', 'root')
     ->set('port', '22')
     ->set('labels', ['stage' => 'staging'])
-    ->set('deploy_path', '/var/www/lumen-boiler-template');
+    ->set('deploy_path', '/var/www/api-beachcomber-v2');
 
 after('deploy:failed', 'deploy:unlock');
 
