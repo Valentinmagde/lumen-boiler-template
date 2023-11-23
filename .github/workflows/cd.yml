@@ -6,7 +6,7 @@ on:
 
 # It is important to specify "concurrency" for the workflow,
 # to prevent concurrency between different deploys.
-# concurrency: production_environment
+concurrency: production_environment
 
 jobs:
   deploy-staging:
@@ -32,7 +32,6 @@ jobs:
           KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOST }}
           SSH_HOST: ${{ secrets.HOST }}
           SSH_USER: ${{ secrets.USERNAME }}
-          DOT_ENV: ${{ secrets.DOT_ENV_STAGING }}
         run: |
           mkdir -p ~/.ssh/
           echo "$KNOWN_HOSTS" > ~/.ssh/known_hosts
@@ -55,7 +54,7 @@ jobs:
           dep: deploy stage=staging --tag=${{ env.GITHUB_REF }} -vvv
 
   deploy-production:
-    name: Deploy to Production
+    name: Deploy on Production
     environment:
       name: production
     runs-on: ubuntu-latest
@@ -75,7 +74,6 @@ jobs:
           KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOST }}
           SSH_HOST: ${{ secrets.HOST }}
           SSH_USER: ${{ secrets.USERNAME }}
-          DOT_ENV: ${{ secrets.DOT_ENV_PRODUCTION }}
         run: |
           mkdir -p ~/.ssh/
           echo "$KNOWN_HOSTS" > ~/.ssh/known_hosts
@@ -90,6 +88,8 @@ jobs:
           END
       - name: Deploy to Prod
         uses: deployphp/action@master
+        env:
+          DOT_ENV: ${{ secrets.DOT_ENV_PRODUCTION }}
         with:
           private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           known-hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
