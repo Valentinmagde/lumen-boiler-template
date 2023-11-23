@@ -4,6 +4,10 @@ on:
   push:
     branches: [ "main" ]
 
+# It is important to specify "concurrency" for the workflow,
+# to prevent concurrency between different deploys.
+concurrency: production_environment
+
 jobs:
   deploy-staging:
     name: Deploy Project to STAGING Server
@@ -22,7 +26,7 @@ jobs:
           php-version: 8.2
       - name: Composer install
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
-      - name: Deploy to Staging
+      - name: Setup Deployer
         uses: deployphp/action@v1
         with:
           # dep: deploy stage=staging --tag=${{ env.GITHUB_REF }} -vvv
