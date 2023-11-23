@@ -51,10 +51,10 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           ssh-known-hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
           ssh-disable-host-key-checking: true
-      - name: Deploy to Prod
+      - name: Deploy to Staging server
         env:
           DOT_ENV: ${{ secrets.DOT_ENV_PRODUCTION }}
-        run: vendor/bin/dep deploy stage=production --tag=${{ env.GITHUB_REF }} -vvv
+        run: vendor/bin/dep deploy stage=staging --tag=${{ env.GITHUB_REF }} -vvv
       # - name: Set Up Deployer
       #   run: curl -LO https://deployer.org/deployer.phar && mv deployer.phar vendor/bin/dep && sudo chmod +x vendor/bin/dep
       # - name: Deploy to STAGING server

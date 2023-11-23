@@ -31,13 +31,14 @@ add('rsync', [
     ],
 ]);
 
-env('lock_path', '{{deploy_path}}/.dep/deploy.lock');
+set('lock_path', '{{deploy_path}}/deploy.lock');
 
 task('deploy:lock', function () {
     $res = run('[ -f {{lock_path}} ] && echo Locked || echo OK');
 
     if (trim($res) === "Locked") {
-        throw new RuntimeException("Deployement is locked.");
+        run('rm -f {{lock_path}}');
+        // throw new RuntimeException("Deployement is locked.");
     }
 
     run('touch {{lock_path}}');
@@ -73,24 +74,42 @@ host('staging')
 
 after('deploy:failed', 'deploy:unlock');
 
-desc('Deploy the application');
-
-task('deploy', [
+desc('Prepares a new release');
+task('deploy:prepare', [
     'deploy:info',
-    'deploy:prepare',
+    'deploy:setup',
     'deploy:lock',
     'deploy:release',
-    'rsync',
-    'deploy:secrets',
+    'deploy:update_code',
     'deploy:shared',
-    'deploy:vendors',
     'deploy:writable',
-    'artisan:storage:link',
-    'artisan:view:cache',
-    'artisan:config:cache',
-    'artisan:migrate',
-    'artisan:queue:restart',
+]);
+
+desc('Publishes the release');
+task('deploy:publish', [
     'deploy:symlink',
     'deploy:unlock',
     'deploy:cleanup',
+    'deploy:success',
 ]);
+// desc('Deploy the application');
+
+// task('deploy', [
+//     'deploy:info',
+//     'deploy:prepare',
+//     'deploy:lock',
+//     'deploy:release',
+//     'rsync',
+//     'deploy:secrets',
+//     'deploy:shared',
+//     'deploy:vendors',
+//     'deploy:writable',
+//     'artisan:storage:link',
+//     'artisan:view:cache',
+//     'artisan:config:cache',
+//     'artisan:migrate',
+//     'artisan:queue:restart',
+//     'deploy:symlink',
+//     'deploy:unlock',
+//     'deploy:cleanup',
+// ]);
