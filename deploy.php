@@ -40,7 +40,8 @@ host('production')
     ->set('labels', ['stage' => 'production'])
     ->set('deploy_path', '/var/www/lumen-boiler-template');
 
-host('137.184.133.101')
+host('staging')
+    ->set('hostname', '137.184.133.101')
     ->set('remote_user', 'root')
     ->set('port', '22')
     ->set('labels', ['stage' => 'staging'])
@@ -48,32 +49,11 @@ host('137.184.133.101')
 
 after('deploy:failed', 'deploy:unlock');
 
-// desc('Deploy the application');
+desc('Deploy the application');
 
-// task('deploy', [
-//     'deploy:info',
-//     'deploy:prepare',
-//     'deploy:lock',
-//     'deploy:release',
-//     'rsync',
-//     'deploy:secrets',
-//     'deploy:shared',
-//     'deploy:vendors',
-//     'deploy:writable',
-//     'artisan:storage:link',
-//     'artisan:view:cache',
-//     'artisan:config:cache',
-//     'artisan:migrate',
-//     'artisan:queue:restart',
-//     'deploy:symlink',
-//     'deploy:unlock',
-//     'deploy:cleanup',
-// ]);
-
-desc('Prepares a new release');
-task('deploy:prepare', [
+task('deploy', [
     'deploy:info',
-    'deploy:lock',
+    'deploy:prepare',
     'deploy:release',
     'rsync',
     'deploy:secrets',
@@ -85,46 +65,7 @@ task('deploy:prepare', [
     'artisan:config:cache',
     'artisan:migrate',
     'artisan:queue:restart',
-]);
-
-desc('Publishes the release');
-task('deploy:publish', [
     'deploy:symlink',
     'deploy:unlock',
     'deploy:cleanup',
-    'deploy:success',
 ]);
-
-desc('Deploy the application');
-task('deploy', [
-    'deploy:prepare',
-    'deploy:publish',
-]);
-
-/**
- * Prints success message
- */
-task('deploy:success', function () {
-    info('successfully deployed!');
-})->hidden();
-
-/**
- * Hook on deploy failure.
- */
-task('deploy:failed', function () {
-})->hidden();
-
-fail('deploy', 'deploy:failed');
-
-/**
- * Follows latest application logs.
- */
-desc('Shows application logs');
-task('logs:app', function () {
-    if (!has('log_files')) {
-        warning("Please, specify \"log_files\" option.");
-        return;
-    }
-    cd('{{current_path}}');
-    run('tail -f {{log_files}}');
-})->verbose();
