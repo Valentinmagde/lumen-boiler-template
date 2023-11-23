@@ -74,43 +74,24 @@ host('staging')
 
 after('deploy:failed', 'deploy:unlock');
 
-desc('Prepares a new release');
 task('deploy:prepare', [
     'deploy:info',
     'deploy:setup',
     'deploy:lock',
-    'deploy:release',
+    // 'deploy:release',
     'deploy:update_code',
-    'deploy:shared',
-    'deploy:writable',
-    'deploy:secrets'
-]);
+    // 'deploy:shared',
+    'deploy:writable'
+])->desc('Prepares a new release');
 
-desc('Publishes the release');
 task('deploy:publish', [
-    // 'deploy:symlink',
-    'deploy:unlock',
-    'deploy:cleanup',
-    'deploy:success',
-]);
-// desc('Deploy the application');
+    'deploy:secrets',
+    'deploy:vendors',
+    'artisan:migrate',
+    'deploy:publish'
+])->desc('Publishes the release');
 
-// task('deploy', [
-//     'deploy:info',
-//     'deploy:prepare',
-//     'deploy:lock',
-//     'deploy:release',
-//     'rsync',
-//     'deploy:secrets',
-//     'deploy:shared',
-//     'deploy:vendors',
-//     'deploy:writable',
-//     'artisan:storage:link',
-//     'artisan:view:cache',
-//     'artisan:config:cache',
-//     'artisan:migrate',
-//     'artisan:queue:restart',
-//     'deploy:symlink',
-//     'deploy:unlock',
-//     'deploy:cleanup',
-// ]);
+task('deploy', [
+    'deploy:prepare',
+    'deploy:publish',
+])->desc('Deploy the application');;
