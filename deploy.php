@@ -71,32 +71,42 @@ host('staging')
     ->set('remote_user', 'root')
     ->set('port', '22')
     ->set('labels', ['stage' => 'staging'])
-    ->set('deploy_path', '/var/www/api-beachcomber-v2');
+    ->set('deploy_path', '/var/www/api-beachcomber-v3');
 
 after('deploy:failed', 'deploy:unlock');
 
-task('deploy:prepare', [
-    'deploy:info',
-    'deploy:setup',
-    'deploy:lock',
-    'deploy:release',
-    'deploy:update_code',
-    'deploy:shared',
-    'deploy:writable',
-])->desc('Prepares a new release');
+// task('deploy:prepare', [
+//     'deploy:info',
+//     'deploy:setup',
+//     'deploy:lock',
+//     'deploy:release',
+//     'deploy:update_code',
+//     'deploy:shared',
+//     'deploy:writable',
+// ])->desc('Prepares a new release');
 
-task('deploy:publish', [
-    'deploy:secrets',
-    'deploy:vendors',
-    'artisan:migrate',
-    'deploy:symlink',
-    'deploy:unlock',
-    'deploy:cleanup',
-    'deploy:success',
+// task('deploy:publish', [
+//     'deploy:secrets',
+//     'deploy:vendors',
+//     'artisan:migrate',
+//     'deploy:symlink',
+//     'deploy:unlock',
+//     'deploy:cleanup',
+//     'deploy:success',
      
-])->desc('Publishes the release');
+// ])->desc('Publishes the release');
 
+// task('deploy', [
+//     'deploy:prepare',
+//     'deploy:publish'
+// ])->desc('Deploy the application');
+/**
+ * Main deploy task.
+ */
+desc('Deploys your project');
 task('deploy', [
     'deploy:prepare',
-    'deploy:publish'
-])->desc('Deploy the application');
+    'deploy:vendors',
+    'artisan:migrate',
+    'deploy:publish',
+]);
