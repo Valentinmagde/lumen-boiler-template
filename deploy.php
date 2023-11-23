@@ -54,6 +54,7 @@ task('deploy:unlock', function () {
 
 after('deploy:prepare', 'deploy:lock');
 after('deploy:symlink', 'deploy:unlock');
+
 task('deploy:secrets', function () {
     file_put_contents(__DIR__ . '/.env', getenv('DOT_ENV'));
     upload('.env', get('deploy_path') . '/shared');
@@ -70,11 +71,10 @@ host('staging')
     ->set('remote_user', 'root')
     ->set('port', '22')
     ->set('labels', ['stage' => 'staging'])
-    ->set('deploy_path', '/var/www/lumen-boiler-template');
+    ->set('deploy_path', '/var/www/api-beachcomber-v2');
 
 after('deploy:failed', 'deploy:unlock');
 
-desc('Prepares a new release');
 task('deploy:prepare', [
     'deploy:info',
     'deploy:setup',
@@ -83,33 +83,20 @@ task('deploy:prepare', [
     'deploy:update_code',
     'deploy:shared',
     'deploy:writable',
-]);
+])->desc('Prepares a new release');
 
-desc('Publishes the release');
 task('deploy:publish', [
+    'deploy:secrets',
+    'deploy:vendors',
+    'artisan:migrate',
     'deploy:symlink',
     'deploy:unlock',
     'deploy:cleanup',
     'deploy:success',
-]);
-// desc('Deploy the application');
+     
+])->desc('Publishes the release');
 
-// task('deploy', [
-//     'deploy:info',
-//     'deploy:prepare',
-//     'deploy:lock',
-//     'deploy:release',
-//     'rsync',
-//     'deploy:secrets',
-//     'deploy:shared',
-//     'deploy:vendors',
-//     'deploy:writable',
-//     'artisan:storage:link',
-//     'artisan:view:cache',
-//     'artisan:config:cache',
-//     'artisan:migrate',
-//     'artisan:queue:restart',
-//     'deploy:symlink',
-//     'deploy:unlock',
-//     'deploy:cleanup',
-// ]);
+task('deploy', [
+    'deploy:prepare',
+    'deploy:publish'
+])->desc('Deploy the application');
