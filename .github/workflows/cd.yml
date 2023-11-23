@@ -27,6 +27,7 @@ jobs:
         with:
           dep: deploy stage=staging --tag=${{ env.GITHUB_REF }} -vvv
           private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          DOT_ENV: ${{ secrets.DOT_ENV_STAGING }}
           # known-hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
           # To disable host key checking (insecure!):
           # ssh-disable-host-key-checking: true
