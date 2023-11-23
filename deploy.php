@@ -83,11 +83,12 @@ task('deploy:prepare', [
     'deploy:update_code',
     'deploy:shared',
     'deploy:writable',
+    'deploy:secrets'
 ]);
 
 desc('Publishes the release');
 task('deploy:publish', [
-    'deploy:symlink',
+    // 'deploy:symlink',
     'deploy:unlock',
     'deploy:cleanup',
     'deploy:success',
