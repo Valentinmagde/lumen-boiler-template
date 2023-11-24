@@ -341,28 +341,28 @@
  *              type="integer"
  *          )
  *      ),
- *      @OA\RequestBody(
+ *     @OA\RequestBody(
  *         @OA\MediaType(
- *            mediaType="multipart/form-data",
+ *            mediaType="application/x-www-form-urlencoded",
  *            @OA\Schema(
- *                @OA\Property(property="id", type="integer", example="number"),
- *                @OA\Property(property="name", type="string", example="string"),
- *                @OA\Property(property="email", type="string", example="string"),
- *                @OA\Property(property="phone", type="string", example="string"),
- *                @OA\Property(property="password", type="string", example="string"),
- *                @OA\Property(property="active", type="integer", example="number")
- *         ),
- *      ),
+ *               type="object",
+ *               @OA\Property(property="name", type="text"),
+ *               @OA\Property(property="email", type="email"),
+ *               @OA\Property(property="phone", type="text"),
+ *               @OA\Property(property="password", type="password"),
+ *               @OA\Property(property="active", type="number"),
+ *            ),
+ *       ),
  *      @OA\MediaType(
  *         mediaType="application/json",
  *            @OA\Schema(
- *                @OA\Property(property="id", type="integer", example="number"),
- *                @OA\Property(property="name", type="string", example="string"),
- *                @OA\Property(property="email", type="string", example="string"),
- *                @OA\Property(property="phone", type="string", example="string"),
- *                @OA\Property(property="password", type="string", example="string"),
- *                @OA\Property(property="active", type="integer", example="number")
- *            ),
+ *                @OA\Property(property="id", type="integer"),
+ *                @OA\Property(property="name", type="string"),
+ *                @OA\Property(property="email", type="string"),
+ *                @OA\Property(property="phone", type="string"),
+ *                @OA\Property(property="password", type="string"),
+ *                @OA\Property(property="active", type="integer")
+ *           ),
  *         ),
  *      ),
  *      @OA\Response(
@@ -443,7 +443,7 @@
  *            mediaType="application/x-www-form-urlencoded",
  *            @OA\Schema(
  *               type="object",
- *               required={"email", "password", "name"},
+ *               required={"email", "password"},
  *               @OA\Property(property="name", type="text"),
  *               @OA\Property(property="email", type="email"),
  *               @OA\Property(property="phone", type="text"),
@@ -455,7 +455,7 @@
  *            mediaType="application/json",
  *            @OA\Schema(
  *               type="object",
- *               required={"id", "email", "password", "name"},
+ *               required={"id", "email", "password"},
  *               @OA\Property(property="name", type="text"),
  *               @OA\Property(property="email", type="email"),
  *               @OA\Property(property="phone", type="text"),

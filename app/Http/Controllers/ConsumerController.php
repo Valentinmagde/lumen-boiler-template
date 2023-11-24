@@ -24,7 +24,7 @@ class ConsumerController extends Controller
      */
     public function __construct(ConsumerService $consumerService)
     {
-        $this->middleware('jwt:api', ['except' => ['register']]);
+        // $this->middleware('jwt:api', ['except' => ['register']]);
         $this->consumerService = $consumerService;
     }
 
@@ -134,7 +134,42 @@ class ConsumerController extends Controller
             );
         }
     }
-
+    /**
+     * Return the patched consumer.
+     *
+     * @author Gregory Albert <gregoryalbert1209@gmail.com>
+     * @since 2023-11-21
+     *
+     * @param Request $request Request.
+     * @param integer $consumerId ID of consumer to be updated.
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function patch(Request $request, int $consumerId)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'email'                  => 'email|unique:Api_Consumers',
+                'password'               => 'min:6'
+            ]);
+        
+            if ($validator->fails()) {
+                $error = implode(",", $validator->errors()->all());
+    
+                return errorResponse(
+                    Response::HTTP_PRECONDITION_FAILED,
+                    ERROR_CODE['VALIDATOR'],
+                    $error
+                );
+            }
+            return successResponse($this->consumerService->patch($consumerId, $request->all()));
+        } catch (Exception $e) {
+            return errorResponse(
+                Response::HTTP_INTERNAL_SERVER_ERROR,
+                ERROR_CODE['GENERIC_ERROR'],
+                $e->getMessage()
+            );
+        }
+    }
      /**
      * Return the upated consumer.
      *
@@ -149,11 +184,10 @@ class ConsumerController extends Controller
     {
         try {
             $validator = Validator::make($request->all(), [
-                'name'                   => 'required',
-                'email'                  => 'required|email',
+                'email'                  => 'required|email|unique:Api_Consumers',
                 'password'               => 'required|min:6'
             ]);
-        
+            
             if ($validator->fails()) {
                 $error = implode(",", $validator->errors()->all());
     
